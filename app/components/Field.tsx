@@ -8,7 +8,7 @@ export function Field({
   ...props
 }: React.ComponentPropsWithoutRef<'label'> & {
   label: string
-  error?: string
+  error?: string[] | string | null
 }) {
   return (
     <label
