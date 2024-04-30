@@ -141,7 +141,6 @@ export default function Contact() {
             {actionData?.message && (
               <p className="text-green-500">{actionData.message}</p>
             )}
-            <p className="text-green-500">Test</p>
           </div>
         </Form>
       </Container>
