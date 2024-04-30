@@ -18,7 +18,7 @@ export default {
     themes: [
       {
         light: {
-          ...themes.light,
+          ...themes.garden,
           ...baseTheme,
         },
         dark: {

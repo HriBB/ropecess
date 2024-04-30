@@ -20,7 +20,7 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
     },
     forwardedRef,
   ) {
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setOpen] = useState(false)
     const location = useLocation()
     const navigation = useNavigation()
     const clickRef = useRef<boolean>(false)
@@ -28,22 +28,22 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
 
     useEffect(() => {
       if (navigation.formData) {
-        setIsOpen(false)
+        setOpen(false)
       }
     }, [navigation])
 
     useEffect(() => {
-      setIsOpen(false)
+      setOpen(false)
     }, [location.key])
 
     useEffect(() => {
       if (isOpen) {
         const clickHandler = () => {
-          if (!clickRef.current) setIsOpen(false)
+          if (!clickRef.current) setOpen(false)
           clickRef.current = false
         }
         const focusHandler = () => {
-          if (!focusRef.current) setIsOpen(false)
+          if (!focusRef.current) setOpen(false)
           focusRef.current = false
         }
         document.addEventListener('mousedown', clickHandler)
@@ -66,7 +66,7 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
         onToggle={(event) => {
           onToggle && onToggle(event)
           if (event.defaultPrevented) return
-          setIsOpen(event.currentTarget.open)
+          setOpen(event.currentTarget.open)
         }}
         onMouseDown={(event) => {
           onMouseDown && onMouseDown(event)
