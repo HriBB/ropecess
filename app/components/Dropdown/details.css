@@ -1,0 +1,14 @@
+/**
+ * Remove details > summary arrow
+ *
+ * @see https://github.com/tailwindlabs/tailwindcss/issues/924#issuecomment-1234958312
+ */
+details > summary::marker,
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary::-webkit-details-marker {
+  border: 1px solid red;
+  display: none;
+}

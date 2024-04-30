@@ -1,0 +1,92 @@
+import { forwardRef, useEffect, useRef, useState } from 'react'
+import { useLocation, useNavigation } from '@remix-run/react'
+import { cls } from '~/utils/cls'
+
+import './details.css'
+
+export type DetailsProps = React.ComponentPropsWithRef<'details'>
+
+export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
+  function Details(
+    {
+      children,
+      className,
+      open,
+      onToggle,
+      onMouseDown,
+      onTouchStart,
+      onFocus,
+      ...rest
+    },
+    forwardedRef,
+  ) {
+    const [isOpen, setIsOpen] = useState(false)
+    const location = useLocation()
+    const navigation = useNavigation()
+    const clickRef = useRef<boolean>(false)
+    const focusRef = useRef<boolean>(false)
+
+    useEffect(() => {
+      if (navigation.formData) {
+        setIsOpen(false)
+      }
+    }, [navigation])
+
+    useEffect(() => {
+      setIsOpen(false)
+    }, [location.key])
+
+    useEffect(() => {
+      if (isOpen) {
+        const clickHandler = () => {
+          if (!clickRef.current) setIsOpen(false)
+          clickRef.current = false
+        }
+        const focusHandler = () => {
+          if (!focusRef.current) setIsOpen(false)
+          focusRef.current = false
+        }
+        document.addEventListener('mousedown', clickHandler)
+        document.addEventListener('touchstart', clickHandler)
+        document.addEventListener('focusin', focusHandler)
+        return () => {
+          document.removeEventListener('mousedown', clickHandler)
+          document.removeEventListener('touchstart', clickHandler)
+          document.removeEventListener('focusin', focusHandler)
+        }
+      }
+    }, [isOpen])
+
+    return (
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+      <details
+        className={cls('group relative', className)}
+        ref={forwardedRef}
+        open={open ?? isOpen}
+        onToggle={(event) => {
+          onToggle && onToggle(event)
+          if (event.defaultPrevented) return
+          setIsOpen(event.currentTarget.open)
+        }}
+        onMouseDown={(event) => {
+          onMouseDown && onMouseDown(event)
+          if (event.defaultPrevented) return
+          if (isOpen) clickRef.current = true
+        }}
+        onTouchStart={(event) => {
+          onTouchStart && onTouchStart(event)
+          if (event.defaultPrevented) return
+          if (isOpen) clickRef.current = true
+        }}
+        onFocus={(event) => {
+          onFocus && onFocus(event)
+          if (event.defaultPrevented) return
+          if (isOpen) focusRef.current = true
+        }}
+        {...rest}
+      >
+        {children}
+      </details>
+    )
+  },
+)
