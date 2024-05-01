@@ -20,7 +20,8 @@ const serializeTheme = async (theme: Theme) =>
     ? themeCookie.serialize({}, { expires: new Date(0), maxAge: 0 })
     : themeCookie.serialize({ theme })
 
-const validateTheme = (theme: Theme) => Object.values(Theme).includes(theme)
+export const validateTheme = (theme: any): theme is Theme =>
+  Object.values(Theme).includes(theme)
 
 export const getThemeFromRequest = async (request: Request) => {
   const header = request.headers.get('Cookie')
