@@ -1,5 +1,6 @@
-import nodemailer from 'nodemailer'
 import Mail from 'nodemailer/lib/mailer'
+/*
+import nodemailer from 'nodemailer'
 
 const transportOptions = {
   service: 'gmail',
@@ -14,20 +15,28 @@ const transportOptions = {
 }
 
 const transporter = nodemailer.createTransport(transportOptions)
+*/
 
-export async function sendEmail(data: any) {
+export async function sendEmail(data: {
+  name: string
+  email: string
+  comment: string
+}) {
   console.log('[INFO] sendEmail', data)
   try {
     const options: Mail.Options = {
-      from: process.env.CLIENT_EMAIL_FROM,
-      to: process.env.CLIENT_EMAIL_TO,
+      from: process.env.EMAIL_FROM,
+      to: process.env.EMAIL_TO,
       subject: 'Subject',
       text: 'Text',
     }
     console.log('[INFO] sendEmail options', options)
+    /*
     const result = await transporter.sendMail(options)
     console.log('[INFO] sendEmail success', result)
     return { success: true, result }
+    */
+    return { success: true, result: '@todo send email' }
   } catch (error) {
     console.error('[INFO] sendEmail error', error)
     return { success: false, error: 'Failed to send email' }

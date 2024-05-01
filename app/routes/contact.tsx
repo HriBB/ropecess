@@ -13,15 +13,12 @@ import { Button } from '~/components/Button'
 import { Container } from '~/components/Container'
 import { Field } from '~/components/Field'
 import { Hero } from '~/components/Hero'
+import { cls } from '~/utils/cls'
 
-import { handleFormError } from '~/utils/error.server'
 import { sendEmail } from '~/utils/email.server'
 import { useRecaptcha } from '~/recaptcha/useRecaptcha'
-import {
-  RECAPTCHA_SITE_KEY,
-  verifyRecaptcha,
-} from '~/recaptcha/recaptcha.server'
-import { cls } from '~/utils/cls'
+import { siteKey, verifyRecaptcha } from '~/recaptcha/recaptcha.server'
+import { handleFormError } from '~/utils/error.server'
 
 const emailSchema = zfd.formData({
   name: zfd.text(z.string()),
@@ -30,37 +27,26 @@ const emailSchema = zfd.formData({
   token: zfd.text(z.string().min(1)),
 })
 
-export const links: LinksFunction = () => {
-  return [
-    { rel: 'preconnect', href: 'https://www.google.com' },
-    {
-      rel: 'preconnect',
-      href: 'https://www.gstatic.com',
-      crossOrigin: 'anonymous',
-    },
-  ]
-}
+export { prefetchRecaptchaLinks as links } from '~/recaptcha/links'
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   try {
-    console.log('action ***********************')
     const formData = await request.formData()
-    const ddd = Object.fromEntries(formData)
-    console.log(ddd)
-
     const { token, ...data } = await emailSchema.parseAsync(formData)
-    console.log('data', data)
     await verifyRecaptcha(token)
-    console.log('recaptcha valid')
-    //await sendEmail({})
-    return { success: true, message: 'Thanks' }
+    await sendEmail(data)
+    return {
+      success: true,
+      message:
+        'Thank you for your inquiry. We will get back to you as soon as possible.',
+    }
   } catch (error) {
     return handleFormError(error)
   }
 }
 
 export const loader = async () => {
-  return { siteKey: RECAPTCHA_SITE_KEY }
+  return { siteKey }
 }
 
 export default function Contact() {

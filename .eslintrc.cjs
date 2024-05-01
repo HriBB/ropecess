@@ -76,7 +76,6 @@ module.exports = {
           'warn',
           { argsIgnorePattern: '^_' },
         ],
-        //'@typescript-eslint/no-unused-vars': 'warn',
         '@typescript-eslint/consistent-type-imports': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
       },

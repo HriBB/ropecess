@@ -1,7 +1,7 @@
-import { LinksFunction } from '@remix-run/node'
+const RECAPTCHA_SITE_KEY = process.env.RECAPTCHA_SITE_KEY || ''
+const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET || ''
 
-export const RECAPTCHA_SITE_KEY = process.env.RECAPTCHA_SITE_KEY || ''
-export const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET || ''
+export const siteKey = RECAPTCHA_SITE_KEY
 
 export type VerifyRecaptchaResponse = {
   success: boolean
@@ -27,16 +27,4 @@ export async function verifyRecaptcha(token: string) {
     throw new Error(`Recaptcha failed: ${err}`)
   }
   return data as VerifyRecaptchaResponse
-}
-
-/**
- * Preconnect to Google reCAPTCHA
- *
- * @see https://developers.google.com/recaptcha/docs/loading#using_resource_hints
- */
-export const prefetchRecaptchaLinks: LinksFunction = () => {
-  return [
-    { rel: 'preconnect', href: 'https://www.google.com' },
-    { rel: 'preconnect', href: 'https://www.gstatic.com', crossOrigin: 'anonymous' },
-  ]
 }

@@ -2,13 +2,9 @@ import { useNavigation } from '@remix-run/react'
 import { useRootData } from '~/utils/data'
 import { Theme } from './theme'
 
-export const useOptimistic = <T>(key: string) => {
-  const { formData } = useNavigation()
-  return formData?.has(key) ? (formData.get(key) as T) : null
-}
-
 export const useTheme = (): Theme => {
   const data = useRootData()
-  const optimistic = useOptimistic<Theme>('theme')
+  const { formData } = useNavigation()
+  const optimistic = (formData?.get('theme') as Theme) ?? null
   return optimistic || data?.theme || Theme.SYSTEM
 }
