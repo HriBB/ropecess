@@ -28,11 +28,9 @@ function HeroBase<C extends React.ElementType = 'section'>({
   )
 }
 
-function Content({
-  children,
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<'div'>) {
+type ContentProps = React.ComponentPropsWithoutRef<'div'>
+
+function Content({ children, className, ...props }: ContentProps) {
   return (
     <div
       className={cls('hero-content w-full flex-col gap-10', className)}
@@ -43,21 +41,19 @@ function Content({
   )
 }
 
-function Title({
-  children,
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<'h1'>) {
+type TitleProps = React.ComponentPropsWithoutRef<'h1'>
+
+function Title({ children, className, ...props }: TitleProps) {
   return (
     <h1
       className={cls(
         'container w-full p-10',
         'text-center font-extralight uppercase leading-snug tracking-wide',
+        'text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl',
         // light
         'bg-white/70 text-base-content',
         // dark
         'dark:bg-black/60 dark:text-white',
-        'text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl',
         className,
       )}
       {...props}

@@ -1,9 +1,7 @@
 import { ActionFunctionArgs, redirect, createCookie } from '@remix-run/node'
 import { Theme } from './theme'
 
-type To = FormDataEntryValue | string | null | undefined
-
-function safeRedirect(to: To) {
+function safeRedirect(to?: FormDataEntryValue | string | null) {
   if (!to || typeof to !== 'string') {
     return '/'
   }
@@ -13,24 +11,23 @@ function safeRedirect(to: To) {
   return to
 }
 
-const cookie = createCookie('theme', {
+const themeCookie = createCookie('theme', {
   maxAge: 31_536_000, // one year
 })
 
-export const parseTheme = async (request: Request) => {
+const serializeTheme = async (theme: Theme) =>
+  theme === Theme.SYSTEM
+    ? themeCookie.serialize({}, { expires: new Date(0), maxAge: 0 })
+    : themeCookie.serialize({ theme })
+
+const validateTheme = (theme: Theme) => Object.values(Theme).includes(theme)
+
+export const getThemeFromRequest = async (request: Request) => {
   const header = request.headers.get('Cookie')
-  const data = await cookie.parse(header)
+  const data = await themeCookie.parse(header)
   const theme = data?.theme as Theme
   return validateTheme(theme) ? theme : Theme.SYSTEM
 }
-
-export const serializeTheme = async (theme: Theme) =>
-  theme === Theme.SYSTEM
-    ? cookie.serialize({}, { expires: new Date(0), maxAge: 0 })
-    : cookie.serialize({ theme })
-
-export const validateTheme = (theme: Theme) =>
-  Object.values(Theme).includes(theme)
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData()

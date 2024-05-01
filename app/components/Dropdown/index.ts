@@ -1,10 +1,10 @@
-import { Details as BaseDetails } from './Details'
+import { Details } from './Details'
 import { Summary } from './Summary'
 import { Menu } from './Menu'
 import { MenuItem } from './MenuItem'
 
-export const Details = Object.assign(BaseDetails, {
-  Summary,
+export const Dropdown = Object.assign(Details, {
+  Trigger: Summary,
   Menu,
   MenuItem,
 })

@@ -12,8 +12,8 @@ import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 
 import { ThemeScript } from './theme/ThemeScript'
-import { parseTheme } from './theme/theme.server'
 import { useTheme } from './theme/useTheme'
+import { getThemeFromRequest } from './theme/theme.server'
 
 import styles from './tailwind.css?url'
 
@@ -24,7 +24,7 @@ export const shouldRevalidate: ShouldRevalidateFunction = (args) => {
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const theme = await parseTheme(request)
+  const theme = await getThemeFromRequest(request)
   return { theme }
 }
 

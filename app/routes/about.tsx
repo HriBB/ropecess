@@ -1,5 +1,5 @@
-import { Container } from '~/components/Container'
 import { Hero } from '~/components/Hero'
+import { Container } from '~/components/Container'
 
 const items = [
   {

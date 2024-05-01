@@ -1,15 +1,17 @@
 import { cls } from '~/utils/cls'
 
-export function Field({
+type FieldProps = React.ComponentPropsWithoutRef<'label'> & {
+  label: string
+  error?: string[] | string | null
+}
+
+export function FormField({
   children,
   className,
   label,
   error,
   ...props
-}: React.ComponentPropsWithoutRef<'label'> & {
-  label: string
-  error?: string[] | string | null
-}) {
+}: FieldProps) {
   return (
     <label
       className={cls('form-control w-full max-w-lg', className)}

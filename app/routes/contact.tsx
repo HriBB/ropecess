@@ -6,26 +6,19 @@ import {
   useNavigation,
 } from '@remix-run/react'
 
-import { z } from 'zod'
-import { zfd } from 'zod-form-data'
-
+import { cls } from '~/utils/cls'
+import { Hero } from '~/components/Hero'
 import { Button } from '~/components/Button'
 import { Container } from '~/components/Container'
-import { Field } from '~/components/Field'
-import { Hero } from '~/components/Hero'
-import { cls } from '~/utils/cls'
 
-import { sendEmail } from '~/utils/email.server'
+import { FormField } from '~/form/FormField'
+import { handleFormError } from '~/form/error.server'
+
 import { useRecaptcha } from '~/recaptcha/useRecaptcha'
 import { siteKey, verifyRecaptcha } from '~/recaptcha/recaptcha.server'
-import { handleFormError } from '~/utils/error.server'
 
-const emailSchema = zfd.formData({
-  name: zfd.text(z.string()),
-  email: zfd.text(z.string().email()),
-  comment: zfd.text(z.string().min(3)),
-  token: zfd.text(z.string().min(1)),
-})
+import { emailSchema } from '~/email/schema'
+import { sendEmail } from '~/email/email.server'
 
 export { prefetchRecaptchaLinks as links } from '~/recaptcha/links'
 
@@ -77,8 +70,7 @@ export default function Contact() {
           className="flex flex-col gap-5 py-20"
           onSubmit={recaptcha.appendTokendAndSubmit}
         >
-          {/* name */}
-          <Field label="Name" htmlFor="name" error={errors?.name}>
+          <FormField label="Name" htmlFor="name" error={errors?.name}>
             <input
               id="name"
               name="name"
@@ -89,9 +81,8 @@ export default function Contact() {
               )}
               disabled={isSuccess}
             />
-          </Field>
-          {/* email */}
-          <Field label="Email" htmlFor="email" error={errors?.email}>
+          </FormField>
+          <FormField label="Email" htmlFor="email" error={errors?.email}>
             <input
               id="email"
               name="email"
@@ -102,9 +93,8 @@ export default function Contact() {
               )}
               disabled={isSuccess}
             />
-          </Field>
-          {/* comment */}
-          <Field label="Comment" htmlFor="comment" error={errors?.comment}>
+          </FormField>
+          <FormField label="Comment" htmlFor="comment" error={errors?.comment}>
             <textarea
               className={cls(
                 'textarea textarea-bordered w-full',
@@ -115,7 +105,7 @@ export default function Contact() {
               rows={5}
               disabled={isSuccess}
             />
-          </Field>
+          </FormField>
           <div className="flex max-w-lg justify-between pr-4">
             <Button
               color="secondary"
