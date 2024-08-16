@@ -1,4 +1,4 @@
-import { ActionFunctionArgs, unstable_data as data } from '@remix-run/node'
+import { ActionFunctionArgs } from '@remix-run/node'
 import {
   Form,
   useActionData,
@@ -45,8 +45,6 @@ export default function Contact() {
   const navigation = useNavigation()
   const recaptcha = useRecaptcha({ siteKey })
 
-  console.log('actionData', actionData)
-
   const isLoading = navigation.state !== 'idle'
   const isSuccess = actionData?.success === true
   const errors = actionData?.errors?.fieldErrors
@@ -76,7 +74,7 @@ export default function Contact() {
                 errors?.name && 'input-error',
               )}
               disabled={isSuccess}
-              defaultValue="Alpi Nistič"
+              //defaultValue="Alpi Nistič"
             />
           </FormField>
           <FormField label="Email" htmlFor="email" error={errors?.email}>
@@ -90,7 +88,7 @@ export default function Contact() {
                 errors?.email && 'input-error',
               )}
               disabled={isSuccess}
-              defaultValue="bojan.hribernik@gmail.com"
+              //defaultValue="bojan.hribernik@gmail.com"
             />
           </FormField>
           <FormField label="Message" htmlFor="message" error={errors?.message}>
@@ -104,7 +102,7 @@ export default function Contact() {
               name="message"
               rows={5}
               disabled={isSuccess}
-              defaultValue={'Test @localhost'}
+              //defaultValue={'Test @localhost'}
             />
           </FormField>
           <div className="flex max-w-lg items-center justify-end gap-4">
