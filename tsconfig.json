@@ -9,7 +9,12 @@
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "types": ["@remix-run/node", "vite/client", "grecaptcha"],
+    "types": [
+      "@remix-run/node",
+      "vite/client",
+      "grecaptcha",
+      "@remix-run/react/future/single-fetch.d.ts"
+    ],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",

@@ -1,4 +1,4 @@
-import { ActionFunctionArgs } from '@remix-run/node'
+import { ActionFunctionArgs, unstable_data as data } from '@remix-run/node'
 import {
   Form,
   useActionData,
@@ -6,33 +6,30 @@ import {
   useNavigation,
 } from '@remix-run/react'
 
+import { formResponseData, handleFormError } from '~/utils/form.server'
+import { siteKey, verifyRecaptcha } from '~/utils/recaptcha.server'
+import { contactEmailSchema, sendContactEmail } from '~/utils/email.server'
+
 import { cls } from '~/utils/cls'
 import { Hero } from '~/components/Hero'
 import { Button } from '~/components/Button'
 import { Container } from '~/components/Container'
+import { FormField } from '~/components/FormField'
+import { useRecaptcha } from '~/utils/recaptcha'
 
-import { FormField } from '~/form/FormField'
-import { handleFormError } from '~/form/error.server'
-
-import { useRecaptcha } from '~/recaptcha/useRecaptcha'
-import { siteKey, verifyRecaptcha } from '~/recaptcha/recaptcha.server'
-
-import { emailSchema } from '~/email/schema'
-import { sendEmail } from '~/email/email.server'
-
-export { prefetchRecaptchaLinks as links } from '~/recaptcha/links'
+export { prefetchRecaptchaLinks as links } from '~/utils/recaptcha'
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   try {
     const formData = await request.formData()
-    const { token, ...data } = await emailSchema.parseAsync(formData)
+    const { token, ...contact } = await contactEmailSchema.parseAsync(formData)
     await verifyRecaptcha(token)
-    await sendEmail(data)
-    return {
+    await sendContactEmail(contact)
+    return formResponseData({
       success: true,
       message:
         'Thank you for your inquiry. We will get back to you as soon as possible.',
-    }
+    })
   } catch (error) {
     return handleFormError(error)
   }
@@ -48,13 +45,11 @@ export default function Contact() {
   const navigation = useNavigation()
   const recaptcha = useRecaptcha({ siteKey })
 
+  console.log('actionData', actionData)
+
   const isLoading = navigation.state !== 'idle'
   const isSuccess = actionData?.success === true
-
-  const errors =
-    actionData && 'flatten' in actionData
-      ? actionData.flatten.fieldErrors
-      : null
+  const errors = actionData?.errors?.fieldErrors
 
   return (
     <main>
@@ -78,8 +73,10 @@ export default function Contact() {
               className={cls(
                 'input input-bordered w-full',
                 isSuccess && 'input-disabled',
+                errors?.name && 'input-error',
               )}
               disabled={isSuccess}
+              defaultValue="Alpi Nistič"
             />
           </FormField>
           <FormField label="Email" htmlFor="email" error={errors?.email}>
@@ -90,23 +87,33 @@ export default function Contact() {
               className={cls(
                 'input input-bordered w-full',
                 isSuccess && 'input-disabled',
+                errors?.email && 'input-error',
               )}
               disabled={isSuccess}
+              defaultValue="bojan.hribernik@gmail.com"
             />
           </FormField>
-          <FormField label="Comment" htmlFor="comment" error={errors?.comment}>
+          <FormField label="Message" htmlFor="message" error={errors?.message}>
             <textarea
               className={cls(
                 'textarea textarea-bordered w-full',
-                isSuccess && 'input-disabled',
+                isSuccess && 'textarea-disabled',
+                errors?.message && 'textarea-error',
               )}
-              id="comment"
-              name="comment"
+              id="message"
+              name="message"
               rows={5}
               disabled={isSuccess}
+              defaultValue={'Test @localhost'}
             />
           </FormField>
-          <div className="flex max-w-lg justify-between pr-4">
+          <div className="flex max-w-lg items-center justify-end gap-4">
+            {actionData?.message && (
+              <p className="text-green-700">{actionData.message}</p>
+            )}
+            {actionData?.error && (
+              <p className="text-red-500">{actionData.error}</p>
+            )}
             <Button
               color="secondary"
               type="submit"
@@ -114,9 +121,6 @@ export default function Contact() {
             >
               Submit
             </Button>
-            {actionData?.message && (
-              <p className="text-green-500">{actionData.message}</p>
-            )}
           </div>
         </Form>
       </Container>
