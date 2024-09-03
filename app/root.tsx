@@ -8,14 +8,14 @@ import {
   ShouldRevalidateFunction,
 } from '@remix-run/react'
 
-import { Header } from './components/Header'
-import { Footer } from './components/Footer'
+import { Header } from '~/components/Header'
+import { Footer } from '~/components/Footer'
 
-import { ThemeScript } from './theme/ThemeScript'
-import { useTheme } from './theme/useTheme'
-import { getThemeFromRequest } from './theme/theme.server'
+import { ThemeScript } from '~/theme/ThemeScript'
+import { useTheme } from '~/theme/useTheme'
+import { getThemeFromRequest } from '~/theme/theme.server'
 
-import styles from './tailwind.css?url'
+import styles from '~/tailwind.css?url'
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }]
 

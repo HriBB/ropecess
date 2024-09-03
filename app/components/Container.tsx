@@ -13,7 +13,7 @@ export function Container<C extends React.ElementType = 'div'>({
   className,
   ...props
 }: Props<C>) {
-  const Component = as || 'button'
+  const Component = as || 'div'
 
   return (
     <Component className={cls('container mx-auto px-5', className)} {...props}>

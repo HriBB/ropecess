@@ -20,7 +20,6 @@ const sizes = {
   sm: 'btn-sm',
   md: 'btn-md',
   lg: 'btn-lg',
-  xl: 'btn-xl',
 }
 
 const shapes = {

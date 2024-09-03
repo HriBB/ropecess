@@ -1,52 +1,71 @@
 import { Hero } from '~/components/Hero'
 import { Container } from '~/components/Container'
 
-const items = [
-  {
-    id: 1,
-    image: '/img/services/industrial-rope-access-01.jpg',
-    text: 'At Ropecess, we specialize in providing high-quality rope work and height steel construction services, along with a range of other specialized services such as photovoltaic installation, rock cleaning, venue rigging, and rope access in confined spaces. With a deep-rooted passion for climbing and highline adventures, we have turned our love for vertical pursuits into a thriving business.',
+const data = {
+  hero: {
+    image: '/img/about/banner.jpg',
+    title: 'Our Story',
   },
-  {
-    id: 2,
-    image: '/img/services/photovoltaic-module-installation-01.jpg',
-    text: 'Founded five years ago, we have quickly become a trusted name in our industry. Our team boasts extensive experience and holds an IRATA certificate, ensuring that we meet the highest safety and operational standards.',
-  },
-  {
-    id: 3,
-    image: '/img/services/rigging-01.jpg',
-    text: "But what sets us apart is not just our technical proficiency - it's our commitment to delivering exceptional results with a personal touch. We prioritize your needs and work closely with you to understand your requirements, ensuring that our solutions are tailor-made to meet your specific project goals.",
-  },
-  {
-    id: 4,
-    image: '/img/services/stage-building-01.jpg',
-    text: "Whether it's constructing steel structures at great heights or harnessing renewable energy through photovoltaic installations, Ropecess is dedicated to delivering excellence in every project we undertake. Safety remains at the forefront of everything we do, and we strictly adhere to industry regulations to provide a secure working environment for our team and clients alike.",
-  },
-]
+  items: [
+    {
+      id: 1,
+      image: '/img/services/industrial-rope-access-01.jpg',
+      alt: 'Industrial rope access',
+      text: 'At Ropecess, we specialize in providing high-quality rope work and height steel construction services, along with a range of other specialized services such as photovoltaic installation, rock cleaning, venue rigging, and rope access in confined spaces. With a deep-rooted passion for climbing and highline adventures, we have turned our love for vertical pursuits into a thriving business.',
+    },
+    {
+      id: 2,
+      image: '/img/services/photovoltaic-module-installation-01.jpg',
+      alt: 'Photovoltaic module installation',
+      text: 'Founded five years ago, we have quickly become a trusted name in our industry. Our team boasts extensive experience and holds an IRATA certificate, ensuring that we meet the highest safety and operational standards.',
+    },
+    {
+      id: 3,
+      image: '/img/services/rigging-01.jpg',
+      alt: 'Rigging',
+      text: "But what sets us apart is not just our technical proficiency - it's our commitment to delivering exceptional results with a personal touch. We prioritize your needs and work closely with you to understand your requirements, ensuring that our solutions are tailor-made to meet your specific project goals.",
+    },
+    {
+      id: 4,
+      image: '/img/services/stage-building-01.jpg',
+      alt: 'Stage building',
+      text: "Whether it's constructing steel structures at great heights or harnessing renewable energy through photovoltaic installations, Ropecess is dedicated to delivering excellence in every project we undertake. Safety remains at the forefront of everything we do, and we strictly adhere to industry regulations to provide a secure working environment for our team and clients alike.",
+    },
+  ],
+}
 
 export default function About() {
   return (
     <main>
-      <Hero backgroundImage="/img/about/banner.jpg">
+      <Hero backgroundImage={data.hero.image}>
         <Hero.Content>
           <Hero.Title className="text-right [word-spacing:9999px]">
-            Our Story
+            {data.hero.title}
           </Hero.Title>
         </Hero.Content>
       </Hero>
 
-      <Container as="section">
-        <div className="flex flex-col gap-20 py-20">
-          {items.map((item) => (
-            <div key={item.id} className="flex flex-col gap-5 md:flex-row">
-              <div className="flex-[2]">
-                <img src={item.image} className="max-h-96" alt="About us" />
+      <section className="py-24">
+        <Container>
+          <div className="flex flex-col gap-20 py-20">
+            {data.items.map((item) => (
+              <div
+                key={item.id}
+                className="flex flex-col gap-5 md:flex-row md:items-center"
+              >
+                <div className="flex-[2]">
+                  <img
+                    src={item.image}
+                    className="max-h-96 w-full object-cover"
+                    alt={item.alt}
+                  />
+                </div>
+                <p className="flex-[3]">{item.text}</p>
               </div>
-              <p className="flex-[3]">{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </Container>
+            ))}
+          </div>
+        </Container>
+      </section>
     </main>
   )
 }

@@ -9,6 +9,7 @@ import { MenuIcon } from './MenuIcon'
 const items = [
   { href: '/', text: 'Home' },
   { href: '/services', text: 'Services' },
+  { href: '/spacenet', text: 'SpaceNet' },
   { href: '/about', text: 'About' },
   { href: '/contact', text: 'Contact' },
 ]
@@ -105,13 +106,13 @@ export function Header() {
               <li key={link.href}>
                 <NavLink
                   to={link.href}
-                  prefetch="intent"
                   className={({ isActive }) =>
                     cls(
                       'btn w-full md:w-auto',
                       isActive ? 'btn-primary' : 'btn-ghost',
                     )
                   }
+                  prefetch="viewport"
                 >
                   {link.text}
                 </NavLink>

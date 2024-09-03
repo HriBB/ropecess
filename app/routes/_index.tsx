@@ -4,62 +4,87 @@ import { Hero } from '~/components/Hero'
 import { Button } from '~/components/Button'
 import { Container } from '~/components/Container'
 
-const items = [
-  {
-    id: 1,
-    title: 'Work plan',
-    image: '/img/home/work-plan.jpg',
-    text: 'Helping you arrange workflow and organize teams',
-    list: null,
+const data = {
+  hero: {
+    title: 'Plan your next rope access project',
+    image: '/img/home/banner.jpg',
+    link: {
+      to: '/contact',
+      text: 'Contact Us',
+    },
   },
-  {
-    id: 2,
-    title: 'Access plan',
-    image: '/img/home/access-plan.jpg',
-    text: 'Plan rope access operation with us. We help you check your construction site, and we plan best rope access solution suitable to your needs',
-    list: null,
+  intro: {
+    title: 'Welcome to Ropecess',
+    text: 'At Ropecess, we deliver top-quality construction and specialized access services, ensuring safety, precision, and reliability in every project.',
   },
-  {
-    id: 3,
-    title: 'Our services',
-    image: '/img/home/our-services.jpg',
-    text: null,
-    list: [
-      'Rock cleaning and anchoring',
-      'Photovoltaic',
-      'Steel construction assembly',
-      'Crane rigging',
-      'Venue rigging',
-      'Window cleaning',
-      'Confined space rope access',
-      'Concrete and facade examination',
+  services: {
+    title: 'Our Services',
+    items: [
+      {
+        id: 1,
+        title: 'Work Plan',
+        image: '/img/home/work-plan.jpg',
+        text: 'Our Work Plan ensures every project is completed on time, within budget, and to the highest standards. We carefully plan, manage timelines, allocate resources, and mitigate risks, keeping you informed at every step.',
+      },
+      {
+        id: 2,
+        title: 'Access Plan',
+        image: '/img/home/access-plan.jpg',
+        text: 'Our Access Plan prioritizes safety and efficiency. We use advanced rope access and innovative methods to safely reach challenging areas, minimizing disruptions and reducing costs while maintaining top safety standards.',
+      },
+      {
+        id: 3,
+        title: 'Our Services',
+        image: '/img/home/our-services.jpg',
+        text: 'We offer a wide range of specialized construction and access services to cater to various industry needs.',
+      },
     ],
   },
-]
+  outro: {
+    text: 'Contact us today to see how Ropecess can help bring your project to life.',
+    link: {
+      to: '/contact',
+      text: 'Contact Us',
+    },
+  },
+}
 
 export default function Index() {
   return (
     <main>
-      <Hero backgroundImage="/img/home/banner.jpg">
+      <Hero backgroundImage={data.hero.image}>
         <Hero.Content>
-          <Hero.Title>Plan your next rope access project</Hero.Title>
-          <Button as={Link} to="/contact" color="primary">
-            Contact Us
+          <Hero.Title>{data.hero.title}</Hero.Title>
+          <Button
+            as={Link}
+            to={data.hero.link.to}
+            color="primary"
+            size="lg"
+            prefetch="viewport"
+          >
+            {data.hero.link.text}
           </Button>
         </Hero.Content>
       </Hero>
 
-      <Container as="section">
-        <div className="flex flex-col gap-10 py-20">
-          <div className="flex flex-col items-center gap-5">
-            <h3 className="text-lg uppercase tracking-wide">Our Services</h3>
-            <h2 className="text-3xl font-medium">
-              Help you plan your next project
-            </h2>
+      <section className="py-24">
+        <Container>
+          <div className="flex flex-col items-start gap-10 md:items-center">
+            <h1 className="text-5xl font-bold">{data.intro.title}</h1>
+            <p className="max-w-3xl text-left text-xl leading-normal md:text-center">
+              {data.intro.text}
+            </p>
           </div>
+        </Container>
+      </section>
 
-          <div className="grid grid-cols-1 gap-20 md:grid-cols-3 md:gap-5">
-            {items.map((item) => (
+      <section className="bg-base-200 py-24">
+        <Container className="flex flex-col gap-10">
+          <h3 className="text-center text-lg uppercase tracking-wide">
+            {data.services.title}
+          </h3>
+          <div className="grid grid-cols-1 gap-20 md:grid-cols-3 md:gap-20">
+            {data.services.items.map((item) => (
               <div
                 key={item.id}
                 className="flex flex-1 flex-col gap-2 md:gap-10"
@@ -69,20 +94,28 @@ export default function Index() {
                   src={item.image}
                   alt={item.title}
                 />
-                <h3 className="text-xl font-bold">{item.title}</h3>
+                <h3 className="text-3xl font-bold">{item.title}</h3>
                 {item.text && <p>{item.text}</p>}
-                {item.list && (
-                  <ul className="list list-inside list-disc">
-                    {item.list.map((li) => (
-                      <li key={li}>{li}</li>
-                    ))}
-                  </ul>
-                )}
               </div>
             ))}
           </div>
-        </div>
-      </Container>
+        </Container>
+      </section>
+
+      <section className="py-24">
+        <Container className="flex flex-col items-center gap-10">
+          <p className="text-xl">{data.outro.text}</p>
+          <Button
+            as={Link}
+            to={data.outro.link.to}
+            className="w-full md:w-auto"
+            color="primary"
+            prefetch="viewport"
+          >
+            {data.outro.link.text}
+          </Button>
+        </Container>
+      </section>
     </main>
   )
 }

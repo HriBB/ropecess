@@ -19,6 +19,22 @@ import { useRecaptcha } from '~/utils/recaptcha'
 
 export { prefetchRecaptchaLinks as links } from '~/utils/recaptcha'
 
+const data = {
+  hero: {
+    image: '/img/contact/banner.jpg',
+    title: 'Contact US',
+  },
+  form: {
+    name: 'Name',
+    email: 'Email',
+    message: 'Message',
+    button: 'Send Message',
+    errorMessage: 'Form contains errors',
+    successMessage:
+      'Thank you for your inquiry. We will get back to you as soon as possible.',
+  },
+}
+
 export const action = async ({ request }: ActionFunctionArgs) => {
   try {
     const formData = await request.formData()
@@ -27,11 +43,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     await sendContactEmail(contact)
     return formResponseData({
       success: true,
-      message:
-        'Thank you for your inquiry. We will get back to you as soon as possible.',
+      message: data.form.successMessage,
     })
   } catch (error) {
-    return handleFormError(error)
+    return handleFormError(error, data.form.errorMessage)
   }
 }
 
@@ -51,9 +66,9 @@ export default function Contact() {
 
   return (
     <main>
-      <Hero backgroundImage="/img/contact/banner.jpg">
+      <Hero backgroundImage={data.hero.image}>
         <Hero.Content>
-          <Hero.Title>Contact Us</Hero.Title>
+          <Hero.Title>{data.hero.title}</Hero.Title>
         </Hero.Content>
       </Hero>
 
@@ -63,7 +78,7 @@ export default function Contact() {
           className="flex flex-col gap-5 py-20"
           onSubmit={recaptcha.appendTokendAndSubmit}
         >
-          <FormField label="Name" htmlFor="name" error={errors?.name}>
+          <FormField label={data.form.name} htmlFor="name" error={errors?.name}>
             <input
               id="name"
               name="name"
@@ -77,7 +92,11 @@ export default function Contact() {
               //defaultValue="Alpi Nistič"
             />
           </FormField>
-          <FormField label="Email" htmlFor="email" error={errors?.email}>
+          <FormField
+            label={data.form.email}
+            htmlFor="email"
+            error={errors?.email}
+          >
             <input
               id="email"
               name="email"
@@ -91,7 +110,11 @@ export default function Contact() {
               //defaultValue="bojan.hribernik@gmail.com"
             />
           </FormField>
-          <FormField label="Message" htmlFor="message" error={errors?.message}>
+          <FormField
+            label={data.form.message}
+            htmlFor="message"
+            error={errors?.message}
+          >
             <textarea
               className={cls(
                 'textarea textarea-bordered w-full',
@@ -117,7 +140,7 @@ export default function Contact() {
               type="submit"
               disabled={isSuccess || isLoading || !recaptcha.isReady}
             >
-              Submit
+              {data.form.button}
             </Button>
           </div>
         </Form>

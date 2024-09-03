@@ -2,6 +2,7 @@ node_modules
 
 /.cache
 /build
+/photos
 .env
 .env.staging
 .env.production

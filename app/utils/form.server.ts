@@ -16,12 +16,12 @@ export function formResponseData(
   return data({ success, message, error, errors }, init)
 }
 
-export function handleFormError(error: unknown) {
+export function handleFormError(error: unknown, formError?: string) {
   if (error instanceof ZodError) {
     return formResponseData(
       {
         success: false,
-        error: 'Form contains errors',
+        error: formError || 'Form contains errors',
         errors: error.flatten(),
       },
       { status: 400 },
