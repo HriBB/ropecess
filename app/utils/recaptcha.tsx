@@ -70,6 +70,7 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
 
   // reset recaptcha after submit
   const didSubmit = useRef(false)
+
   const appendTokendAndSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()

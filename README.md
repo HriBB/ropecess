@@ -2,6 +2,10 @@
 
 - [primer1](https://ropeaccess.se/)
 
+## TODO
+
+- [ ] shrink photos
+
 ## URLs
 
 - https://ropecess.eu/
