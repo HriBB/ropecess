@@ -2,7 +2,6 @@ import { cls } from '~/utils/cls'
 
 type HeroProps<C extends React.ElementType> = {
   as?: C
-  backgroundImage: string
 }
 
 type Props<C extends React.ElementType> = HeroProps<C> &
@@ -10,7 +9,6 @@ type Props<C extends React.ElementType> = HeroProps<C> &
 
 function HeroBase<C extends React.ElementType = 'section'>({
   as,
-  backgroundImage,
   children,
   className,
   ...props
@@ -18,8 +16,8 @@ function HeroBase<C extends React.ElementType = 'section'>({
   const Component = as || 'section'
   return (
     <Component
-      className={cls('hero min-h-[60vh] bg-base-200', className)}
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      className={cls('hero relative min-h-[60vh] bg-base-200', className)}
+      //style={{ backgroundImage: `url(${backgroundImage})` }}
       {...props}
     >
       <div className="hero-overlay bg-base-100/20"></div>
@@ -63,7 +61,28 @@ function Title({ children, className, ...props }: TitleProps) {
   )
 }
 
+function BackgroundImage({
+  src,
+  alt,
+  className,
+  loading = 'eager',
+  //fetchPriority = 'high',
+  ...props
+}: React.ComponentPropsWithoutRef<'img'>) {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={cls('absolute inset-0 h-full w-full object-cover', className)}
+      loading={loading}
+      //fetchPriority={fetchPriority}
+      {...props}
+    />
+  )
+}
+
 export const Hero = Object.assign(HeroBase, {
   Content,
   Title,
+  BackgroundImage,
 })

@@ -4,10 +4,13 @@ import { Hero } from '~/components/Hero'
 import { Button } from '~/components/Button'
 import { Container } from '~/components/Container'
 
+import home from '~/images/_gen/home'
+
 const data = {
   hero: {
     title: 'Plan your next rope access project',
-    image: '/img/home/banner.jpg',
+    image: home.banner.default,
+    imageAlt: 'Construction frame',
     link: {
       to: '/contact',
       text: 'Contact Us',
@@ -23,19 +26,19 @@ const data = {
       {
         id: 1,
         title: 'Work Plan',
-        image: '/img/home/work-plan.jpg',
+        image: '/images/home/work-plan.jpg',
         text: 'Our Work Plan ensures every project is completed on time, within budget, and to the highest standards. We carefully plan, manage timelines, allocate resources, and mitigate risks, keeping you informed at every step.',
       },
       {
         id: 2,
         title: 'Access Plan',
-        image: '/img/home/access-plan.jpg',
+        image: '/images/home/access-plan.jpg',
         text: 'Our Access Plan prioritizes safety and efficiency. We use advanced rope access and innovative methods to safely reach challenging areas, minimizing disruptions and reducing costs while maintaining top safety standards.',
       },
       {
         id: 3,
         title: 'Our Services',
-        image: '/img/home/our-services.jpg',
+        image: '/images/home/our-services.jpg',
         text: 'We offer a wide range of specialized construction and access services to cater to various industry needs.',
       },
     ],
@@ -52,7 +55,8 @@ const data = {
 export default function Index() {
   return (
     <main>
-      <Hero backgroundImage={data.hero.image}>
+      <Hero>
+        <Hero.BackgroundImage src={data.hero.image} alt={data.hero.imageAlt} />
         <Hero.Content>
           <Hero.Title>{data.hero.title}</Hero.Title>
           <Button

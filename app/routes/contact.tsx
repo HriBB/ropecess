@@ -21,8 +21,9 @@ export { prefetchRecaptchaLinks as links } from '~/utils/recaptcha'
 
 const data = {
   hero: {
-    image: '/img/contact/banner.jpg',
     title: 'Contact US',
+    image: '/images/contact/banner.jpg',
+    imageAlt: 'Construction worker on a building site',
   },
   form: {
     name: 'Name',
@@ -66,7 +67,8 @@ export default function Contact() {
 
   return (
     <main>
-      <Hero backgroundImage={data.hero.image}>
+      <Hero>
+        <Hero.BackgroundImage src={data.hero.image} alt={data.hero.imageAlt} />
         <Hero.Content>
           <Hero.Title>{data.hero.title}</Hero.Title>
         </Hero.Content>

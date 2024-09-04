@@ -21,35 +21,37 @@ export { prefetchRecaptchaLinks as links } from '~/utils/recaptcha'
 
 const data = {
   hero: {
-    image: '/img/spacenet/spacenet-neon-glow.jpg',
     title: 'Space Net',
+    image: '/images/spacenet/spacenet-making-of.jpg',
+    imageAlt: 'Making of Space Net',
   },
   image: {
-    image1: '/img/spacenet/big-triangle-spacenet.jpg',
-    image3: '/img/spacenet/spacenet-no-jumping.jpg',
-    image2: '/img/spacenet/spacenet-neon-glow.jpg',
+    image1: '/images/spacenet/big-triangle-spacenet.jpg',
+    image3: '/images/spacenet/spacenet-no-jumping.jpg',
+    image2: '/images/spacenet/spacenet-neon-glow.jpg',
   },
   chillout: {
-    image1: '/img/spacenet/spacenet-chillout-from-above.jpg',
-    image2: '/img/spacenet/spacenet-chillout-from-below.jpg',
-    image3: '/img/spacenet/spacenet-chillout-people.jpg',
+    image1: '/images/spacenet/spacenet-chillout-from-above.jpg',
+    image2: '/images/spacenet/spacenet-chillout-from-below.jpg',
+    image3: '/images/spacenet/spacenet-chillout-people.jpg',
+    image4: '/images/spacenet/spacenet-chillout-festival.jpg',
   },
   makingOf: {
-    image: '/img/spacenet/spacenet-making-of.jpg',
-    image1: '/img/spacenet/spacenet-making-of-01.jpg',
-    image2: '/img/spacenet/spacenet-making-of-02.jpg',
-    image3: '/img/spacenet/spacenet-making-of-03.jpg',
-    image4: '/img/spacenet/spacenet-making-of-04.jpg',
+    image: '/images/spacenet/spacenet-making-of.jpg',
+    image1: '/images/spacenet/spacenet-making-of-01.jpg',
+    image2: '/images/spacenet/spacenet-making-of-02.jpg',
+    image3: '/images/spacenet/spacenet-making-of-03.jpg',
+    image4: '/images/spacenet/spacenet-making-of-04.jpg',
   },
   neonGlow: {
-    image1: '/img/spacenet/spacenet-neon-glow.jpg',
-    image2: '/img/spacenet/spacenet-neon-glow-closeup.jpeg',
-    image3: '/img/spacenet/spacenet-neon-glow-next.jpeg',
-    image4: '/img/spacenet/spacenet-neon-glow-blurry.jpg',
-    image5: '/img/spacenet/two-spacenets-at-night-glow.jpg',
+    image1: '/images/spacenet/spacenet-neon-glow.jpg',
+    image2: '/images/spacenet/spacenet-neon-glow-closeup.jpeg',
+    image3: '/images/spacenet/spacenet-neon-glow-next.jpeg',
+    image4: '/images/spacenet/spacenet-neon-glow-blurry.jpg',
+    image5: '/images/spacenet/two-spacenets-at-night-glow.jpg',
   },
   form: {
-    image: '/img/spacenet/two-spacenets-at-night-glow.jpg',
+    image: '/images/spacenet/spacenet-making-of-02.jpg',
     name: 'Name',
     email: 'Email',
     message: 'Message',
@@ -91,70 +93,101 @@ export default function SpaceNet() {
 
   return (
     <main>
-      <Hero backgroundImage={data.hero.image}>
+      <Hero>
+        <Hero.BackgroundImage src={data.hero.image} alt={data.hero.imageAlt} />
         <Hero.Content>
           <Hero.Title>{data.hero.title}</Hero.Title>
         </Hero.Content>
       </Hero>
 
       <Container as="section" className="py-24">
-        <h2 className="mb-8 text-4xl font-semibold">What is space net?</h2>
-        <p>
-          The space net, a hand-woven creation made from thin ropes, is designed
+        <h2 className="mb-8 text-3xl font-semibold">What is a Space Net?</h2>
+        <p className="text-lg">
+          The Space Net, a hand-woven creation made from thin ropes, is designed
           for levitation, meditation, and various whimsical activities in the
-          sky. Our team crafts these nets and sets them up for different
-          occasions. Sometimes they soar high in the air, other times they rest
-          low to the ground, and often they are layered one above the other. If
-          you are interested in having one of these nets, feel free to reach
-          out! We can install them at your festival, event, or any special
-          occasion, or even just for fun. We can enhance the setup with UV and
-          LED lighting to make it stand out beautifully at night.
+          sky.
         </p>
       </Container>
 
       <img src={data.chillout.image1} alt="Space Net" className="w-full" />
 
       <Container as="section" className="py-24">
-        <h2 className="mb-8 text-4xl font-semibold">WHERE TO USE IT?</h2>
-        <p>
+        <h2 className="mb-8 text-3xl font-semibold">How to use Space Net?</h2>
+        <p className="text-lg">
+          Our team crafts these nets and sets them up for different occasions.
+          Sometimes they soar high in the air, other times they rest low to the
+          ground, and often they are layered one above the other.
+        </p>
+      </Container>
+
+      <img src={data.makingOf.image4} alt="Space Net" className="w-full" />
+
+      <Container as="section" className="py-24">
+        <h2 className="mb-8 text-3xl font-semibold">Where to use Space Net?</h2>
+        <p className="text-lg">
           It is perfect to set up a chill area on festival, event, or any
           special occasion, or even just for fun. We can enhance the setup with
           UV and LED lighting to make it stand out beautifully at night.
         </p>
       </Container>
 
-      <img src={data.chillout.image2} alt="Space Net" className="w-full" />
+      <img
+        src={data.neonGlow.image5}
+        alt="Space Net"
+        className="max-h-screen w-full object-cover object-top"
+      />
 
       <Container as="section" className="py-24">
-        <h2 className="mb-8 text-4xl font-semibold">WHAT IS SPACENET!?</h2>
+        <h2 className="mb-8 text-3xl font-semibold">Floating on a Space Net</h2>
         <p>
-          The space net, a hand-woven creation made from thin ropes, is designed
-          for levitation, meditation, and various whimsical activities above the
-          ground Experience the thrill of floating like never before with a
-          space-net! This innovative setup transforms your outdoor adventures,
-          offering a unique blend of levitation and fun. Designed for both
-          beginners and seasoned chill-seeking adventiurers, a space-net
-          provides a safe and exhilarating way to relax in gravity-defying way
-          above the ground. Imagine setting up a stunning display at your next
-          event or festival, where participants can float above the ground,
-          challenge themselves, and enjoy a captivating atmosphere. With
-          customizable options for LED and UV lighting, the space-net creates an
-          enchanting visual experience, especially at night. Whether for a
-          special occasion, team-building event, or just for fun, renting or
-          purchasing a space net will elevate your gatherings and leave lasting
-          memories. Don’t miss out on this extraordinary adventure!
+          Experience the thrill of floating like never before with a space-net!
+          This innovative setup transforms your outdoor adventures, offering a
+          unique blend of levitation and fun. Designed for both beginners and
+          seasoned chill-seeking adventiurers, a space-net provides a safe and
+          exhilarating way to relax in gravity-defying way above the ground.
         </p>
       </Container>
 
-      <img src={data.makingOf.image} alt="Space Net" className="w-full" />
+      <img src={data.chillout.image2} alt="Space Net" className="w-full" />
 
       <Container as="section" className="py-24">
-        <h2 className="mb-8 text-4xl font-semibold">RENT OR BUY SPACENET?</h2>
-        <p>Please, fill out the form below.</p>
+        <h2 className="mb-8 text-3xl font-semibold">
+          Perfect for events and festivals
+        </h2>
+        <p>
+          Imagine setting up a stunning display at your next event or festival,
+          where participants can float above the ground, challenge themselves,
+          and enjoy a captivating atmosphere. With customizable options for LED
+          and UV lighting, the space-net creates an enchanting visual
+          experience, especially at night. Whether for a special occasion,
+          team-building event, or just for fun, renting or purchasing a Space
+          Net will elevate your gatherings and leave lasting memories.
+          Don&apos;t miss out on this extraordinary adventure!
+        </p>
+      </Container>
+
+      <img src={data.chillout.image4} alt="Space Net" className="w-full" />
+
+      <Container as="section" className="py-24">
+        <div className="pb-10">
+          <h2 className="mb-8 text-3xl font-semibold">
+            Rent or buy a spacenet?
+          </h2>
+          <p className="mb-4">
+            If you are interested in having one of these nets, feel free to
+            reach out! We can install them at your festival, event, or any
+            special occasion, or even just for fun.
+          </p>
+          <p className="mb-4">
+            We can enhance the setup with UV and LED lighting to make it stand
+            out beautifully at night.
+          </p>
+          <p className="mb-4">Please, fill out the form below.</p>
+        </div>
         <div className="flex flex-col gap-5 md:flex-row">
           <Form
             method="POST"
-            className="flex flex-1 flex-col gap-5 py-20"
+            className="flex flex-1 flex-col gap-5"
             onSubmit={recaptcha.appendTokendAndSubmit}
           >
             <FormField
@@ -167,7 +200,7 @@ export default function SpaceNet() {
                 name="name"
                 type="text"
                 className={cls(
-                  'input input-bordered w-full',
+                  'input input-bordered input-primary w-full',
                   isSuccess && 'input-disabled',
                   errors?.name && 'input-error',
                 )}
@@ -185,7 +218,7 @@ export default function SpaceNet() {
                 name="email"
                 type="text"
                 className={cls(
-                  'input input-bordered w-full',
+                  'input input-bordered input-primary w-full',
                   isSuccess && 'input-disabled',
                   errors?.email && 'input-error',
                 )}
@@ -200,7 +233,7 @@ export default function SpaceNet() {
             >
               <textarea
                 className={cls(
-                  'textarea textarea-bordered w-full',
+                  'textarea textarea-bordered textarea-primary w-full',
                   isSuccess && 'textarea-disabled',
                   errors?.message && 'textarea-error',
                 )}
@@ -228,7 +261,11 @@ export default function SpaceNet() {
             </div>
           </Form>
           <div className="flex-1">
-            <img src={data.form.image} alt="Space Net" className="w-full" />
+            <img
+              src={data.form.image}
+              alt="Space Net"
+              className="mt-10 w-full md:mt-0"
+            />
           </div>
         </div>
       </Container>
