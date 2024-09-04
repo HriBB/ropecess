@@ -4,12 +4,10 @@ import { Hero } from '~/components/Hero'
 import { Button } from '~/components/Button'
 import { Container } from '~/components/Container'
 
-import home from '~/images/_gen/home'
-
 const data = {
   hero: {
     title: 'Plan your next rope access project',
-    image: home.banner.default,
+    image: '/images/home/banner.jpg',
     imageAlt: 'Construction frame',
     link: {
       to: '/contact',
