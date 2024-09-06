@@ -104,9 +104,9 @@ export default function SpaceNet() {
           <Hero.Title>{data.hero.title}</Hero.Title>
           <Button
             as="a"
+            href={data.hero.button.href}
             color="secondary"
             size="lg"
-            href={data.hero.button.href}
           >
             {data.hero.button.text}
           </Button>
@@ -122,7 +122,12 @@ export default function SpaceNet() {
         </Main.P>
       </Container>
 
-      <img src={data.chillout.image3} alt="Space Net" className="w-full" />
+      <img
+        className="w-full"
+        src={data.chillout.image3}
+        alt="Space Net"
+        loading="lazy"
+      />
 
       <Container as="section" className="py-24">
         <Main.H2>How to use a Space Net?</Main.H2>
@@ -133,7 +138,12 @@ export default function SpaceNet() {
         </Main.P>
       </Container>
 
-      <img src={data.makingOf.image4} alt="Space Net" className="w-full" />
+      <img
+        className="w-full"
+        src={data.makingOf.image4}
+        alt="Space Net"
+        loading="lazy"
+      />
 
       <Container as="section" className="py-24">
         <Main.H2>Where to use a Space Net?</Main.H2>
@@ -145,9 +155,10 @@ export default function SpaceNet() {
       </Container>
 
       <img
+        className="max-h-screen w-full object-cover object-top"
         src={data.neonGlow.image5}
         alt="Space Net"
-        className="max-h-screen w-full object-cover object-top"
+        loading="lazy"
       />
 
       <Container as="section" className="py-24">
@@ -164,7 +175,12 @@ export default function SpaceNet() {
         </Main.P>
       </Container>
 
-      <img src={data.chillout.image2} alt="Space Net" className="w-full" />
+      <img
+        className="w-full"
+        src={data.chillout.image2}
+        alt="Space Net"
+        loading="lazy"
+      />
 
       <Container as="section" className="py-24">
         <Main.H2>Perfect for events and festivals</Main.H2>
@@ -183,7 +199,12 @@ export default function SpaceNet() {
         <p>Don&apos;t miss out on this extraordinary adventure!</p>
       </Container>
 
-      <img src={data.chillout.image4} alt="Space Net" className="w-full" />
+      <img
+        className="w-full"
+        src={data.chillout.image4}
+        alt="Space Net"
+        loading="lazy"
+      />
 
       <Container
         as="section"
@@ -285,9 +306,10 @@ export default function SpaceNet() {
 
           <div className="flex-1">
             <img
+              className="mt-20 w-full md:mt-0"
               src={data.form.image}
               alt="Space Net"
-              className="mt-20 w-full md:mt-0"
+              loading="lazy"
             />
           </div>
         </div>

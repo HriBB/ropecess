@@ -95,6 +95,7 @@ export default function Index() {
                   className="mb-3 w-full"
                   src={item.image}
                   alt={item.title}
+                  loading="lazy"
                 />
                 <h3 className="text-3xl font-bold">{item.title}</h3>
                 {item.text && <p>{item.text}</p>}

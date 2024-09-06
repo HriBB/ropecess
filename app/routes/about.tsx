@@ -57,9 +57,10 @@ export default function About() {
               >
                 <div className="flex-[2]">
                   <img
-                    src={item.image}
                     className="max-h-96 w-full object-cover"
+                    src={item.image}
                     alt={item.alt}
+                    loading="lazy"
                   />
                 </div>
                 <p className="flex-[3]">{item.text}</p>

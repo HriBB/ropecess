@@ -17,7 +17,6 @@ function HeroBase<C extends React.ElementType = 'section'>({
   return (
     <Component
       className={cls('hero relative min-h-[60vh] bg-base-200', className)}
-      //style={{ backgroundImage: `url(${backgroundImage})` }}
       {...props}
     >
       <div className="hero-overlay bg-base-100/20"></div>
@@ -66,7 +65,7 @@ function BackgroundImage({
   alt,
   className,
   loading = 'eager',
-  //fetchPriority = 'high',
+  fetchPriority = 'high',
   ...props
 }: React.ComponentPropsWithoutRef<'img'>) {
   return (
@@ -75,7 +74,7 @@ function BackgroundImage({
       alt={alt}
       className={cls('absolute inset-0 h-full w-full object-cover', className)}
       loading={loading}
-      //fetchPriority={fetchPriority}
+      fetchPriority={fetchPriority}
       {...props}
     />
   )
