@@ -45,13 +45,13 @@ function Title({ children, className, ...props }: TitleProps) {
   return (
     <h1
       className={cls(
-        'container w-full p-10',
-        'text-center font-extralight uppercase leading-snug tracking-wide',
+        'container w-full rounded-sm p-10',
+        'text-center font-bold uppercase leading-snug tracking-wide',
         'text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl',
         // light
-        'bg-white/70 text-base-content',
+        'bg-white/85 text-base-content',
         // dark
-        'dark:bg-black/60 dark:text-white',
+        'dark:bg-black/70 dark:text-white',
         className,
       )}
       {...props}

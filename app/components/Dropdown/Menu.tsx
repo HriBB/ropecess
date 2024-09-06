@@ -19,7 +19,8 @@ export const Menu = ({
   return (
     <ul
       className={cls(
-        'absolute z-50 max-h-[360px] min-w-[150px] overflow-y-auto bg-base-300 p-2 shadow-xl',
+        'absolute z-50 max-h-[360px] min-w-[150px] overflow-y-auto p-2',
+        'rounded bg-base-200 shadow-xl dark:bg-base-300',
         bottom && 'top-12',
         top && 'bottom-12',
         right && 'left-0',

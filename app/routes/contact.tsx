@@ -138,7 +138,7 @@ export default function Contact() {
               <p className="text-red-500">{actionData.error}</p>
             )}
             <Button
-              color="secondary"
+              color="primary"
               type="submit"
               disabled={isSuccess || isLoading || !recaptcha.isReady}
             >

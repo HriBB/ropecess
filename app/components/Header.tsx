@@ -7,11 +7,11 @@ import { Button } from './Button'
 import { MenuIcon } from './MenuIcon'
 
 const items = [
-  { href: '/', text: 'Home' },
-  { href: '/services', text: 'Services' },
-  { href: '/spacenet', text: 'SpaceNet' },
-  { href: '/about', text: 'About' },
-  { href: '/contact', text: 'Contact' },
+  { href: '/', text: 'Home', className: 'btn-primary' },
+  { href: '/services', text: 'Services', className: 'btn-primary' },
+  { href: '/spacenet', text: 'Space Net', className: 'btn-secondary' },
+  { href: '/about', text: 'About', className: 'btn-primary' },
+  { href: '/contact', text: 'Contact', className: 'btn-primary' },
 ]
 
 function contains(parent: any, child: any) {
@@ -94,11 +94,13 @@ export function Header() {
         <nav
           ref={navRef}
           className={cls(
-            'navbar-center order-2 md:flex',
+            'navbar-center order-2 min-w-[175px] flex-1 md:flex',
+            'rounded bg-base-200 shadow-xl dark:bg-base-300',
             //'border border-red-500',
             isOpen
-              ? 'absolute right-4 top-full z-50 flex min-w-[150px] flex-1 -translate-y-4 bg-base-300'
+              ? 'absolute right-4 top-full z-50 flex -translate-y-4'
               : 'hidden',
+            isOpen && '',
           )}
         >
           <ul className="flex w-full flex-col items-stretch gap-1 p-2 md:flex-row md:items-center md:gap-4 md:p-0">
@@ -108,8 +110,9 @@ export function Header() {
                   to={link.href}
                   className={({ isActive }) =>
                     cls(
-                      'btn w-full md:w-auto',
+                      'btn no-animation w-full justify-start md:w-auto',
                       isActive ? 'btn-primary' : 'btn-ghost',
+                      isActive && link.className,
                     )
                   }
                   prefetch="viewport"
