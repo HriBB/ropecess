@@ -1,4 +1,4 @@
-import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node'
+import type { LoaderFunctionArgs } from '@remix-run/node'
 import {
   Links,
   Meta,
@@ -15,9 +15,7 @@ import { ThemeScript } from '~/theme/ThemeScript'
 import { useTheme } from '~/theme/useTheme'
 import { getThemeFromRequest } from '~/theme/theme.server'
 
-import styles from '~/tailwind.css?url'
-
-export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }]
+import '~/tailwind.css'
 
 export const shouldRevalidate: ShouldRevalidateFunction = (args) => {
   return args.formData?.get('theme') ? true : args.defaultShouldRevalidate

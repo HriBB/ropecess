@@ -15,6 +15,7 @@ import { Hero } from '~/components/Hero'
 import { Button } from '~/components/Button'
 import { Container } from '~/components/Container'
 import { FormField } from '~/components/FormField'
+import { Main } from '~/components/Main'
 import { useRecaptcha } from '~/utils/recaptcha'
 
 export { prefetchRecaptchaLinks as links } from '~/utils/recaptcha'
@@ -24,6 +25,10 @@ const data = {
     title: 'Space Net',
     image: '/images/spacenet/spacenet-making-of.jpg',
     imageAlt: 'Making of Space Net',
+    button: {
+      text: 'Buy or Rent',
+      href: '#rent-or-buy',
+    },
   },
   image: {
     image1: '/images/spacenet/big-triangle-spacenet.jpg',
@@ -55,7 +60,7 @@ const data = {
     name: 'Name',
     email: 'Email',
     message: 'Message',
-    button: 'Send',
+    button: 'Submit',
     errorMessage: 'Form contains errors',
     successMessage:
       'Thank you for your inquiry. We will get back to you as soon as possible.',
@@ -92,97 +97,134 @@ export default function SpaceNet() {
   const errors = actionData?.errors?.fieldErrors
 
   return (
-    <main>
+    <Main>
       <Hero>
         <Hero.BackgroundImage src={data.hero.image} alt={data.hero.imageAlt} />
         <Hero.Content>
           <Hero.Title>{data.hero.title}</Hero.Title>
+          <Button
+            as="a"
+            href={data.hero.button.href}
+            color="secondary"
+            size="lg"
+          >
+            {data.hero.button.text}
+          </Button>
         </Hero.Content>
       </Hero>
 
       <Container as="section" className="py-24">
-        <h2 className="mb-8 text-3xl font-semibold">What is a Space Net?</h2>
-        <p className="text-lg">
+        <Main.H2>What is a Space Net?</Main.H2>
+        <Main.P size="lg">
           The Space Net, a hand-woven creation made from thin ropes, is designed
           for levitation, meditation, and various whimsical activities in the
           sky.
-        </p>
-      </Container>
-
-      <img src={data.chillout.image1} alt="Space Net" className="w-full" />
-
-      <Container as="section" className="py-24">
-        <h2 className="mb-8 text-3xl font-semibold">How to use Space Net?</h2>
-        <p className="text-lg">
-          Our team crafts these nets and sets them up for different occasions.
-          Sometimes they soar high in the air, other times they rest low to the
-          ground, and often they are layered one above the other.
-        </p>
-      </Container>
-
-      <img src={data.makingOf.image4} alt="Space Net" className="w-full" />
-
-      <Container as="section" className="py-24">
-        <h2 className="mb-8 text-3xl font-semibold">Where to use Space Net?</h2>
-        <p className="text-lg">
-          It is perfect to set up a chill area on festival, event, or any
-          special occasion, or even just for fun. We can enhance the setup with
-          UV and LED lighting to make it stand out beautifully at night.
-        </p>
+        </Main.P>
       </Container>
 
       <img
-        src={data.neonGlow.image5}
+        className="w-full"
+        src={data.chillout.image3}
         alt="Space Net"
-        className="max-h-screen w-full object-cover object-top"
+        loading="lazy"
       />
 
       <Container as="section" className="py-24">
-        <h2 className="mb-8 text-3xl font-semibold">Floating on a Space Net</h2>
-        <p>
+        <Main.H2>How to use a Space Net?</Main.H2>
+        <Main.P size="lg">
+          Our team crafts these nets and sets them up for different occasions.
+          Sometimes they soar high in the air, other times they rest low to the
+          ground, and often they are layered one above the other.
+        </Main.P>
+      </Container>
+
+      <img
+        className="w-full"
+        src={data.makingOf.image4}
+        alt="Space Net"
+        loading="lazy"
+      />
+
+      <Container as="section" className="py-24">
+        <Main.H2>Where to use a Space Net?</Main.H2>
+        <Main.P size="lg">
+          It is perfect to set up a chill area on festival, event, or any
+          special occasion, or even just for fun. We can enhance the setup with
+          UV and LED lighting to make it stand out beautifully at night.
+        </Main.P>
+      </Container>
+
+      <img
+        className="max-h-screen w-full object-cover object-top"
+        src={data.neonGlow.image5}
+        alt="Space Net"
+        loading="lazy"
+      />
+
+      <Container as="section" className="py-24">
+        <Main.H2>Floating on a Space Net</Main.H2>
+        <Main.P size="lg">
           Experience the thrill of floating like never before with a space-net!
           This innovative setup transforms your outdoor adventures, offering a
-          unique blend of levitation and fun. Designed for both beginners and
-          seasoned chill-seeking adventiurers, a space-net provides a safe and
-          exhilarating way to relax in gravity-defying way above the ground.
-        </p>
+          unique blend of levitation and fun.
+        </Main.P>
+        <Main.P size="lg">
+          Designed for both beginners and seasoned chill-seeking adventiurers, a
+          space-net provides a safe and exhilarating way to relax in
+          gravity-defying way above the ground.
+        </Main.P>
       </Container>
 
-      <img src={data.chillout.image2} alt="Space Net" className="w-full" />
+      <img
+        className="w-full"
+        src={data.chillout.image2}
+        alt="Space Net"
+        loading="lazy"
+      />
 
       <Container as="section" className="py-24">
-        <h2 className="mb-8 text-3xl font-semibold">
-          Perfect for events and festivals
-        </h2>
-        <p>
+        <Main.H2>Perfect for events and festivals</Main.H2>
+        <Main.P size="lg">
           Imagine setting up a stunning display at your next event or festival,
           where participants can float above the ground, challenge themselves,
-          and enjoy a captivating atmosphere. With customizable options for LED
-          and UV lighting, the space-net creates an enchanting visual
-          experience, especially at night. Whether for a special occasion,
-          team-building event, or just for fun, renting or purchasing a Space
-          Net will elevate your gatherings and leave lasting memories.
-          Don&apos;t miss out on this extraordinary adventure!
-        </p>
+          and enjoy a captivating atmosphere.
+        </Main.P>
+        <Main.P size="lg">
+          With customizable options for LED and UV lighting, the space-net
+          creates an enchanting visual experience, especially at night. Whether
+          for a special occasion, team-building event, or just for fun, renting
+          or purchasing a Space Net will elevate your gatherings and leave
+          lasting memories.
+        </Main.P>
+        <p>Don&apos;t miss out on this extraordinary adventure!</p>
       </Container>
 
-      <img src={data.chillout.image4} alt="Space Net" className="w-full" />
+      <img
+        className="w-full"
+        src={data.chillout.image4}
+        alt="Space Net"
+        loading="lazy"
+      />
 
-      <Container as="section" className="py-24">
+      <Container
+        as="section"
+        className="bg-slate-50 py-24 dark:bg-slate-950"
+        id="rent-or-buy"
+      >
         <div className="pb-10">
-          <h2 className="mb-8 text-3xl font-semibold">
-            Rent or buy a spacenet?
-          </h2>
-          <p className="mb-4">
+          <Main.SpecialTitle>Rent or buy a spacenet?</Main.SpecialTitle>
+          <Main.P size="lg" className="text-black dark:text-white">
             If you are interested in having one of these nets, feel free to
             reach out! We can install them at your festival, event, or any
             special occasion, or even just for fun.
-          </p>
-          <p className="mb-4">
+          </Main.P>
+          <Main.P size="lg" className="text-black dark:text-white">
             We can enhance the setup with UV and LED lighting to make it stand
             out beautifully at night.
-          </p>
-          <p className="mb-4">Please, fill out the form below.</p>
+          </Main.P>
+          <Main.P size="lg" className="text-black dark:text-white">
+            Please, fill out the form below.
+          </Main.P>
         </div>
         <div className="flex flex-col gap-5 md:flex-row">
           <Form
@@ -200,7 +242,7 @@ export default function SpaceNet() {
                 name="name"
                 type="text"
                 className={cls(
-                  'input input-bordered input-primary w-full',
+                  'input input-bordered input-secondary w-full bg-transparent',
                   isSuccess && 'input-disabled',
                   errors?.name && 'input-error',
                 )}
@@ -218,7 +260,7 @@ export default function SpaceNet() {
                 name="email"
                 type="text"
                 className={cls(
-                  'input input-bordered input-primary w-full',
+                  'input input-bordered input-secondary w-full bg-transparent',
                   isSuccess && 'input-disabled',
                   errors?.email && 'input-error',
                 )}
@@ -233,7 +275,7 @@ export default function SpaceNet() {
             >
               <textarea
                 className={cls(
-                  'textarea textarea-bordered textarea-primary w-full',
+                  'textarea textarea-bordered textarea-secondary w-full bg-transparent',
                   isSuccess && 'textarea-disabled',
                   errors?.message && 'textarea-error',
                 )}
@@ -254,21 +296,24 @@ export default function SpaceNet() {
               <Button
                 color="secondary"
                 type="submit"
+                className="w-full md:w-auto md:min-w-24"
                 disabled={isSuccess || isLoading || !recaptcha.isReady}
               >
                 {data.form.button}
               </Button>
             </div>
           </Form>
+
           <div className="flex-1">
             <img
+              className="mt-20 w-full md:mt-0"
               src={data.form.image}
               alt="Space Net"
-              className="mt-10 w-full md:mt-0"
+              loading="lazy"
             />
           </div>
         </div>
       </Container>
-    </main>
+    </Main>
   )
 }

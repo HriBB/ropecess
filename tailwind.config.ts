@@ -9,6 +9,8 @@ const baseTheme = {
 }
 */
 
+console.log(themes.emerald)
+
 export default {
   content: ['./app/**/*.{js,jsx,ts,tsx}'],
   darkMode: 'class',
@@ -20,7 +22,11 @@ export default {
     themes: [
       {
         light: {
-          ...themes.garden,
+          ...themes.emerald,
+          primary: themes.emerald.secondary,
+          'primary-content': themes.emerald['secondary-content'],
+          secondary: themes.emerald.primary,
+          'secondary-content': themes.emerald['primary-content'],
           //...baseTheme,
         },
         dark: {

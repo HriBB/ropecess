@@ -4,12 +4,10 @@ import { Hero } from '~/components/Hero'
 import { Button } from '~/components/Button'
 import { Container } from '~/components/Container'
 
-import home from '~/images/_gen/home'
-
 const data = {
   hero: {
     title: 'Plan your next rope access project',
-    image: home.banner.default,
+    image: '/images/home/banner.jpg',
     imageAlt: 'Construction frame',
     link: {
       to: '/contact',
@@ -97,6 +95,7 @@ export default function Index() {
                   className="mb-3 w-full"
                   src={item.image}
                   alt={item.title}
+                  loading="lazy"
                 />
                 <h3 className="text-3xl font-bold">{item.title}</h3>
                 {item.text && <p>{item.text}</p>}

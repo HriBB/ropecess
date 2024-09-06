@@ -97,9 +97,10 @@ export default function Services() {
               <div key={service.id} className="flex flex-col gap-5 md:flex-row">
                 <div className="flex flex-1 items-center justify-center">
                   <img
-                    src={service.image}
                     className="w-full object-cover md:aspect-square"
+                    src={service.image}
                     alt={service.title}
+                    loading="lazy"
                   />
                 </div>
                 <div className="flex flex-1 flex-col items-start justify-center gap-3">
