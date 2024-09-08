@@ -13,10 +13,7 @@ export function FormField({
   ...props
 }: FormFieldProps) {
   return (
-    <label
-      className={cls('form-control w-full max-w-lg', className)}
-      {...props}
-    >
+    <label className={cls('form-control w-full', className)} {...props}>
       <div className="label">
         <span
           className={cls(

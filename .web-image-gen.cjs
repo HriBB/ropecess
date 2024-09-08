@@ -15,8 +15,8 @@ module.exports = {
     // Default single generated image to fallback on or use outside imageset.
     //  Must refer to a format and size defined above.
     default: {
-      format: 'jpg',
-      size: 800,
+      format: 'webp',
+      size: 1920,
     },
 
     // Static assets folder.

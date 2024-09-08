@@ -52,14 +52,15 @@ export function Header() {
   useEffect(() => {
     if (isOpen) {
       const clickHandler = (e: Event) => {
-        if (!contains(navRef.current, e.target)) setOpen(false)
+        if (!contains(navRef.current, e.target)) {
+          e.preventDefault()
+          setOpen(false)
+        }
       }
-      document.addEventListener('mousedown', clickHandler)
-      document.addEventListener('touchstart', clickHandler)
+      document.addEventListener('click', clickHandler)
       document.addEventListener('focusin', clickHandler)
       return () => {
-        document.removeEventListener('mousedown', clickHandler)
-        document.removeEventListener('touchstart', clickHandler)
+        document.removeEventListener('click', clickHandler)
         document.removeEventListener('focusin', clickHandler)
       }
     }
@@ -70,7 +71,7 @@ export function Header() {
       {navigation.state !== 'idle' && (
         <progress className="progress progress-primary fixed left-0 top-0 z-50 h-1 w-full" />
       )}
-      <header className="navbar relative">
+      <header className="navbar fixed top-0 z-40 bg-base-100 drop-shadow-lg">
         {/* logo left */}
         <div className="navbar-start order-1">
           <a
@@ -94,25 +95,30 @@ export function Header() {
         <nav
           ref={navRef}
           className={cls(
-            'navbar-center order-2 min-w-[175px] flex-1 md:flex',
-            'rounded bg-base-200 shadow-xl dark:bg-base-300',
-            //'border border-red-500',
+            'navbar-center order-2 w-44 flex-1 md:flex md:w-auto',
+            'max-sm:bg-base-200 max-sm:dark:bg-base-300',
+            'max-sm:rounded max-sm:shadow-xl',
             isOpen
               ? 'absolute right-4 top-full z-50 flex -translate-y-4'
               : 'hidden',
-            isOpen && '',
           )}
         >
-          <ul className="flex w-full flex-col items-stretch gap-1 p-2 md:flex-row md:items-center md:gap-4 md:p-0">
+          <ul
+            className={cls(
+              'flex w-full flex-col items-stretch gap-1 p-2',
+              'md:p-0x md:flex-row md:items-center md:gap-4',
+            )}
+          >
             {items.map((link) => (
               <li key={link.href}>
                 <NavLink
                   to={link.href}
                   className={({ isActive }) =>
                     cls(
-                      'btn no-animation w-full justify-start md:w-auto',
+                      'btn no-animation flex-shrink-0 text-nowrap',
+                      'w-full justify-start md:w-auto',
                       isActive ? 'btn-primary' : 'btn-ghost',
-                      isActive && link.className,
+                      //isActive && link.className,
                     )
                   }
                   prefetch="viewport"

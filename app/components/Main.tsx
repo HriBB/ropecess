@@ -14,7 +14,10 @@ type ParagraphProps = React.ComponentPropsWithoutRef<'p'> & {
 
 function P({ children, className, size = 'md', ...props }: ParagraphProps) {
   return (
-    <p className={cls('mb-6', paragraphSizes[size], className)} {...props}>
+    <p
+      className={cls('mb-6 last:mb-0', paragraphSizes[size], className)}
+      {...props}
+    >
       {children}
     </p>
   )
@@ -26,7 +29,10 @@ function H2({
   ...props
 }: React.ComponentPropsWithoutRef<'h1'>) {
   return (
-    <h2 className={cls('text-3xl font-semibold', 'mb-8', className)} {...props}>
+    <h2
+      className={cls('text-3xl font-medium', 'mb-8 last:mb-0', className)}
+      {...props}
+    >
       {children}
     </h2>
   )
@@ -38,7 +44,10 @@ function H3({
   ...props
 }: React.ComponentPropsWithoutRef<'h3'>) {
   return (
-    <h2 className={cls('text-2xl font-semibold', 'mb-8', className)} {...props}>
+    <h2
+      className={cls('text-2xl font-medium', 'mb-8 last:mb-0', className)}
+      {...props}
+    >
       {children}
     </h2>
   )

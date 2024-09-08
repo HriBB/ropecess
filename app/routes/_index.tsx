@@ -3,6 +3,7 @@ import { Link } from '@remix-run/react'
 import { Hero } from '~/components/Hero'
 import { Button } from '~/components/Button'
 import { Container } from '~/components/Container'
+import { Main } from '~/components/Main'
 
 const data = {
   hero: {
@@ -72,7 +73,7 @@ export default function Index() {
       <section className="py-24">
         <Container>
           <div className="flex flex-col items-start gap-10 md:items-center">
-            <h1 className="text-5xl font-bold">{data.intro.title}</h1>
+            <Main.H2>{data.intro.title}</Main.H2>
             <p className="max-w-3xl text-left text-xl leading-normal md:text-center">
               {data.intro.text}
             </p>

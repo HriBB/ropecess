@@ -113,7 +113,7 @@ export default function SpaceNet() {
         </Hero.Content>
       </Hero>
 
-      <Container as="section" className="py-24">
+      <Container as="section" size="md" className="py-40">
         <Main.H2>What is a Space Net?</Main.H2>
         <Main.P size="lg">
           The Space Net, a hand-woven creation made from thin ropes, is designed
@@ -129,8 +129,8 @@ export default function SpaceNet() {
         loading="lazy"
       />
 
-      <Container as="section" className="py-24">
-        <Main.H2>How to use a Space Net?</Main.H2>
+      <Container as="section" size="md" className="py-40">
+        <Main.H2>How we use a Space Net?</Main.H2>
         <Main.P size="lg">
           Our team crafts these nets and sets them up for different occasions.
           Sometimes they soar high in the air, other times they rest low to the
@@ -145,11 +145,11 @@ export default function SpaceNet() {
         loading="lazy"
       />
 
-      <Container as="section" className="py-24">
-        <Main.H2>Where to use a Space Net?</Main.H2>
+      <Container as="section" size="md" className="py-40">
+        <Main.H2>How you might use a Space Net?</Main.H2>
         <Main.P size="lg">
-          It is perfect to set up a chill area on festival, event, or any
-          special occasion, or even just for fun. We can enhance the setup with
+          It is perfect to set up a chill area on festival, event, or any other
+          special occasion. Or even just for fun! We can enhance the setup with
           UV and LED lighting to make it stand out beautifully at night.
         </Main.P>
       </Container>
@@ -161,8 +161,8 @@ export default function SpaceNet() {
         loading="lazy"
       />
 
-      <Container as="section" className="py-24">
-        <Main.H2>Floating on a Space Net</Main.H2>
+      <Container as="section" size="md" className="py-40">
+        <Main.H2>Floating above the ground</Main.H2>
         <Main.P size="lg">
           Experience the thrill of floating like never before with a space-net!
           This innovative setup transforms your outdoor adventures, offering a
@@ -182,7 +182,7 @@ export default function SpaceNet() {
         loading="lazy"
       />
 
-      <Container as="section" className="py-24">
+      <Container as="section" size="md" className="py-40">
         <Main.H2>Perfect for events and festivals</Main.H2>
         <Main.P size="lg">
           Imagine setting up a stunning display at your next event or festival,
@@ -206,27 +206,23 @@ export default function SpaceNet() {
         loading="lazy"
       />
 
-      <Container
-        as="section"
-        className="bg-slate-50 py-24 dark:bg-slate-950"
-        id="rent-or-buy"
-      >
-        <div className="pb-10">
-          <Main.SpecialTitle>Rent or buy a spacenet?</Main.SpecialTitle>
-          <Main.P size="lg" className="text-black dark:text-white">
-            If you are interested in having one of these nets, feel free to
-            reach out! We can install them at your festival, event, or any
-            special occasion, or even just for fun.
-          </Main.P>
-          <Main.P size="lg" className="text-black dark:text-white">
-            We can enhance the setup with UV and LED lighting to make it stand
-            out beautifully at night.
-          </Main.P>
-          <Main.P size="lg" className="text-black dark:text-white">
-            Please, fill out the form below.
-          </Main.P>
-        </div>
-        <div className="flex flex-col gap-5 md:flex-row">
+      <section id="rent-or-buy" className="bg-slate-50 py-40 dark:bg-slate-950">
+        <Container size="sm">
+          <div className="pb-10">
+            <Main.SpecialTitle>Rent or buy a Space Net?</Main.SpecialTitle>
+            <Main.P size="lg" className="text-black dark:text-white">
+              If you are interested in having one of these nets, feel free to
+              reach out! We can install them at your festival, event, or any
+              special occasion, or even just for fun.
+            </Main.P>
+            <Main.P size="lg" className="text-black dark:text-white">
+              We can enhance the setup with UV and LED lighting to make it stand
+              out beautifully at night.
+            </Main.P>
+            <Main.P size="lg" className="text-black dark:text-white">
+              Please, fill out the form below.
+            </Main.P>
+          </div>
           <Form
             method="POST"
             className="flex flex-1 flex-col gap-5"
@@ -242,7 +238,8 @@ export default function SpaceNet() {
                 name="name"
                 type="text"
                 className={cls(
-                  'input input-bordered input-secondary w-full bg-transparent',
+                  'input input-bordered w-full bg-transparent',
+                  //'input-secondary',
                   isSuccess && 'input-disabled',
                   errors?.name && 'input-error',
                 )}
@@ -260,7 +257,8 @@ export default function SpaceNet() {
                 name="email"
                 type="text"
                 className={cls(
-                  'input input-bordered input-secondary w-full bg-transparent',
+                  'input input-bordered w-full bg-transparent',
+                  //'input-secondary',
                   isSuccess && 'input-disabled',
                   errors?.email && 'input-error',
                 )}
@@ -275,7 +273,8 @@ export default function SpaceNet() {
             >
               <textarea
                 className={cls(
-                  'textarea textarea-bordered textarea-secondary w-full bg-transparent',
+                  'textarea textarea-bordered w-full bg-transparent',
+                  //'textarea-secondary',
                   isSuccess && 'textarea-disabled',
                   errors?.message && 'textarea-error',
                 )}
@@ -286,7 +285,7 @@ export default function SpaceNet() {
                 //defaultValue={'Test @localhost'}
               />
             </FormField>
-            <div className="flex max-w-lg items-center justify-end gap-4">
+            <div className="flex items-center justify-end gap-4">
               {actionData?.message && (
                 <p className="text-green-700">{actionData.message}</p>
               )}
@@ -302,18 +301,16 @@ export default function SpaceNet() {
                 {data.form.button}
               </Button>
             </div>
+            <div id="recaptcha" />
           </Form>
-
-          <div className="flex-1">
-            <img
-              className="mt-20 w-full md:mt-0"
-              src={data.form.image}
-              alt="Space Net"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </Container>
+        </Container>
+      </section>
+      <img
+        className="w-full"
+        src={data.form.image}
+        alt="Space Net"
+        loading="lazy"
+      />
     </Main>
   )
 }
