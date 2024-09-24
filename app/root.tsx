@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import type { LoaderFunctionArgs } from '@remix-run/node'
 import {
   Links,

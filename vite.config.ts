@@ -2,39 +2,30 @@ import { vitePlugin as remix } from '@remix-run/dev'
 import { installGlobals } from '@remix-run/node'
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import minipic from 'vite-plugin-minipic'
+import { setupPlugins as responsiveImages } from '@responsive-image/vite-plugin'
 
 installGlobals({ nativeFetch: true })
 
+declare module '@remix-run/server-runtime' {
+  interface Future {
+    unstable_singleFetch: true
+  }
+}
+
 export default defineConfig({
   plugins: [
-    minipic({
-      sharpOptions: {
-        png: {
-          quality: 70,
-        },
-        jpg: {
-          quality: 70,
-        },
-        gif: {},
-        jpeg: {
-          quality: 70,
-        },
-        webp: {
-          quality: 70,
-        },
-        avif: {
-          quality: 70,
-        },
-      },
-      convert: [{ from: 'jpg', to: 'webp' }],
-      cache: false,
-      exclude: [],
-      include: [],
+    responsiveImages({
+      include: /^[^?]+\.jpg\?.*responsive.*$/,
+      w: [320, 640, 750, 828, 1080, 1200, 1920],
+      format:
+        process.env.NODE_ENV === 'production'
+          ? ['jpeg', 'webp', 'avif']
+          : ['jpeg', 'webp'],
     }),
     remix({
       future: {
         unstable_singleFetch: true,
+        unstable_optimizeDeps: true,
       },
     }),
     tsconfigPaths(),

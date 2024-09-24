@@ -1,4 +1,4 @@
-import { ActionFunctionArgs } from '@remix-run/node'
+import { ActionFunctionArgs, MetaFunction } from '@remix-run/node'
 import {
   Form,
   useActionData,
@@ -16,47 +16,40 @@ import { Button } from '~/components/Button'
 import { Container } from '~/components/Container'
 import { FormField } from '~/components/FormField'
 import { Main } from '~/components/Main'
+import { Picture } from '~/components/Picture'
 import { useRecaptcha } from '~/utils/recaptcha'
+import { getMeta } from '~/utils/meta'
+
+import bannerImage from '~/images/spacenet/spacenet-making-of.jpg?responsive'
+
+import chilloutImage2 from '~/images/spacenet/spacenet-chillout-from-below.jpg?responsive'
+import chilloutImage3 from '~/images/spacenet/spacenet-chillout-people.jpg?responsive'
+import chilloutImage4 from '~/images/spacenet/spacenet-chillout-festival.jpg?responsive'
+
+import makingOfImage4 from '~/images/spacenet/spacenet-making-of-04.jpg?responsive'
+import makingOfImage2 from '~/images/spacenet/spacenet-making-of-02.jpg?responsive'
+
+import neonGlowImage5 from '~/images/spacenet/two-spacenets-at-night-glow.jpg?responsive'
 
 export { prefetchRecaptchaLinks as links } from '~/utils/recaptcha'
 
 const data = {
+  meta: {
+    title: 'Space Net',
+    description:
+      'The Space Net, a hand-woven creation made from thin ropes, is designed for levitation, meditation, and various whimsical activities in the sky.',
+    image: bannerImage.imageUrlFor(1200, 'jpeg'),
+  },
   hero: {
     title: 'Space Net',
-    image: '/images/spacenet/spacenet-making-of.jpg',
+    image: bannerImage,
     imageAlt: 'Making of Space Net',
     button: {
       text: 'Buy or Rent',
       href: '#rent-or-buy',
     },
   },
-  image: {
-    image1: '/images/spacenet/big-triangle-spacenet.jpg',
-    image3: '/images/spacenet/spacenet-no-jumping.jpg',
-    image2: '/images/spacenet/spacenet-neon-glow.jpg',
-  },
-  chillout: {
-    image1: '/images/spacenet/spacenet-chillout-from-above.jpg',
-    image2: '/images/spacenet/spacenet-chillout-from-below.jpg',
-    image3: '/images/spacenet/spacenet-chillout-people.jpg',
-    image4: '/images/spacenet/spacenet-chillout-festival.jpg',
-  },
-  makingOf: {
-    image: '/images/spacenet/spacenet-making-of.jpg',
-    image1: '/images/spacenet/spacenet-making-of-01.jpg',
-    image2: '/images/spacenet/spacenet-making-of-02.jpg',
-    image3: '/images/spacenet/spacenet-making-of-03.jpg',
-    image4: '/images/spacenet/spacenet-making-of-04.jpg',
-  },
-  neonGlow: {
-    image1: '/images/spacenet/spacenet-neon-glow.jpg',
-    image2: '/images/spacenet/spacenet-neon-glow-closeup.jpeg',
-    image3: '/images/spacenet/spacenet-neon-glow-next.jpeg',
-    image4: '/images/spacenet/spacenet-neon-glow-blurry.jpg',
-    image5: '/images/spacenet/two-spacenets-at-night-glow.jpg',
-  },
   form: {
-    image: '/images/spacenet/spacenet-making-of-02.jpg',
     name: 'Name',
     email: 'Email',
     message: 'Message',
@@ -65,6 +58,10 @@ const data = {
     successMessage:
       'Thank you for your inquiry. We will get back to you as soon as possible.',
   },
+}
+
+export const meta: MetaFunction = () => {
+  return getMeta(data.meta)
 }
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -99,7 +96,7 @@ export default function SpaceNet() {
   return (
     <Main>
       <Hero>
-        <Hero.BackgroundImage src={data.hero.image} alt={data.hero.imageAlt} />
+        <Hero.BackgroundPicture {...data.hero.image} alt={data.hero.imageAlt} />
         <Hero.Content>
           <Hero.Title>{data.hero.title}</Hero.Title>
           <Button
@@ -122,10 +119,11 @@ export default function SpaceNet() {
         </Main.P>
       </Container>
 
-      <img
-        className="w-full"
-        src={data.chillout.image3}
-        alt="Space Net"
+      <Picture
+        {...chilloutImage3}
+        alt="People chilling on a Space Net"
+        pictureClassName="w-full"
+        className="w-full object-cover"
         loading="lazy"
       />
 
@@ -138,10 +136,11 @@ export default function SpaceNet() {
         </Main.P>
       </Container>
 
-      <img
-        className="w-full"
-        src={data.makingOf.image4}
-        alt="Space Net"
+      <Picture
+        {...makingOfImage4}
+        alt="Crafting a Space Net"
+        pictureClassName="w-full"
+        className="w-full object-cover"
         loading="lazy"
       />
 
@@ -154,10 +153,11 @@ export default function SpaceNet() {
         </Main.P>
       </Container>
 
-      <img
+      <Picture
+        {...neonGlowImage5}
+        alt="Space Net with neon glow"
+        pictureClassName="w-full max-h-screen"
         className="max-h-screen w-full object-cover object-top"
-        src={data.neonGlow.image5}
-        alt="Space Net"
         loading="lazy"
       />
 
@@ -175,10 +175,11 @@ export default function SpaceNet() {
         </Main.P>
       </Container>
 
-      <img
-        className="w-full"
-        src={data.chillout.image2}
-        alt="Space Net"
+      <Picture
+        {...chilloutImage2}
+        alt="Space Net chillout"
+        pictureClassName="w-full"
+        className="w-full object-cover"
         loading="lazy"
       />
 
@@ -199,10 +200,11 @@ export default function SpaceNet() {
         <p>Don&apos;t miss out on this extraordinary adventure!</p>
       </Container>
 
-      <img
-        className="w-full"
-        src={data.chillout.image4}
-        alt="Space Net"
+      <Picture
+        {...chilloutImage4}
+        alt="People chilling on a Space Net on a festival"
+        pictureClassName="w-full"
+        className="w-full object-cover"
         loading="lazy"
       />
 
@@ -305,10 +307,12 @@ export default function SpaceNet() {
           </Form>
         </Container>
       </section>
-      <img
-        className="w-full"
-        src={data.form.image}
-        alt="Space Net"
+
+      <Picture
+        {...makingOfImage2}
+        alt="Crafting a Space Net next to a lake"
+        pictureClassName="w-full"
+        className="w-full object-cover"
         loading="lazy"
       />
     </Main>

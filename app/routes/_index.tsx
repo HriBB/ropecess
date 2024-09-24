@@ -1,14 +1,27 @@
+import { MetaFunction } from '@remix-run/node'
 import { Link } from '@remix-run/react'
 
+import { Main } from '~/components/Main'
 import { Hero } from '~/components/Hero'
 import { Button } from '~/components/Button'
 import { Container } from '~/components/Container'
-import { Main } from '~/components/Main'
+
+import bannerImage from '~/images/home/banner.jpg?responsive'
+import workPlanImage from '~/images/home/work-plan.jpg?responsive'
+import accessPlanImage from '~/images/home/access-plan.jpg?responsive'
+import ourServicesImage from '~/images/home/our-services.jpg?responsive'
+import { Picture } from '~/components/Picture'
 
 const data = {
+  meta: {
+    title: 'Ropecess',
+    description:
+      'Ropecess delivers top-quality construction and specialized access services, ensuring safety, precision, and reliability in every project.',
+    image: bannerImage.imageUrlFor(1200, 'jpeg'),
+  },
   hero: {
     title: 'Plan your next rope access project',
-    image: '/images/home/banner.jpg',
+    image: bannerImage,
     imageAlt: 'Construction frame',
     link: {
       to: '/contact',
@@ -25,19 +38,19 @@ const data = {
       {
         id: 1,
         title: 'Work Plan',
-        image: '/images/home/work-plan.jpg',
+        image: workPlanImage,
         text: 'Our Work Plan ensures every project is completed on time, within budget, and to the highest standards. We carefully plan, manage timelines, allocate resources, and mitigate risks, keeping you informed at every step.',
       },
       {
         id: 2,
         title: 'Access Plan',
-        image: '/images/home/access-plan.jpg',
+        image: accessPlanImage,
         text: 'Our Access Plan prioritizes safety and efficiency. We use advanced rope access and innovative methods to safely reach challenging areas, minimizing disruptions and reducing costs while maintaining top safety standards.',
       },
       {
         id: 3,
         title: 'Our Services',
-        image: '/images/home/our-services.jpg',
+        image: ourServicesImage,
         text: 'We offer a wide range of specialized construction and access services to cater to various industry needs.',
       },
     ],
@@ -51,11 +64,23 @@ const data = {
   },
 }
 
+export const meta: MetaFunction = () => {
+  return [
+    {
+      title: data.meta.title,
+    },
+    {
+      name: 'description',
+      content: data.meta.description,
+    },
+  ]
+}
+
 export default function Index() {
   return (
-    <main>
+    <Main>
       <Hero>
-        <Hero.BackgroundImage src={data.hero.image} alt={data.hero.imageAlt} />
+        <Hero.BackgroundPicture {...data.hero.image} alt={data.hero.imageAlt} />
         <Hero.Content>
           <Hero.Title>{data.hero.title}</Hero.Title>
           <Button
@@ -92,9 +117,9 @@ export default function Index() {
                 key={item.id}
                 className="flex flex-1 flex-col gap-2 md:gap-10"
               >
-                <img
-                  className="mb-3 w-full"
-                  src={item.image}
+                <Picture
+                  {...item.image}
+                  className="w-full"
                   alt={item.title}
                   loading="lazy"
                 />
@@ -120,6 +145,6 @@ export default function Index() {
           </Button>
         </Container>
       </section>
-    </main>
+    </Main>
   )
 }

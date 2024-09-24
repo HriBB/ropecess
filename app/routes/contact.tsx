@@ -1,4 +1,4 @@
-import { ActionFunctionArgs } from '@remix-run/node'
+import { ActionFunctionArgs, MetaFunction } from '@remix-run/node'
 import {
   Form,
   useActionData,
@@ -17,12 +17,20 @@ import { Container } from '~/components/Container'
 import { FormField } from '~/components/FormField'
 import { useRecaptcha } from '~/utils/recaptcha'
 
+import bannerImage from '~/images/contact/banner.jpg?responsive'
+
 export { prefetchRecaptchaLinks as links } from '~/utils/recaptcha'
 
 const data = {
+  meta: {
+    title: 'Contact US',
+    description:
+      'Get in touch with Ropecess to discuss your project requirements. Our team is here to help you with your construction and access needs.',
+    image: bannerImage.imageUrlFor(1200, 'jpeg'),
+  },
   hero: {
     title: 'Contact US',
-    image: '/images/contact/banner.jpg',
+    image: bannerImage,
     imageAlt: 'Construction worker on a building site',
   },
   form: {
@@ -34,6 +42,18 @@ const data = {
     successMessage:
       'Thank you for your inquiry. We will get back to you as soon as possible.',
   },
+}
+
+export const meta: MetaFunction = () => {
+  return [
+    {
+      title: data.meta.title,
+    },
+    {
+      name: 'description',
+      content: data.meta.description,
+    },
+  ]
 }
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -68,7 +88,7 @@ export default function Contact() {
   return (
     <main>
       <Hero>
-        <Hero.BackgroundImage src={data.hero.image} alt={data.hero.imageAlt} />
+        <Hero.BackgroundPicture {...data.hero.image} alt={data.hero.imageAlt} />
         <Hero.Content>
           <Hero.Title>{data.hero.title}</Hero.Title>
         </Hero.Content>

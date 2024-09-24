@@ -3,6 +3,7 @@ node_modules
 /.cache
 /build
 /photos
+/lighthouse
 _gen
 .env
 .env.staging

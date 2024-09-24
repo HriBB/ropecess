@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { cls } from '~/utils/cls'
 import { DownIcon } from './DownIcon'
 import { Button } from './Button'
+import { Picture, PictureProps } from './Picture'
 
 type HeroProps<C extends React.ElementType> = {
   as?: C
@@ -40,18 +41,10 @@ function HeroBase<C extends React.ElementType = 'section'>({
         <Button
           color="ghost"
           shape="circle"
-          className={cls(
-            'absolute bottom-4 left-1/2 z-50 -translate-x-1/2 transform',
-          )}
+          className={cls('absolute bottom-4 left-1/2 z-50 -ml-5')}
           onClick={() => window.scrollTo({ top: window.innerHeight })}
         >
-          <DownIcon
-            className={cls(
-              'h-10 w-10 text-white/70',
-              'animate-pulse',
-              //'border-2 border-red-500',
-            )}
-          />
+          <DownIcon className="h-10 w-10 animate-pulse text-white/70" />
         </Button>
       )}
     </Component>
@@ -87,7 +80,7 @@ function Title({ children, className, ...props }: TitleProps) {
     <h1
       className={cls(
         'text-center font-semibold uppercase leading-snug tracking-wide',
-        'text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl',
+        'text-3xl sm:text-4xl md:text-5xl lg:text-6xl',
         className,
       )}
       {...props}
@@ -97,21 +90,13 @@ function Title({ children, className, ...props }: TitleProps) {
   )
 }
 
-function BackgroundImage({
-  src,
-  alt,
-  className,
-  loading = 'eager',
-  fetchPriority = 'high',
-  ...props
-}: React.ComponentPropsWithoutRef<'img'>) {
+function BackgroundPicture({ className, ...props }: PictureProps) {
   return (
-    <img
-      src={src}
-      alt={alt}
+    <Picture
       className={cls('absolute inset-0 h-full w-full object-cover', className)}
-      loading={loading}
-      fetchPriority={fetchPriority}
+      loading="eager"
+      decoding="sync"
+      fetchPriority="high"
       {...props}
     />
   )
@@ -120,5 +105,5 @@ function BackgroundImage({
 export const Hero = Object.assign(HeroBase, {
   Content,
   Title,
-  BackgroundImage,
+  BackgroundPicture,
 })

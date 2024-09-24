@@ -75,18 +75,19 @@ export function Header() {
         {/* logo left */}
         <div className="navbar-start order-1">
           <a
-            className="btn btn-ghost btn-lg px-4 text-4xl font-bold uppercase"
+            className="btn btn-ghost no-animation btn-lg px-4 text-4xl font-bold uppercase"
             href="/"
           >
-            Ropecess{' '}
+            Ropecess
           </a>
         </div>
         {/* buttons right */}
         <div className="navbar-end order-3">
           <ThemeButton />
           <Button
-            className="btn btn-circle btn-ghost flex md:hidden"
+            className="btn btn-circle btn-ghost no-animation flex md:hidden"
             onClick={handleMenuToggle}
+            aria-label="Toggle Menu"
           >
             <MenuIcon />
           </Button>

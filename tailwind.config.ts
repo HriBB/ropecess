@@ -9,8 +9,6 @@ const baseTheme = {
 }
 */
 
-console.log(themes.emerald)
-
 export default {
   content: ['./app/**/*.{js,jsx,ts,tsx}'],
   darkMode: 'class',

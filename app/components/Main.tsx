@@ -1,4 +1,5 @@
 import { cls } from '~/utils/cls'
+import { Container } from './Container'
 
 const paragraphSizes = {
   xs: 'text-xs',
@@ -73,10 +74,45 @@ function SpecialTitle({
   )
 }
 
-function Main({ children }: { children: React.ReactNode }) {
-  return <main>{children}</main>
+function Hero({
+  children,
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<'section'>) {
+  return (
+    <section className={cls('h-svh w-full', className)} {...props}>
+      {children}
+    </section>
+  )
 }
 
+function Section({
+  children,
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<'section'>) {
+  return (
+    <section className={cls('py-24', className)} {...props}>
+      {children}
+    </section>
+  )
+}
+
+function Main({
+  children,
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<'main'>) {
+  return (
+    <main className={className} {...props}>
+      {children}
+    </main>
+  )
+}
+
+Main.Hero = Hero
+Main.Section = Section
+Main.Container = Container
 Main.SpecialTitle = SpecialTitle
 Main.H2 = H2
 Main.H3 = H3

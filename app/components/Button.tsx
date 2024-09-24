@@ -1,6 +1,6 @@
 import { cls } from '~/utils/cls'
 
-const baseClassName = 'btn'
+const baseClassName = 'btn no-animation'
 
 const colors = {
   primary: 'btn-primary',
