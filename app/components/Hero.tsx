@@ -63,10 +63,12 @@ function Content({ children, className, ...props }: ContentProps) {
         'hero-content flex-col gap-10',
         'container rounded-sm p-10 py-14',
         'w-[calc(100%-4rem)] sm:w-full sm:max-w-md md:max-w-lg lg:max-w-4xl',
+        // background
+        'bg-base-100/70 dark:bg-base-100/90',
         // light
-        'bg-white/15 text-base-content backdrop-blur',
+        'text-base-content backdrop-blur-sm',
         // dark
-        'dark:bg-base-100/60 dark:text-white dark:backdrop-blur-sm',
+        'dark:text-white dark:backdrop-blur-sm',
         className,
       )}
       {...props}
