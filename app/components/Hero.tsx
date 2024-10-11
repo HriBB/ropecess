@@ -43,6 +43,7 @@ function HeroBase<C extends React.ElementType = 'section'>({
         <Button
           color="ghost"
           shape="circle"
+          aria-label="Scroll down"
           className={cls('absolute bottom-4 left-1/2 z-50 -ml-5')}
           onClick={() => window.scrollTo({ top: window.innerHeight })}
         >
