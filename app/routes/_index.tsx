@@ -4,20 +4,20 @@ import { Link } from '@remix-run/react'
 import { Main } from '~/components/Main'
 import { Hero } from '~/components/Hero'
 import { Button } from '~/components/Button'
+import { Picture } from '~/components/Picture'
 import { Container } from '~/components/Container'
 
-import bannerImage from '~/images/home/banner.jpg?responsive'
-import workPlanImage from '~/images/home/work-plan.jpg?responsive'
-import accessPlanImage from '~/images/home/access-plan.jpg?responsive'
-import ourServicesImage from '~/images/home/our-services.jpg?responsive'
-import { Picture } from '~/components/Picture'
+import bannerImage from '~/images/home/banner.jpg?hero'
+import workPlanImage from '~/images/home/work-plan.jpg?square'
+import accessPlanImage from '~/images/home/access-plan.jpg?square'
+import ourServicesImage from '~/images/home/our-services.jpg?square'
 
 const data = {
   meta: {
     title: 'Ropecess',
     description:
       'Ropecess delivers top-quality construction and specialized access services, ensuring safety, precision, and reliability in every project.',
-    image: bannerImage.imageUrlFor(1200, 'jpeg'),
+    image: bannerImage,
   },
   hero: {
     title: 'Plan your next rope access project',
@@ -80,7 +80,10 @@ export default function Index() {
   return (
     <Main>
       <Hero>
-        <Hero.BackgroundPicture {...data.hero.image} alt={data.hero.imageAlt} />
+        <Hero.BackgroundPicture
+          picture={data.hero.image}
+          alt={data.hero.imageAlt}
+        />
         <Hero.Content>
           <Hero.Title>{data.hero.title}</Hero.Title>
           <Button
@@ -95,35 +98,28 @@ export default function Index() {
         </Hero.Content>
       </Hero>
 
-      <section className="py-24">
-        <Container>
-          <div className="flex flex-col items-start gap-10 md:items-center">
+      <section className="bg-base-200 py-24">
+        <Container className="flex flex-col gap-24">
+          <div className="flex flex-col items-start md:items-center">
             <Main.H2>{data.intro.title}</Main.H2>
             <p className="max-w-3xl text-left text-xl leading-normal md:text-center">
               {data.intro.text}
             </p>
           </div>
-        </Container>
-      </section>
-
-      <section className="bg-base-200 py-24">
-        <Container className="flex flex-col gap-10">
-          <h3 className="text-center text-lg uppercase tracking-wide">
-            {data.services.title}
-          </h3>
           <div className="grid grid-cols-1 gap-20 md:grid-cols-3 md:gap-20">
             {data.services.items.map((item) => (
               <div
                 key={item.id}
-                className="flex flex-1 flex-col gap-2 md:gap-10"
+                className="flex flex-1 flex-col gap-2 md:gap-6"
               >
                 <Picture
-                  {...item.image}
-                  className="w-full"
+                  picture={item.image}
                   alt={item.title}
+                  className="w-full"
                   loading="lazy"
+                  sizes="(max-width:767px) 100vw, 400px"
                 />
-                <h3 className="text-3xl font-bold">{item.title}</h3>
+                <Main.H3 className="mb-0">{item.title}</Main.H3>
                 {item.text && <p>{item.text}</p>}
               </div>
             ))}
@@ -138,6 +134,7 @@ export default function Index() {
             as={Link}
             to={data.outro.link.to}
             className="w-full md:w-auto"
+            size="lg"
             color="primary"
             prefetch="viewport"
           >

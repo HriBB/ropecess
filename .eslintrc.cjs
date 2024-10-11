@@ -48,6 +48,9 @@ module.exports = {
           typescript: {},
         },
       },
+      rules: {
+        'import/no-duplicates': ['error', { considerQueryString: true }],
+      },
     },
 
     // Typescript

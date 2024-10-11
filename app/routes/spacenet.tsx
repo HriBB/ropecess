@@ -20,16 +20,23 @@ import { Picture } from '~/components/Picture'
 import { useRecaptcha } from '~/utils/recaptcha'
 import { getMeta } from '~/utils/meta'
 
-import bannerImage from '~/images/spacenet/spacenet-making-of.jpg?responsive'
+import bannerImage from '~/images/spacenet/spacenet-making-of.jpg?hero'
+import bannerLqip from '~/images/spacenet/spacenet-making-of.jpg?lqip'
 
-import chilloutImage2 from '~/images/spacenet/spacenet-chillout-from-below.jpg?responsive'
-import chilloutImage3 from '~/images/spacenet/spacenet-chillout-people.jpg?responsive'
-import chilloutImage4 from '~/images/spacenet/spacenet-chillout-festival.jpg?responsive'
+import chilloutImage2 from '~/images/spacenet/spacenet-chillout-from-below.jpg?hero'
+import chilloutImage2Lqip from '~/images/spacenet/spacenet-chillout-from-below.jpg?lqip'
+import chilloutImage3 from '~/images/spacenet/spacenet-chillout-people.jpg?hero'
+import chilloutImage3Lqip from '~/images/spacenet/spacenet-chillout-people.jpg?lqip'
+import chilloutImage4 from '~/images/spacenet/spacenet-chillout-festival.jpg?hero'
+import chilloutImage4Lqip from '~/images/spacenet/spacenet-chillout-festival.jpg?lqip'
 
-import makingOfImage4 from '~/images/spacenet/spacenet-making-of-04.jpg?responsive'
-import makingOfImage2 from '~/images/spacenet/spacenet-making-of-02.jpg?responsive'
+import makingOfImage4 from '~/images/spacenet/spacenet-making-of-04.jpg?hero'
+import makingOfImage4Lqip from '~/images/spacenet/spacenet-making-of-04.jpg?lqip'
+import makingOfImage2 from '~/images/spacenet/spacenet-making-of-02.jpg?hero'
+import makingOfImage2Lqip from '~/images/spacenet/spacenet-making-of-02.jpg?lqip'
 
-import neonGlowImage5 from '~/images/spacenet/two-spacenets-at-night-glow.jpg?responsive'
+import neonGlowImage5 from '~/images/spacenet/two-spacenets-at-night-glow.jpg?hero'
+import neonGlowImage5Lqip from '~/images/spacenet/two-spacenets-at-night-glow.jpg?lqip'
 
 export { prefetchRecaptchaLinks as links } from '~/utils/recaptcha'
 
@@ -38,11 +45,12 @@ const data = {
     title: 'Space Net',
     description:
       'The Space Net, a hand-woven creation made from thin ropes, is designed for levitation, meditation, and various whimsical activities in the sky.',
-    image: bannerImage.imageUrlFor(1200, 'jpeg'),
+    image: bannerImage,
   },
   hero: {
     title: 'Space Net',
     image: bannerImage,
+    lqip: bannerLqip,
     imageAlt: 'Making of Space Net',
     button: {
       text: 'Buy or Rent',
@@ -96,7 +104,11 @@ export default function SpaceNet() {
   return (
     <Main>
       <Hero>
-        <Hero.BackgroundPicture {...data.hero.image} alt={data.hero.imageAlt} />
+        <Hero.BackgroundPicture
+          picture={data.hero.image}
+          lqip={data.hero.lqip}
+          alt={data.hero.imageAlt}
+        />
         <Hero.Content>
           <Hero.Title>{data.hero.title}</Hero.Title>
           <Button
@@ -120,7 +132,8 @@ export default function SpaceNet() {
       </Container>
 
       <Picture
-        {...chilloutImage3}
+        picture={chilloutImage3}
+        lqip={chilloutImage3Lqip}
         alt="People chilling on a Space Net"
         pictureClassName="w-full"
         className="w-full object-cover"
@@ -137,7 +150,8 @@ export default function SpaceNet() {
       </Container>
 
       <Picture
-        {...makingOfImage4}
+        picture={makingOfImage4}
+        lqip={makingOfImage4Lqip}
         alt="Crafting a Space Net"
         pictureClassName="w-full"
         className="w-full object-cover"
@@ -154,7 +168,8 @@ export default function SpaceNet() {
       </Container>
 
       <Picture
-        {...neonGlowImage5}
+        picture={neonGlowImage5}
+        lqip={neonGlowImage5Lqip}
         alt="Space Net with neon glow"
         pictureClassName="w-full max-h-screen"
         className="max-h-screen w-full object-cover object-top"
@@ -176,7 +191,8 @@ export default function SpaceNet() {
       </Container>
 
       <Picture
-        {...chilloutImage2}
+        picture={chilloutImage2}
+        lqip={chilloutImage2Lqip}
         alt="Space Net chillout"
         pictureClassName="w-full"
         className="w-full object-cover"
@@ -201,7 +217,8 @@ export default function SpaceNet() {
       </Container>
 
       <Picture
-        {...chilloutImage4}
+        picture={chilloutImage4}
+        lqip={chilloutImage4Lqip}
         alt="People chilling on a Space Net on a festival"
         pictureClassName="w-full"
         className="w-full object-cover"
@@ -309,7 +326,8 @@ export default function SpaceNet() {
       </section>
 
       <Picture
-        {...makingOfImage2}
+        picture={makingOfImage2}
+        lqip={makingOfImage2Lqip}
         alt="Crafting a Space Net next to a lake"
         pictureClassName="w-full"
         className="w-full object-cover"

@@ -2,20 +2,21 @@ import { MetaFunction } from '@remix-run/node'
 
 import { Hero } from '~/components/Hero'
 import { Container } from '~/components/Container'
-
-import bannerImage from '~/images/services/banner.jpg?responsive'
-import photovoltaicImage from '~/images/services/photovoltaic-module-installation-01.jpg?responsive'
-import industrialImage from '~/images/services/industrial-rope-access-01.jpg?responsive'
-import riggingImage from '~/images/services/rigging-01.jpg?responsive'
-import stageImage from '~/images/services/stage-building-01.jpg?responsive'
 import { Picture } from '~/components/Picture'
+
+import bannerImage from '~/images/services/banner.jpg?hero'
+
+import photovoltaicImage from '~/images/services/photovoltaic-module-installation-01.jpg?thumb'
+import industrialImage from '~/images/services/industrial-rope-access-01.jpg?thumb'
+import riggingImage from '~/images/services/rigging-01.jpg?thumb'
+import stageImage from '~/images/services/stage-building-01.jpg?thumb'
 
 const data = {
   meta: {
     title: 'Services',
     description:
       'Ropecess offers a wide range of specialized construction services, including photovoltaic installation, industrial rope access, rigging, and stage building.',
-    image: bannerImage.imageUrlFor(1200, 'jpeg'),
+    image: bannerImage,
   },
   hero: {
     title: 'Services',
@@ -111,30 +112,30 @@ export default function Services() {
   return (
     <main>
       <Hero>
-        <Hero.BackgroundPicture {...data.hero.image} alt={data.hero.imageAlt} />
-        <Hero.Content>
+        <Hero.BackgroundPicture
+          picture={data.hero.image}
+          alt={data.hero.imageAlt}
+        />
+        <Hero.Content className="lg:mr-10">
           <Hero.Title>{data.hero.title}</Hero.Title>
         </Hero.Content>
       </Hero>
 
       <section className="py-24">
-        <Container>
-          <div className="flex flex-col gap-20 py-20 md:gap-10">
+        <Container size="md">
+          <div className="flex flex-col gap-24">
             {data.items.map((service) => (
               <div
                 key={service.id}
                 className="flex flex-col gap-5 md:flex-row md:gap-10"
               >
-                <div className="flex flex-1 items-center justify-center">
-                  <Picture
-                    {...service.image}
-                    alt={service.title}
-                    pictureClassName="w-full"
-                    className="aspect-square max-h-96 w-full object-cover"
-                    sizes="(max-width:767px) 100vw, 33vw"
-                    loading="lazy"
-                  />
-                </div>
+                <Picture
+                  picture={service.image}
+                  alt={service.title}
+                  className="aspect- object-cover md:w-[400px]"
+                  sizes="(max-width:767px) 100vw, 400px"
+                  loading="lazy"
+                />
                 <div className="flex flex-1 flex-col items-start justify-center gap-3">
                   <h2 className="text-2xl font-medium">{service.title}</h2>
                   <p>{service.description}</p>

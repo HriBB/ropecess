@@ -2,20 +2,21 @@ import { MetaFunction } from '@remix-run/node'
 
 import { Hero } from '~/components/Hero'
 import { Container } from '~/components/Container'
-
-import bannerImage from '~/images/about/banner.jpg?responsive'
-import industrialImage from '~/images/services/industrial-rope-access-01.jpg?responsive'
-import photovoltaicImage from '~/images/services/photovoltaic-module-installation-01.jpg?responsive'
-import riggingImage from '~/images/services/rigging-01.jpg?responsive'
-import stageImage from '~/images/services/stage-building-01.jpg?responsive'
 import { Picture } from '~/components/Picture'
+
+import bannerImage from '~/images/about/banner.jpg?hero'
+
+import industrialImage from '~/images/services/industrial-rope-access-01.jpg?thumb'
+import photovoltaicImage from '~/images/services/photovoltaic-module-installation-01.jpg?thumb'
+import riggingImage from '~/images/services/rigging-01.jpg?thumb'
+import stageImage from '~/images/services/stage-building-01.jpg?thumb'
 
 const data = {
   meta: {
     title: 'Our Story',
     description:
       'Ropecess offers a range of specialized solutions such as photovoltaic installation, rock cleaning, venue rigging, and rope access in confined spaces.',
-    image: bannerImage.imageUrlFor(1200, 'jpeg'),
+    image: bannerImage,
   },
   hero: {
     title: 'Our Story',
@@ -66,8 +67,11 @@ export default function About() {
   return (
     <main>
       <Hero>
-        <Hero.BackgroundPicture {...data.hero.image} alt={data.hero.imageAlt} />
-        <Hero.Content>
+        <Hero.BackgroundPicture
+          picture={data.hero.image}
+          alt={data.hero.imageAlt}
+        />
+        <Hero.Content className="md:translate-x-[100px] lg:max-w-3xl lg:translate-x-[150px]">
           <Hero.Title className="text-right [word-spacing:9999px]">
             {data.hero.title}
           </Hero.Title>
@@ -75,24 +79,21 @@ export default function About() {
       </Hero>
 
       <section className="py-24">
-        <Container>
-          <div className="flex flex-col gap-20 py-20">
+        <Container size="md">
+          <div className="flex flex-col gap-24">
             {data.items.map((item) => (
               <div
                 key={item.id}
-                className="flex flex-col gap-5 md:flex-row md:items-center md:gap-10"
+                className="flex flex-col gap-5 md:flex-row md:gap-10"
               >
-                <div className="flex-[2]">
-                  <Picture
-                    {...item.image}
-                    alt={item.alt}
-                    className="aspect-square max-h-96 w-full object-cover"
-                    sizes="(max-width:767px) 100vw, 33vw"
-                    pictureClassName="w-full"
-                    loading="lazy"
-                  />
-                </div>
-                <p className="flex-[3]">{item.text}</p>
+                <Picture
+                  picture={item.image}
+                  alt={item.alt}
+                  className="aspect-square md:w-[400px]"
+                  sizes="(max-width:767px) 100vw, 400px"
+                  loading="lazy"
+                />
+                <p className="flex-1">{item.text}</p>
               </div>
             ))}
           </div>

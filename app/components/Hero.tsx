@@ -30,12 +30,14 @@ function HeroBase<C extends React.ElementType = 'section'>({
   return (
     <Component
       className={cls(
-        'hero relative h-svh w-full bg-base-200 text-white',
+        'hero relative h-svh w-full overflow-hidden bg-base-200 text-white',
         className,
       )}
       {...props}
     >
+      {/*
       <div className="hero-overlay bg-base-100/20"></div>
+      */}
       {children}
       {!isScrolled && (
         <Button
@@ -61,9 +63,9 @@ function Content({ children, className, ...props }: ContentProps) {
         'container rounded-sm p-10 py-14',
         'w-[calc(100%-4rem)] sm:w-full sm:max-w-md md:max-w-lg lg:max-w-4xl',
         // light
-        'bg-white/85 text-base-content',
+        'bg-white/15 text-base-content backdrop-blur',
         // dark
-        'dark:bg-black/75 dark:text-white',
+        'dark:bg-base-100/60 dark:text-white dark:backdrop-blur-sm',
         className,
       )}
       {...props}
@@ -79,8 +81,9 @@ function Title({ children, className, ...props }: TitleProps) {
   return (
     <h1
       className={cls(
-        'text-center font-semibold uppercase leading-snug tracking-wide',
+        'text-center font-medium leading-snug tracking-wide',
         'text-3xl sm:text-4xl md:text-5xl lg:text-6xl',
+        'uppercase',
         className,
       )}
       {...props}
@@ -95,7 +98,7 @@ function BackgroundPicture({ className, ...props }: PictureProps) {
     <Picture
       className={cls('absolute inset-0 h-full w-full object-cover', className)}
       loading="eager"
-      decoding="sync"
+      decoding="async"
       fetchPriority="high"
       {...props}
     />

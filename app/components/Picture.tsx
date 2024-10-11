@@ -1,113 +1,58 @@
-import { useMemo } from 'react'
-import type { ImageData, ImageType } from '@responsive-image/core'
+import { LQIP } from 'types/env'
+import { Picture as PictureType } from 'vite-imagetools'
 
-export type PictureProps = ImageData & {
+export type PictureProps = {
+  picture: PictureType
+  alt: string
+  lqip?: LQIP
+  style?: React.CSSProperties
   className?: string
   pictureClassName?: string
-  alt: string
-  width?: number
-  height?: number
   sizes?: string
   loading?: 'lazy' | 'eager'
-  decoding?: 'auto' | 'async' | 'sync'
-  fetchPriority?: 'auto' | 'high' | 'low'
+  decoding?: 'sync' | 'async' | 'auto'
+  fetchPriority?: 'high' | 'low' | 'auto'
 }
 
-const PIXEL_DENSITIES = [1, 2]
+const order = ['avif', 'webp', 'jpeg']
 
-const typeScore = new Map<ImageType, number>([
-  ['png', 1],
-  ['jpeg', 1],
-  ['webp', 2],
-  ['avif', 3],
-])
-
-function sortTypes(a: ImageType, b: ImageType) {
-  return (typeScore.get(b) ?? 0) - (typeScore.get(a) ?? 0)
-}
+const sortSources = ([k1]: string[], [k2]: string[]) =>
+  order.indexOf(k1) - order.indexOf(k2)
 
 export function Picture({
+  picture,
+  lqip,
+  style,
   className,
   pictureClassName,
   alt,
-  sizes,
-  imageTypes,
-  availableWidths,
-  loading = 'lazy',
-  decoding = 'auto',
-  fetchPriority = 'auto',
-  imageUrlFor,
   ...props
 }: PictureProps) {
-  if (!props.aspectRatio) throw new Error('Picture aspectRatio is required')
-  if (!availableWidths) throw new Error('Picture availableWidths is required')
-  if (!imageTypes) throw new Error('Picture imageTypes is required')
-  if (!imageUrlFor) throw new Error('Picture imageUrlFor is required')
-
-  const aspectRatio = props.aspectRatio || 1
-
-  let width = props.width
-  let height = props.height
-
-  const isResponsive = width === undefined && height === undefined
-
-  if (!width) {
-    if (height) {
-      width = Math.round(height * aspectRatio)
-    } else {
-      width = availableWidths?.[0] || 300
-    }
-  }
-
-  if (!height && width) {
-    height = Math.round(width / aspectRatio)
-  }
-
-  const sources = useMemo(() => {
-    const types = imageTypes.sort(sortTypes)
-
-    if (isResponsive) {
-      return types.map((type) => (
-        <source
-          key={type}
-          srcSet={availableWidths
-            ?.map((width) => `${imageUrlFor(width, type)} ${width}w`)
-            .join(', ')}
-          sizes={sizes}
-          type={`image/${type}`}
-        />
-      ))
-    } else {
-      return types.map((type) => (
-        <source
-          key={type}
-          srcSet={PIXEL_DENSITIES.map(
-            (density) => `${imageUrlFor(width * density, type)} ${density}x`,
-          )
-            .filter((source) => source !== undefined)
-            .join(', ')}
-          sizes={sizes}
-          type={`image/${type}`}
-        />
-      ))
-    }
-  }, [isResponsive, imageTypes, availableWidths, width, sizes, imageUrlFor])
-
-  const src = imageUrlFor(width, 'jpeg')
-
   return (
     <picture className={pictureClassName}>
-      {sources}
+      {Object.entries(picture.sources)
+        .sort(sortSources)
+        .map(([key, value]) => (
+          <source key={key} srcSet={value} type={`image/${key}`} />
+        ))}
+
       <img
         className={className}
-        src={src}
+        src={picture.img.src}
         alt={alt}
-        width={width}
-        height={height}
-        loading={loading}
-        decoding={decoding}
-        fetchPriority={fetchPriority}
-        sizes={sizes}
+        width={picture.img.w}
+        height={picture.img.h}
+        style={{
+          ...style,
+          ...(lqip
+            ? {
+                backgroundImage: `url("${lqip.lqip}")`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }
+            : {}),
+        }}
+        {...props}
       />
     </picture>
   )

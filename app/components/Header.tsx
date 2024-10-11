@@ -71,11 +71,16 @@ export function Header() {
       {navigation.state !== 'idle' && (
         <progress className="progress progress-primary fixed left-0 top-0 z-50 h-1 w-full" />
       )}
-      <header className="navbar fixed top-0 z-40 bg-base-100 drop-shadow-lg">
+      <header
+        className={cls(
+          'navbar fixed top-0 z-40 drop-shadow-lg backdrop-blur-sm',
+          'bg-base-100/70 dark:bg-base-100/90',
+        )}
+      >
         {/* logo left */}
         <div className="navbar-start order-1">
           <a
-            className="btn btn-ghost no-animation btn-lg px-4 text-4xl font-bold uppercase"
+            className="btn btn-ghost no-animation btn-lg px-4 text-4xl font-bold uppercase hover:text-white"
             href="/"
           >
             Ropecess

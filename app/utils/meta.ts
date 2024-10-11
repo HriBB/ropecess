@@ -1,7 +1,9 @@
+import { Picture } from 'vite-imagetools'
+
 export type MetaProps = {
   title: string
   description?: string
-  image?: string
+  image?: Picture
 }
 
 const name = 'Ropecess'
@@ -25,7 +27,7 @@ export function getMeta({ title, description, image }: MetaProps) {
   //props.push({ property: 'og:url', content: url })
   if (description)
     props.push({ property: 'og:description', content: description })
-  if (image) props.push({ property: 'og:image', content: image })
+  if (image) props.push({ property: 'og:image', content: image.img.src })
 
   //
   // Twitter
@@ -35,7 +37,7 @@ export function getMeta({ title, description, image }: MetaProps) {
   props.push({ property: 'twitter:title', content: title })
   if (description)
     props.push({ property: 'twitter:description', content: description })
-  if (image) props.push({ property: 'twitter:image', content: image })
+  if (image) props.push({ property: 'twitter:image', content: image.img.src })
 
   return props
 }

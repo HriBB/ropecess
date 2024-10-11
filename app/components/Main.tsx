@@ -31,7 +31,12 @@ function H2({
 }: React.ComponentPropsWithoutRef<'h1'>) {
   return (
     <h2
-      className={cls('text-3xl font-medium', 'mb-8 last:mb-0', className)}
+      className={cls(
+        'text-4xl font-bold',
+        'mb-8 last:mb-0',
+        'uppercase',
+        className,
+      )}
       {...props}
     >
       {children}
@@ -46,7 +51,12 @@ function H3({
 }: React.ComponentPropsWithoutRef<'h3'>) {
   return (
     <h2
-      className={cls('text-2xl font-medium', 'mb-8 last:mb-0', className)}
+      className={cls(
+        'text-2xl font-bold',
+        'mb-8 last:mb-0',
+        'uppercase',
+        className,
+      )}
       {...props}
     >
       {children}

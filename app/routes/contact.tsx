@@ -17,7 +17,7 @@ import { Container } from '~/components/Container'
 import { FormField } from '~/components/FormField'
 import { useRecaptcha } from '~/utils/recaptcha'
 
-import bannerImage from '~/images/contact/banner.jpg?responsive'
+import bannerImage from '~/images/contact/banner.jpg?hero'
 
 export { prefetchRecaptchaLinks as links } from '~/utils/recaptcha'
 
@@ -26,7 +26,7 @@ const data = {
     title: 'Contact US',
     description:
       'Get in touch with Ropecess to discuss your project requirements. Our team is here to help you with your construction and access needs.',
-    image: bannerImage.imageUrlFor(1200, 'jpeg'),
+    image: bannerImage,
   },
   hero: {
     title: 'Contact US',
@@ -88,16 +88,19 @@ export default function Contact() {
   return (
     <main>
       <Hero>
-        <Hero.BackgroundPicture {...data.hero.image} alt={data.hero.imageAlt} />
+        <Hero.BackgroundPicture
+          picture={data.hero.image}
+          alt={data.hero.imageAlt}
+        />
         <Hero.Content>
           <Hero.Title>{data.hero.title}</Hero.Title>
         </Hero.Content>
       </Hero>
 
-      <Container as="section">
+      <Container as="section" className="flex items-center justify-center">
         <Form
           method="POST"
-          className="flex flex-col gap-5 py-20"
+          className="flex max-w-lg flex-1 flex-col gap-5 py-20"
           onSubmit={recaptcha.appendTokendAndSubmit}
         >
           <FormField label={data.form.name} htmlFor="name" error={errors?.name}>
@@ -145,7 +148,7 @@ export default function Contact() {
               )}
               id="message"
               name="message"
-              rows={5}
+              rows={6}
               disabled={isSuccess}
               //defaultValue={'Test @localhost'}
             />
