@@ -12,6 +12,7 @@ import { FormField } from '~/components/FormField'
 import { useRecaptcha } from '~/utils/recaptcha'
 
 import bannerImage from '~/images/contact/banner.jpg?hero'
+import bannerLqip from '~/images/contact/banner.jpg?lqip'
 
 import type * as Route from './+types.contact'
 
@@ -27,6 +28,7 @@ const data = {
   hero: {
     title: 'Contact US',
     image: bannerImage,
+    lqip: bannerLqip,
     imageAlt: 'Construction worker on a building site',
   },
   form: {
@@ -81,17 +83,12 @@ export default function Contact({
   const isSuccess = actionData?.success === true
   const errors = actionData?.errors?.fieldErrors
 
-  console.log({
-    isSuccess,
-    isLoading: recaptcha.isLoading,
-    isReady: recaptcha.isReady,
-  })
-
   return (
     <main>
       <Hero>
         <Hero.BackgroundPicture
           picture={data.hero.image}
+          lqip={data.hero.lqip}
           alt={data.hero.imageAlt}
         />
         <Hero.Content>

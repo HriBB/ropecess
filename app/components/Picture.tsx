@@ -26,6 +26,8 @@ export function Picture({
   className,
   pictureClassName,
   alt,
+  decoding = 'async',
+  loading = 'lazy',
   ...props
 }: PictureProps) {
   return (
@@ -42,6 +44,8 @@ export function Picture({
         alt={alt}
         width={picture.img.w}
         height={picture.img.h}
+        decoding={decoding}
+        loading={loading}
         style={{
           ...style,
           ...(lqip

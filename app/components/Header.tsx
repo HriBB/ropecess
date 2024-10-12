@@ -25,8 +25,11 @@ function contains(parent: any, child: any) {
 export function Header() {
   const location = useLocation()
   const navigation = useNavigation()
+
   const navRef = useRef<HTMLDivElement | null>(null)
   const [isOpen, setOpen] = useState<HTMLButtonElement | false>(false)
+
+  const isLoading = navigation.state !== 'idle'
 
   const handleMenuToggle = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -68,7 +71,7 @@ export function Header() {
 
   return (
     <>
-      {navigation.state !== 'idle' && (
+      {isLoading && (
         <progress className="progress progress-primary fixed left-0 top-0 z-50 h-1 w-full" />
       )}
       <header
@@ -80,7 +83,6 @@ export function Header() {
         {/* logo left */}
         <div className="navbar-start order-1" style={{ order: 1 }}>
           <a
-            aria-flowto="nav-item-1"
             className={cls(
               'btn btn-ghost no-animation btn-lg px-4 text-4xl font-bold uppercase',
             )}
@@ -97,7 +99,6 @@ export function Header() {
             className="btn btn-circle btn-ghost no-animation flex md:hidden"
             onClick={handleMenuToggle}
             aria-label="Toggle Menu"
-            style={{ order: items.length + 3 }}
           >
             <MenuIcon />
           </Button>
@@ -109,7 +110,6 @@ export function Header() {
           className={cls(
             'navbar-center order-2 w-44 flex-1 md:flex md:w-auto',
             'max-md:bg-base-200 max-md:dark:bg-base-300',
-            //'bg-red-500 max-md:bg-green-500',
             'max-md:rounded-lg max-md:shadow-xl',
             isOpen
               ? 'absolute right-4 top-full z-50 flex -translate-y-4'
@@ -119,10 +119,10 @@ export function Header() {
           <ul
             className={cls(
               'flex w-full flex-col items-stretch gap-1 p-2',
-              'md:p-0x md:flex-row md:items-center md:gap-4',
+              'md:p-0x md:flex-row md:items-center md:gap-2',
             )}
           >
-            {items.map((link, index) => (
+            {items.map((link) => (
               <li key={link.href}>
                 <NavLink
                   to={link.href}
@@ -135,7 +135,6 @@ export function Header() {
                     )
                   }
                   prefetch="viewport"
-                  style={{ order: index + 2 }}
                 >
                   {link.text}
                 </NavLink>

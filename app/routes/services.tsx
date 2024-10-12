@@ -6,11 +6,15 @@ import { Container } from '~/components/Container'
 import { Picture } from '~/components/Picture'
 
 import bannerImage from '~/images/services/banner.jpg?hero'
-
+import bannerLqip from '~/images/services/banner.jpg?lqip'
 import photovoltaicImage from '~/images/services/photovoltaic-module-installation-01.jpg?thumb'
+import photovoltaicLqip from '~/images/services/photovoltaic-module-installation-01.jpg?lqip'
 import industrialImage from '~/images/services/industrial-rope-access-01.jpg?thumb'
+import industrialLqip from '~/images/services/industrial-rope-access-01.jpg?lqip'
 import riggingImage from '~/images/services/rigging-01.jpg?thumb'
+import riggingLqip from '~/images/services/rigging-01.jpg?lqip'
 import stageImage from '~/images/services/stage-building-01.jpg?thumb'
+import stageLqip from '~/images/services/stage-building-01.jpg?lqip'
 
 const data = {
   meta: {
@@ -22,6 +26,7 @@ const data = {
   hero: {
     title: 'Services',
     image: bannerImage,
+    lqip: bannerLqip,
     imageAlt: 'Construction frame with workers',
   },
   items: [
@@ -29,6 +34,7 @@ const data = {
       id: 1,
       title: 'Photovoltaic Modules Installation',
       image: photovoltaicImage,
+      lqip: photovoltaicLqip,
       description:
         'Our team allready worked on various PV constructon sites, ranging from flat roofs to vertical PV instalation. Every project is its own, and has to be tailored to construction site parameters.',
     },
@@ -36,6 +42,7 @@ const data = {
       id: 2,
       title: 'Industrial Rope Access and Climbing',
       image: industrialImage,
+      lqip: industrialLqip,
       description:
         'Working for various companies, from High Bay Warehouses to rock cleaning, our range of knowlege expands with each project. Work on ropes is our specialty.',
     },
@@ -43,6 +50,7 @@ const data = {
       id: 3,
       title: 'Rigging',
       image: riggingImage,
+      lqip: riggingLqip,
       description:
         'Venue rigging are projects, which demand more knowlege than you can think of. It is not just pulling chains up in the air and fixing them, but also weight redundancy calculating and setting points exactly on spot, so they are in perfect position for the gig.',
     },
@@ -50,6 +58,7 @@ const data = {
       id: 4,
       title: 'Stage Building',
       image: stageImage,
+      lqip: stageLqip,
       description: 'Working on big stages for StageCo Nederland and Belgium.',
     },
   ],
@@ -115,6 +124,7 @@ export default function Services() {
       <Hero>
         <Hero.BackgroundPicture
           picture={data.hero.image}
+          lqip={data.hero.lqip}
           alt={data.hero.imageAlt}
         />
         <Hero.Content className="lg:mr-10">
@@ -132,6 +142,7 @@ export default function Services() {
               >
                 <Picture
                   picture={service.image}
+                  lqip={service.lqip}
                   alt={service.title}
                   className="aspect- object-cover md:w-[400px]"
                   sizes="(max-width:767px) 100vw, 400px"

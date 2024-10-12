@@ -8,9 +8,13 @@ import { Picture } from '~/components/Picture'
 import { Container } from '~/components/Container'
 
 import bannerImage from '~/images/home/banner.jpg?hero'
+import bannerLqip from '~/images/home/banner.jpg?lqip'
 import workPlanImage from '~/images/home/work-plan.jpg?square'
+import workPlanLqip from '~/images/home/work-plan.jpg?lqip'
 import accessPlanImage from '~/images/home/access-plan.jpg?square'
+import accessPlanLqip from '~/images/home/access-plan.jpg?lqip'
 import ourServicesImage from '~/images/home/our-services.jpg?square'
+import ourServicesLqip from '~/images/home/our-services.jpg?lqip'
 
 const data = {
   meta: {
@@ -22,6 +26,7 @@ const data = {
   hero: {
     title: 'Plan your next rope access project',
     image: bannerImage,
+    lqip: bannerLqip,
     imageAlt: 'Construction frame',
     link: {
       to: '/contact',
@@ -39,18 +44,21 @@ const data = {
         id: 1,
         title: 'Work Plan',
         image: workPlanImage,
+        lqip: workPlanLqip,
         text: 'Our Work Plan ensures every project is completed on time, within budget, and to the highest standards. We carefully plan, manage timelines, allocate resources, and mitigate risks, keeping you informed at every step.',
       },
       {
         id: 2,
         title: 'Access Plan',
         image: accessPlanImage,
+        lqip: accessPlanLqip,
         text: 'Our Access Plan prioritizes safety and efficiency. We use advanced rope access and innovative methods to safely reach challenging areas, minimizing disruptions and reducing costs while maintaining top safety standards.',
       },
       {
         id: 3,
         title: 'Our Services',
         image: ourServicesImage,
+        lqip: ourServicesLqip,
         text: 'We offer a wide range of specialized construction and access services to cater to various industry needs.',
       },
     ],
@@ -82,6 +90,7 @@ export default function Index() {
       <Hero>
         <Hero.BackgroundPicture
           picture={data.hero.image}
+          lqip={data.hero.lqip}
           alt={data.hero.imageAlt}
         />
         <Hero.Content>
@@ -114,6 +123,7 @@ export default function Index() {
               >
                 <Picture
                   picture={item.image}
+                  lqip={item.lqip}
                   alt={item.title}
                   className="w-full"
                   loading="lazy"

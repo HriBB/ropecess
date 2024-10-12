@@ -20,10 +20,11 @@ export const ThemeButton = ({ className, ...props }: Props) => {
       </Dropdown.Trigger>
       <Dropdown.Menu bottom left>
         <Form
-          replace
-          method="POST"
-          action="/theme"
           className="flex flex-col gap-1"
+          action="/theme"
+          method="POST"
+          replace
+          preventScrollReset
         >
           <input type="hidden" name="returnTo" value={pathname + search} />
           {Object.values(Theme).map((t) => (

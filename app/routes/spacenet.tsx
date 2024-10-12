@@ -18,19 +18,16 @@ import { getMeta } from '~/utils/meta'
 
 import bannerImage from '~/images/spacenet/spacenet-making-of.jpg?hero'
 import bannerLqip from '~/images/spacenet/spacenet-making-of.jpg?lqip'
-
 import chilloutImage2 from '~/images/spacenet/spacenet-chillout-from-below.jpg?hero'
 import chilloutImage2Lqip from '~/images/spacenet/spacenet-chillout-from-below.jpg?lqip'
 import chilloutImage3 from '~/images/spacenet/spacenet-chillout-people.jpg?hero'
 import chilloutImage3Lqip from '~/images/spacenet/spacenet-chillout-people.jpg?lqip'
 import chilloutImage4 from '~/images/spacenet/spacenet-chillout-festival.jpg?hero'
 import chilloutImage4Lqip from '~/images/spacenet/spacenet-chillout-festival.jpg?lqip'
-
 import makingOfImage4 from '~/images/spacenet/spacenet-making-of-04.jpg?hero'
 import makingOfImage4Lqip from '~/images/spacenet/spacenet-making-of-04.jpg?lqip'
 import makingOfImage2 from '~/images/spacenet/spacenet-making-of-02.jpg?hero'
 import makingOfImage2Lqip from '~/images/spacenet/spacenet-making-of-02.jpg?lqip'
-
 import neonGlowImage5 from '~/images/spacenet/two-spacenets-at-night-glow.jpg?hero'
 import neonGlowImage5Lqip from '~/images/spacenet/two-spacenets-at-night-glow.jpg?lqip'
 
