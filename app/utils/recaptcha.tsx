@@ -27,14 +27,20 @@ export const prefetchRecaptchaLinks: LinksFunction = () => {
  * @see https://stackoverflow.com/questions/58114386/how-can-i-reload-recaptcha-v3
  */
 export function useRecaptcha({ siteKey }: { siteKey: string }) {
+  const formRef = useRef<HTMLFormElement | null>(null)
+
   const keyRef = useRef(siteKey)
   const isInitializing = useRef(false)
   const [isReady, setReady] = useState(false)
+  const [isLoading, setLoading] = useState(false)
   const navigation = useNavigation()
   const submit = useSubmit()
 
   const reset = useCallback(async () => {
-    window.grecaptcha.reset()
+    //window.grecaptcha.reset()
+    console.log('reset')
+    formRef.current?.reset()
+    setLoading(false)
     setReady(true)
   }, [])
 
@@ -51,7 +57,9 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
 
     // create script
     const onScriptLoad = () => {
+      console.log('onScriptLoad')
       window.grecaptcha.ready(() => {
+        console.log('onRecaptchaReady')
         setReady(true)
         /*
         tokenRef.current = await window.grecaptcha.execute(keyRef.current, {
@@ -71,11 +79,19 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
 
   const appendTokendAndSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
+      setLoading(true)
       e.preventDefault()
+      console.log('onSubmit', e, { key: keyRef.current })
+
+      const formEl = e.currentTarget || e.target
+
       const token = await window.grecaptcha.execute(keyRef.current, {
         action: 'homepage',
       })
-      const formData = new FormData(e.currentTarget)
+
+      console.log('token', token)
+
+      const formData = new FormData(formEl)
       formData.append('token', token)
       submit(formData, { method: 'POST' })
       didSubmit.current = true
@@ -86,6 +102,7 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
   useEffect(() => {
     if (navigation.state !== 'submitting' && didSubmit.current) {
       didSubmit.current = false
+      console.log('useEffect reset')
       reset()
     }
   }, [navigation.state, reset])
@@ -104,5 +121,5 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
     }
   }, [])
 
-  return { isReady, appendTokendAndSubmit, reset }
+  return { formRef, isReady, isLoading, appendTokendAndSubmit, reset }
 }

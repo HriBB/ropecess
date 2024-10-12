@@ -1,4 +1,4 @@
-import { Form, MetaFunction, useNavigation } from 'react-router'
+import { Form, MetaFunction } from 'react-router'
 
 import type * as Route from './+types.spacenet'
 
@@ -92,10 +92,8 @@ export default function SpaceNet({
   actionData,
 }: Route.ComponentProps) {
   const { siteKey } = loaderData
-  const navigation = useNavigation()
   const recaptcha = useRecaptcha({ siteKey })
 
-  const isLoading = navigation.state !== 'idle'
   const isSuccess = actionData?.success === true
   const errors = actionData?.errors?.fieldErrors
 
@@ -302,22 +300,22 @@ export default function SpaceNet({
                 //defaultValue={'Test @localhost'}
               />
             </FormField>
-            <div className="flex items-center justify-end gap-4">
-              {actionData?.message && (
-                <p className="text-green-700">{actionData.message}</p>
-              )}
-              {actionData?.error && (
-                <p className="text-red-500">{actionData.error}</p>
-              )}
+            <div className="flex justify-end">
               <Button
                 color="secondary"
                 type="submit"
-                className="w-full md:w-auto md:min-w-24"
-                disabled={isSuccess || isLoading || !recaptcha.isReady}
+                className="w-full sm:w-auto"
+                disabled={recaptcha.isLoading || !recaptcha.isReady}
               >
                 {data.form.button}
               </Button>
             </div>
+            {actionData?.message && (
+              <p className="text-green-700">{actionData.message}</p>
+            )}
+            {actionData?.error && (
+              <p className="text-red-500">{actionData.error}</p>
+            )}
             <div id="recaptcha" />
           </Form>
         </Container>

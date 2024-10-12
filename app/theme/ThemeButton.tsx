@@ -19,7 +19,12 @@ export const ThemeButton = ({ className, ...props }: Props) => {
         <DarkIcon className="hidden dark:block" />
       </Dropdown.Trigger>
       <Dropdown.Menu bottom left>
-        <Form replace method="POST" action="/theme">
+        <Form
+          replace
+          method="POST"
+          action="/theme"
+          className="flex flex-col gap-1"
+        >
           <input type="hidden" name="returnTo" value={pathname + search} />
           {Object.values(Theme).map((t) => (
             <Dropdown.MenuItem key={t}>

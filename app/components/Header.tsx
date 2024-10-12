@@ -73,19 +73,23 @@ export function Header() {
       )}
       <header
         className={cls(
-          'navbar fixed top-0 z-40 drop-shadow-lg backdrop-blur-sm',
+          'navbar fixed top-0 z-40 flex drop-shadow-lg backdrop-blur-sm',
           'bg-base-100/70 dark:bg-base-100/90',
         )}
       >
         {/* logo left */}
-        <div className="navbar-start order-1">
+        <div className="navbar-start order-1" style={{ order: 1 }}>
           <a
-            className="btn btn-ghost no-animation btn-lg px-4 text-4xl font-bold uppercase hover:text-white"
+            aria-flowto="nav-item-1"
+            className={cls(
+              'btn btn-ghost no-animation btn-lg px-4 text-4xl font-bold uppercase',
+            )}
             href="/"
           >
             Ropecess
           </a>
         </div>
+
         {/* buttons right */}
         <div className="navbar-end order-3">
           <ThemeButton />
@@ -93,17 +97,20 @@ export function Header() {
             className="btn btn-circle btn-ghost no-animation flex md:hidden"
             onClick={handleMenuToggle}
             aria-label="Toggle Menu"
+            style={{ order: items.length + 3 }}
           >
             <MenuIcon />
           </Button>
         </div>
+
         {/* navigation */}
         <nav
           ref={navRef}
           className={cls(
             'navbar-center order-2 w-44 flex-1 md:flex md:w-auto',
-            'max-sm:bg-base-200 max-sm:dark:bg-base-300',
-            'max-sm:rounded max-sm:shadow-xl',
+            'max-md:bg-base-200 max-md:dark:bg-base-300',
+            //'bg-red-500 max-md:bg-green-500',
+            'max-md:rounded-lg max-md:shadow-xl',
             isOpen
               ? 'absolute right-4 top-full z-50 flex -translate-y-4'
               : 'hidden',
@@ -115,7 +122,7 @@ export function Header() {
               'md:p-0x md:flex-row md:items-center md:gap-4',
             )}
           >
-            {items.map((link) => (
+            {items.map((link, index) => (
               <li key={link.href}>
                 <NavLink
                   to={link.href}
@@ -128,6 +135,7 @@ export function Header() {
                     )
                   }
                   prefetch="viewport"
+                  style={{ order: index + 2 }}
                 >
                   {link.text}
                 </NavLink>

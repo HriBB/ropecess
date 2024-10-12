@@ -1,4 +1,4 @@
-import { Form, MetaFunction, useNavigation } from 'react-router'
+import { Form, MetaFunction } from 'react-router'
 
 import { handleFormError } from '~/utils/form.server'
 import { siteKey, verifyRecaptcha } from '~/utils/recaptcha.server'
@@ -76,12 +76,16 @@ export default function Contact({
   actionData,
 }: Route.ComponentProps) {
   const { siteKey } = loaderData
-  const navigation = useNavigation()
   const recaptcha = useRecaptcha({ siteKey })
 
-  const isLoading = navigation.state !== 'idle'
   const isSuccess = actionData?.success === true
   const errors = actionData?.errors?.fieldErrors
+
+  console.log({
+    isSuccess,
+    isLoading: recaptcha.isLoading,
+    isReady: recaptcha.isReady,
+  })
 
   return (
     <main>
@@ -97,6 +101,7 @@ export default function Contact({
 
       <Container as="section" className="flex items-center justify-center">
         <Form
+          ref={recaptcha.formRef}
           method="POST"
           className="flex max-w-lg flex-1 flex-col gap-5 py-20"
           onSubmit={recaptcha.appendTokendAndSubmit}
@@ -151,21 +156,22 @@ export default function Contact({
               //defaultValue={'Test @localhost'}
             />
           </FormField>
-          <div className="flex max-w-lg items-center justify-end gap-4">
-            {actionData?.message && (
-              <p className="text-green-700">{actionData.message}</p>
-            )}
-            {actionData?.error && (
-              <p className="text-red-500">{actionData.error}</p>
-            )}
+          <div className="flex justify-end">
             <Button
               color="primary"
               type="submit"
-              disabled={isSuccess || isLoading || !recaptcha.isReady}
+              className="w-full sm:w-auto"
+              disabled={recaptcha.isLoading || !recaptcha.isReady}
             >
               {data.form.button}
             </Button>
           </div>
+          {actionData?.message && (
+            <p className="text-green-700">{actionData.message}</p>
+          )}
+          {actionData?.error && (
+            <p className="text-red-500">{actionData.error}</p>
+          )}
         </Form>
       </Container>
     </main>
