@@ -1,12 +1,8 @@
-import { ActionFunctionArgs, MetaFunction } from '@remix-run/node'
-import {
-  Form,
-  useActionData,
-  useLoaderData,
-  useNavigation,
-} from '@remix-run/react'
+import { Form, MetaFunction, useNavigation } from 'react-router'
 
-import { formResponseData, handleFormError } from '~/utils/form.server'
+import type * as Route from './+types.spacenet'
+
+import { handleFormError } from '~/utils/form.server'
 import { siteKey, verifyRecaptcha } from '~/utils/recaptcha.server'
 import { contactEmailSchema, sendContactEmail } from '~/utils/email.server'
 
@@ -72,16 +68,16 @@ export const meta: MetaFunction = () => {
   return getMeta(data.meta)
 }
 
-export const action = async ({ request }: ActionFunctionArgs) => {
+export const action = async ({ request }: Route.ActionArgs) => {
   try {
     const formData = await request.formData()
     const { token, ...contact } = await contactEmailSchema.parseAsync(formData)
     await verifyRecaptcha(token)
     await sendContactEmail(contact)
-    return formResponseData({
+    return {
       success: true,
       message: data.form.successMessage,
-    })
+    }
   } catch (error) {
     return handleFormError(error, data.form.errorMessage)
   }
@@ -91,9 +87,11 @@ export const loader = async () => {
   return { siteKey }
 }
 
-export default function SpaceNet() {
-  const { siteKey } = useLoaderData<typeof loader>()
-  const actionData = useActionData<typeof action>()
+export default function SpaceNet({
+  loaderData,
+  actionData,
+}: Route.ComponentProps) {
+  const { siteKey } = loaderData
   const navigation = useNavigation()
   const recaptcha = useRecaptcha({ siteKey })
 

@@ -1,6 +1,6 @@
-import { MetaFunction } from '@remix-run/node'
-import { Link } from '@remix-run/react'
+import { Link, MetaFunction } from 'react-router'
 
+//import type * as Route from './+types.home'
 import { Main } from '~/components/Main'
 import { Hero } from '~/components/Hero'
 import { Button } from '~/components/Button'

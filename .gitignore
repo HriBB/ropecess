@@ -9,3 +9,4 @@ _gen
 .env
 .env.staging
 .env.production
+.react-router

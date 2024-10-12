@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-import type { LoaderFunctionArgs } from '@remix-run/node'
 import {
   Links,
   Meta,
@@ -7,7 +5,11 @@ import {
   Scripts,
   ScrollRestoration,
   ShouldRevalidateFunction,
-} from '@remix-run/react'
+} from 'react-router'
+
+import '~/tailwind.css'
+
+import type * as Route from './+types.root'
 
 import { Header } from '~/components/Header'
 import { Footer } from '~/components/Footer'
@@ -16,13 +18,11 @@ import { ThemeScript } from '~/theme/ThemeScript'
 import { useTheme } from '~/theme/useTheme'
 import { getThemeFromRequest } from '~/theme/theme.server'
 
-import '~/tailwind.css'
-
 export const shouldRevalidate: ShouldRevalidateFunction = (args) => {
   return args.formData?.get('theme') ? true : args.defaultShouldRevalidate
 }
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = async ({ request }: Route.LoaderArgs) => {
   const theme = await getThemeFromRequest(request)
   return { theme }
 }

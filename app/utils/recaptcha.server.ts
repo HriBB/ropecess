@@ -23,6 +23,7 @@ export async function verifyRecaptcha(token: string) {
   const result = await fetch(url, { method: 'POST' })
   const data = await result.json()
   if (!data.success) {
+    console.log('Recaptcha failed:', data)
     const err = data['error-codes'] ? data['error-codes'].join(', ') : ''
     throw new Error(`Recaptcha failed: ${err}`)
   }

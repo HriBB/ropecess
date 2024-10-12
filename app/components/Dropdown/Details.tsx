@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigation } from '@remix-run/react'
+import { useLocation, useNavigation } from 'react-router'
 import { cls } from '~/utils/cls'
 
 import './details.css'

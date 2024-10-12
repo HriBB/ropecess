@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { NavLink, useLocation, useNavigation } from '@remix-run/react'
+import { NavLink, useLocation, useNavigation } from 'react-router'
 
 import { ThemeButton } from '~/theme/ThemeButton'
 import { cls } from '~/utils/cls'

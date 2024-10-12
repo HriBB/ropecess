@@ -1,13 +1,8 @@
-import { SerializeFrom, LoaderFunction } from '@remix-run/node'
-import { useMatches } from '@remix-run/react'
+import { useMatches } from 'react-router'
 
-export type Loader<P> = P extends { loader: LoaderFunction }
-  ? SerializeFrom<P['loader']>
-  : never
-
-export type RootLoader = Loader<typeof import('~/root')>
+import type * as Root from '../+types.root'
 
 export const useRootData = () => {
   const m = useMatches()
-  return m.find((match) => match.id === 'root')?.data as RootLoader
+  return m.find((match) => match.id === 'root')?.data as Root.LoaderData
 }

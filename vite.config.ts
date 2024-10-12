@@ -1,22 +1,8 @@
 import { defineConfig } from 'vite'
-import { vitePlugin as remix } from '@remix-run/dev'
-import { installGlobals } from '@remix-run/node'
+import { reactRouter } from '@react-router/dev/vite'
 import { imagetools, pictureFormat } from 'vite-imagetools'
 import lqip from 'vite-plugin-lqip'
 import tsconfigPaths from 'vite-tsconfig-paths'
-
-installGlobals({ nativeFetch: true })
-
-/**
- * Enable Single Fetch types
- *
- * @see https://remix.run/docs/en/main/guides/single-fetch#enable-single-fetch-types
- */
-declare module '@remix-run/node' {
-  interface Future {
-    unstable_singleFetch: true
-  }
-}
 
 export default defineConfig({
   plugins: [
@@ -91,15 +77,7 @@ export default defineConfig({
         },
       }),
     }),
-    remix({
-      future: {
-        v3_fetcherPersist: true,
-        v3_relativeSplatPath: true,
-        v3_throwAbortReason: true,
-        unstable_singleFetch: true,
-        unstable_optimizeDeps: true,
-      },
-    }),
+    reactRouter(),
     tsconfigPaths(),
   ],
 })

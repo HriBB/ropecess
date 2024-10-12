@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useNavigation, useSubmit } from '@remix-run/react'
-import { LinksFunction } from '@remix-run/node'
+import { useNavigation, useSubmit } from 'react-router'
+import type { LinksFunction } from 'react-router'
 
 /**
  * Preconnect to Google reCAPTCHA
@@ -28,17 +28,13 @@ export const prefetchRecaptchaLinks: LinksFunction = () => {
  */
 export function useRecaptcha({ siteKey }: { siteKey: string }) {
   const keyRef = useRef(siteKey)
-  const tokenRef = useRef('')
   const isInitializing = useRef(false)
   const [isReady, setReady] = useState(false)
   const navigation = useNavigation()
   const submit = useSubmit()
 
   const reset = useCallback(async () => {
-    setReady(false)
-    tokenRef.current = await window.grecaptcha.execute(keyRef.current, {
-      action: 'homepage',
-    })
+    window.grecaptcha.reset()
     setReady(true)
   }, [])
 
@@ -55,11 +51,13 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
 
     // create script
     const onScriptLoad = () => {
-      window.grecaptcha.ready(async () => {
+      window.grecaptcha.ready(() => {
+        setReady(true)
+        /*
         tokenRef.current = await window.grecaptcha.execute(keyRef.current, {
           action: 'homepage',
         })
-        setReady(true)
+        */
       })
     }
     const script = document.createElement('script')
@@ -74,13 +72,17 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
   const appendTokendAndSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
+      const token = await window.grecaptcha.execute(keyRef.current, {
+        action: 'homepage',
+      })
       const formData = new FormData(e.currentTarget)
-      formData.append('token', tokenRef.current)
+      formData.append('token', token)
       submit(formData, { method: 'POST' })
       didSubmit.current = true
     },
     [submit],
   )
+
   useEffect(() => {
     if (navigation.state !== 'submitting' && didSubmit.current) {
       didSubmit.current = false
@@ -102,5 +104,5 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
     }
   }, [])
 
-  return { tokenRef, isReady, appendTokendAndSubmit, reset }
+  return { isReady, appendTokendAndSubmit, reset }
 }

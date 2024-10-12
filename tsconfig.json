@@ -6,11 +6,12 @@
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
     "**/.client/**/*.tsx",
+    ".react-router/types/**/*",
     "types/env.d.ts"
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "types": ["@remix-run/node", "vite/client", "grecaptcha"],
+    "types": ["@react-router/node", "vite/client", "grecaptcha"],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
@@ -26,9 +27,8 @@
     "paths": {
       "~/*": ["./app/*"]
     },
-    "typeRoots": ["types", "node_modules", "node_modules/@types"],
-
-    // Vite takes care of building everything, not tsc.
-    "noEmit": true
+    "noEmit": true,
+    "rootDirs": [".", "./.react-router/types"],
+    "plugins": [{ "name": "@react-router/dev" }]
   }
 }

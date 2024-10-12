@@ -1,4 +1,3 @@
-import { unstable_data as data } from '@remix-run/node'
 import { typeToFlattenedError, ZodError } from 'zod'
 import { ContactEmail } from './email.server'
 
@@ -9,37 +8,22 @@ export type FormResponseData = {
   errors?: typeToFlattenedError<ContactEmail> | null
 }
 
-export function formResponseData(
-  { success, message = null, error = null, errors = null }: FormResponseData,
-  init?: ResponseInit,
-) {
-  return data({ success, message, error, errors }, init)
-}
-
-export function handleFormError(error: unknown, formError?: string) {
+export function handleFormError(
+  error: unknown,
+  formError?: string,
+): FormResponseData {
   if (error instanceof ZodError) {
-    return formResponseData(
-      {
-        success: false,
-        error: formError || 'Form contains errors',
-        errors: error.flatten(),
-      },
-      { status: 400 },
-    )
+    return {
+      success: false,
+      error: formError || 'Form contains errors',
+      errors: error.flatten(),
+    }
   }
   if (error instanceof Error) {
-    return formResponseData(
-      { success: false, error: error.message },
-      {
-        status: 500,
-      },
-    )
+    return { success: false, error: error.message }
   }
-  return formResponseData(
-    {
-      success: false,
-      error: 'Unknown error',
-    },
-    { status: 500 },
-  )
+  return {
+    success: false,
+    error: 'Unknown error',
+  }
 }
