@@ -19,12 +19,10 @@ const transporter = nodemailer.createTransport(transportOptions)
 
 export async function sendEmail(options: Mail.Options) {
   try {
-    console.log('[INFO] sendEmail', options)
     const result = await transporter.sendMail(options)
-    console.log('[INFO] sendEmail success', result)
     return { success: true, result }
   } catch (error) {
-    console.error('[INFO] sendEmail error', error)
+    console.error('[ERROR] sendEmail', error)
     throw new Error('Failed to send email')
   }
 }
@@ -43,7 +41,6 @@ export async function sendContactEmail(data: {
   email: string
   message: string
 }) {
-  console.log('[INFO] sendContactEmail', data)
   return sendEmail({
     from: data.email,
     to: process.env.CONTACT_EMAIL_TO,

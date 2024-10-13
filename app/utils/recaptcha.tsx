@@ -27,23 +27,59 @@ export const prefetchRecaptchaLinks: LinksFunction = () => {
  * @see https://stackoverflow.com/questions/58114386/how-can-i-reload-recaptcha-v3
  */
 export function useRecaptcha({ siteKey }: { siteKey: string }) {
-  const formRef = useRef<HTMLFormElement | null>(null)
+  console.log('useRecaptcha', { siteKey })
 
   const keyRef = useRef(siteKey)
+  const formRef = useRef<HTMLFormElement | null>(null)
+
   const isInitializing = useRef(false)
   const [isReady, setReady] = useState(false)
   const [isLoading, setLoading] = useState(false)
+  const isBusy = isLoading || !isReady
+
   const navigation = useNavigation()
   const submit = useSubmit()
 
+  // reset recaptcha after submit
+  const didSubmit = useRef(false)
+
+  /**
+   * Append reCAPTCHA token and submit form
+   * 
+   * ```tsx
+   * <Form
+   *   method="POST"
+   *   ref={recaptcha.formRef}
+       onSubmit={recaptcha.appendTokendAndSubmit}
+   * />
+   * ```
+   */
+  const appendTokendAndSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      const formEl = e.currentTarget || e.target
+      const formData = new FormData(formEl)
+
+      setLoading(true)
+      e.preventDefault()
+
+      const token = await window.grecaptcha.execute(keyRef.current, {
+        action: 'homepage',
+      })
+      formData.append('token', token)
+
+      submit(formData, { method: 'POST' })
+      didSubmit.current = true
+    },
+    [submit],
+  )
+
   const reset = useCallback(async () => {
-    //window.grecaptcha.reset()
-    console.log('reset')
     formRef.current?.reset()
     setLoading(false)
     setReady(true)
   }, [])
 
+  // initialize reCAPTCHA
   useEffect(() => {
     // recaptcha is already initializing
     if (isInitializing.current) return
@@ -57,9 +93,7 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
 
     // create script
     const onScriptLoad = () => {
-      console.log('onScriptLoad')
       window.grecaptcha.ready(() => {
-        console.log('onRecaptchaReady')
         setReady(true)
         /*
         tokenRef.current = await window.grecaptcha.execute(keyRef.current, {
@@ -75,34 +109,9 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
   }, [reset])
 
   // reset recaptcha after submit
-  const didSubmit = useRef(false)
-
-  const appendTokendAndSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
-      setLoading(true)
-      e.preventDefault()
-      console.log('onSubmit', e, { key: keyRef.current })
-
-      const formEl = e.currentTarget || e.target
-
-      const token = await window.grecaptcha.execute(keyRef.current, {
-        action: 'homepage',
-      })
-
-      console.log('token', token)
-
-      const formData = new FormData(formEl)
-      formData.append('token', token)
-      submit(formData, { method: 'POST' })
-      didSubmit.current = true
-    },
-    [submit],
-  )
-
   useEffect(() => {
     if (navigation.state !== 'submitting' && didSubmit.current) {
       didSubmit.current = false
-      console.log('useEffect reset')
       reset()
     }
   }, [navigation.state, reset])
@@ -121,5 +130,5 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
     }
   }, [])
 
-  return { formRef, isReady, isLoading, appendTokendAndSubmit, reset }
+  return { formRef, isReady, isLoading, isBusy, appendTokendAndSubmit, reset }
 }

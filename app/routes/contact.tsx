@@ -1,20 +1,25 @@
 import { Form, MetaFunction } from 'react-router'
 
+import type * as Route from './+types.contact'
+
 import { handleFormError } from '~/utils/form.server'
 import { siteKey, verifyRecaptcha } from '~/utils/recaptcha.server'
 import { contactEmailSchema, sendContactEmail } from '~/utils/email.server'
 
-import { cls } from '~/utils/cls'
+import { Main } from '~/components/Main'
 import { Hero } from '~/components/Hero'
-import { Button } from '~/components/Button'
 import { Container } from '~/components/Container'
-import { FormField } from '~/components/FormField'
+import {
+  InputField,
+  TextareaField,
+  Success,
+  Error,
+  SubmitButton,
+} from '~/components/Form'
 import { useRecaptcha } from '~/utils/recaptcha'
 
 import bannerImage from '~/images/contact/banner.jpg?hero'
 import bannerLqip from '~/images/contact/banner.jpg?lqip'
-
-import type * as Route from './+types.contact'
 
 export { prefetchRecaptchaLinks as links } from '~/utils/recaptcha'
 
@@ -78,13 +83,12 @@ export default function Contact({
   actionData,
 }: Route.ComponentProps) {
   const { siteKey } = loaderData
-  const recaptcha = useRecaptcha({ siteKey })
-
-  const isSuccess = actionData?.success === true
   const errors = actionData?.errors?.fieldErrors
 
+  const recaptcha = useRecaptcha({ siteKey })
+
   return (
-    <main>
+    <Main>
       <Hero>
         <Hero.BackgroundPicture
           picture={data.hero.image}
@@ -98,79 +102,39 @@ export default function Contact({
 
       <Container as="section" className="flex items-center justify-center">
         <Form
-          ref={recaptcha.formRef}
           method="POST"
           className="flex max-w-lg flex-1 flex-col gap-5 py-20"
+          ref={recaptcha.formRef}
           onSubmit={recaptcha.appendTokendAndSubmit}
         >
-          <FormField label={data.form.name} htmlFor="name" error={errors?.name}>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              className={cls(
-                'input input-bordered w-full',
-                isSuccess && 'input-disabled',
-                errors?.name && 'input-error',
-              )}
-              disabled={isSuccess}
-              //defaultValue="Alpi Nistič"
-            />
-          </FormField>
-          <FormField
+          <InputField
+            id="name"
+            name="name"
+            label={data.form.name}
+            error={errors?.name}
+            disabled={recaptcha.isBusy}
+          />
+          <InputField
+            id="email"
+            name="email"
             label={data.form.email}
-            htmlFor="email"
             error={errors?.email}
-          >
-            <input
-              id="email"
-              name="email"
-              type="text"
-              className={cls(
-                'input input-bordered w-full',
-                isSuccess && 'input-disabled',
-                errors?.email && 'input-error',
-              )}
-              disabled={isSuccess}
-              //defaultValue="bojan.hribernik@gmail.com"
-            />
-          </FormField>
-          <FormField
+            disabled={recaptcha.isBusy}
+          />
+          <TextareaField
+            id="message"
+            name="message"
             label={data.form.message}
-            htmlFor="message"
             error={errors?.message}
-          >
-            <textarea
-              className={cls(
-                'textarea textarea-bordered w-full',
-                isSuccess && 'textarea-disabled',
-                errors?.message && 'textarea-error',
-              )}
-              id="message"
-              name="message"
-              rows={6}
-              disabled={isSuccess}
-              //defaultValue={'Test @localhost'}
-            />
-          </FormField>
-          <div className="flex justify-end">
-            <Button
-              color="primary"
-              type="submit"
-              className="w-full sm:w-auto"
-              disabled={recaptcha.isLoading || !recaptcha.isReady}
-            >
-              {data.form.button}
-            </Button>
-          </div>
-          {actionData?.message && (
-            <p className="text-green-700">{actionData.message}</p>
-          )}
-          {actionData?.error && (
-            <p className="text-red-500">{actionData.error}</p>
-          )}
+            disabled={recaptcha.isBusy}
+          />
+          <SubmitButton disabled={recaptcha.isBusy}>
+            {data.form.button}
+          </SubmitButton>
+          {actionData?.message && <Success>{actionData.message}</Success>}
+          {actionData?.error && <Error>{actionData.error}</Error>}
         </Form>
       </Container>
-    </main>
+    </Main>
   )
 }

@@ -34,7 +34,7 @@ const variants = {
   link: 'btn-link',
 }
 
-type ButtonProps<C extends React.ElementType> = {
+export type ButtonProps<C extends React.ElementType> = {
   as?: C
   color?: keyof typeof colors
   size?: keyof typeof sizes
@@ -42,7 +42,7 @@ type ButtonProps<C extends React.ElementType> = {
   variant?: keyof typeof variants
 }
 
-type Props<C extends React.ElementType> = ButtonProps<C> &
+export type AllButtonProps<C extends React.ElementType> = ButtonProps<C> &
   Omit<React.ComponentPropsWithoutRef<C>, keyof ButtonProps<C>>
 
 export const Button = <C extends React.ElementType = 'button'>({
@@ -54,7 +54,7 @@ export const Button = <C extends React.ElementType = 'button'>({
   children,
   className,
   ...props
-}: Props<C>) => {
+}: AllButtonProps<C>) => {
   const Component = as || 'button'
 
   return (

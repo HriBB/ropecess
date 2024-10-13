@@ -8,5 +8,5 @@ export const routes: RouteConfig = [
   route('/services', 'routes/services.tsx'),
   route('/spacenet', 'routes/spacenet.tsx'),
   route('/theme', 'theme/theme-route.ts'),
-  route('/robots.txt', 'routes/[robots.txt].tsx'),
+  route('/robots.txt', 'utils/robots.tsx'),
 ]

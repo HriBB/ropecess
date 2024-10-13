@@ -8,5 +8,6 @@ node_modules
 _gen
 .env
 .env.staging
+.env.prod
 .env.production
 .react-router
