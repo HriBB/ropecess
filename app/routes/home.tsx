@@ -29,7 +29,7 @@ const data = {
     lqip: bannerLqip,
     imageAlt: 'Construction frame',
     link: {
-      to: '/contact',
+      to: '/contact/',
       text: 'Contact Us',
     },
   },
@@ -66,7 +66,7 @@ const data = {
   outro: {
     text: 'Contact us today to see how Ropecess can help bring your project to life.',
     link: {
-      to: '/contact',
+      to: '/contact/',
       text: 'Contact Us',
     },
   },
