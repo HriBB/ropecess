@@ -78,7 +78,7 @@ export default defineConfig({
       }),
     }),
     reactRouter({
-      prerender: ['/', '/about', '/contact', '/services', '/spacenet'],
+      //prerender: ['/', '/about', '/contact', '/services', '/spacenet'],
     }),
     tsconfigPaths(),
   ],
