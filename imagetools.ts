@@ -1,7 +1,7 @@
 import { imagetools as viteImagetools, pictureFormat } from 'vite-imagetools'
 
-export function imagetools() {
-  return viteImagetools({
+export const imagetools = () =>
+  viteImagetools({
     defaultDirectives: (url) => {
       if (url.searchParams.has('hero')) {
         return new URLSearchParams({
@@ -61,4 +61,3 @@ export function imagetools() {
       },
     }),
   })
-}
