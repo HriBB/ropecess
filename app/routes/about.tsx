@@ -15,6 +15,7 @@ import riggingImage from '~/images/services/rigging-01.jpg?thumb'
 import riggingLqip from '~/images/services/rigging-01.jpg?lqip'
 import stageImage from '~/images/services/stage-building-01.jpg?thumb'
 import stageLqip from '~/images/services/stage-building-01.jpg?lqip'
+import { getMeta } from '~/utils/meta'
 
 const data = {
   meta: {
@@ -61,17 +62,7 @@ const data = {
   ],
 }
 
-export const meta: MetaFunction = () => {
-  return [
-    {
-      title: data.meta.title,
-    },
-    {
-      name: 'description',
-      content: data.meta.description,
-    },
-  ]
-}
+export const meta: MetaFunction = () => getMeta(data.meta)
 
 export default function About() {
   return (

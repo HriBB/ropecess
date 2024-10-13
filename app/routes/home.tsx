@@ -1,6 +1,8 @@
 import { Link, MetaFunction } from 'react-router'
 
+import { getMeta } from '~/utils/meta'
 //import type * as Route from './+types.home'
+
 import { Main } from '~/components/Main'
 import { Hero } from '~/components/Hero'
 import { Button } from '~/components/Button'
@@ -72,17 +74,7 @@ const data = {
   },
 }
 
-export const meta: MetaFunction = () => {
-  return [
-    {
-      title: data.meta.title,
-    },
-    {
-      name: 'description',
-      content: data.meta.description,
-    },
-  ]
-}
+export const meta: MetaFunction = () => getMeta(data.meta)
 
 export default function Index() {
   return (

@@ -1,10 +1,13 @@
 import { Form, MetaFunction } from 'react-router'
 
 import type * as Route from './+types.spacenet'
-
+import { getMeta } from '~/utils/meta'
 import { handleFormError } from '~/utils/form.server'
-import { siteKey, verifyRecaptcha } from '~/utils/recaptcha.server'
 import { contactEmailSchema, sendContactEmail } from '~/utils/email.server'
+
+import { useRecaptcha } from '~/recaptcha/useRecaptcha'
+import { siteKey, verifyRecaptcha } from '~/recaptcha/recaptcha.server'
+export { preconnectRecaptchaLinks as links } from '~/recaptcha/links'
 
 import { Main } from '~/components/Main'
 import { Hero } from '~/components/Hero'
@@ -18,8 +21,6 @@ import {
   Error,
   SubmitButton,
 } from '~/components/Form'
-import { useRecaptcha } from '~/utils/recaptcha'
-import { getMeta } from '~/utils/meta'
 
 import bannerImage from '~/images/spacenet/spacenet-making-of.jpg?hero'
 import bannerLqip from '~/images/spacenet/spacenet-making-of.jpg?lqip'
@@ -35,8 +36,6 @@ import makingOfImage2 from '~/images/spacenet/spacenet-making-of-02.jpg?hero'
 import makingOfImage2Lqip from '~/images/spacenet/spacenet-making-of-02.jpg?lqip'
 import neonGlowImage5 from '~/images/spacenet/two-spacenets-at-night-glow.jpg?hero'
 import neonGlowImage5Lqip from '~/images/spacenet/two-spacenets-at-night-glow.jpg?lqip'
-
-export { prefetchRecaptchaLinks as links } from '~/utils/recaptcha'
 
 const data = {
   meta: {
@@ -66,9 +65,9 @@ const data = {
   },
 }
 
-export const meta: MetaFunction = () => {
-  return getMeta(data.meta)
-}
+export const meta: MetaFunction = () => getMeta(data.meta)
+
+export const loader = async () => ({ siteKey })
 
 export const action = async ({ request }: Route.ActionArgs) => {
   try {
@@ -83,10 +82,6 @@ export const action = async ({ request }: Route.ActionArgs) => {
   } catch (error) {
     return handleFormError(error, data.form.errorMessage)
   }
-}
-
-export const loader = async () => {
-  return { siteKey }
 }
 
 export default function SpaceNet({

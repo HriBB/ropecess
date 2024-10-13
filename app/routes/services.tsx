@@ -1,6 +1,8 @@
 import { MetaFunction } from 'react-router'
 
+import { getMeta } from '~/utils/meta'
 //import type * as Route from './+types.services'
+
 import { Hero } from '~/components/Hero'
 import { Container } from '~/components/Container'
 import { Picture } from '~/components/Picture'
@@ -106,17 +108,7 @@ const data = {
   ],
 }
 
-export const meta: MetaFunction = () => {
-  return [
-    {
-      title: data.meta.title,
-    },
-    {
-      name: 'description',
-      content: data.meta.description,
-    },
-  ]
-}
+export const meta: MetaFunction = () => getMeta(data.meta)
 
 export default function Services() {
   return (

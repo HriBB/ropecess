@@ -1,22 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigation, useSubmit } from 'react-router'
-import type { LinksFunction } from 'react-router'
-
-/**
- * Preconnect to Google reCAPTCHA
- *
- * @see https://developers.google.com/recaptcha/docs/loading#using_resource_hints
- */
-export const prefetchRecaptchaLinks: LinksFunction = () => {
-  return [
-    { rel: 'preconnect', href: 'https://www.google.com' },
-    {
-      rel: 'preconnect',
-      href: 'https://www.gstatic.com',
-      crossOrigin: 'anonymous',
-    },
-  ]
-}
 
 /**
  * useRecaptcha v3
@@ -27,8 +10,6 @@ export const prefetchRecaptchaLinks: LinksFunction = () => {
  * @see https://stackoverflow.com/questions/58114386/how-can-i-reload-recaptcha-v3
  */
 export function useRecaptcha({ siteKey }: { siteKey: string }) {
-  console.log('useRecaptcha', { siteKey })
-
   const keyRef = useRef(siteKey)
   const formRef = useRef<HTMLFormElement | null>(null)
 
