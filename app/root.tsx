@@ -18,6 +18,8 @@ import { ThemeScript } from '~/theme/ThemeScript'
 import { useTheme } from '~/theme/useTheme'
 import { getThemeFromRequest } from '~/theme/theme.server'
 
+export { ErrorBoundary } from '~/components/ErrorBoundary'
+
 export const shouldRevalidate: ShouldRevalidateFunction = (args) => {
   return args.formData?.get('theme') ? true : args.defaultShouldRevalidate
 }

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigation, useSubmit } from 'react-router'
+import useIntersection from './useIntersection'
 
 /**
  * useRecaptcha v3
@@ -12,8 +13,10 @@ import { useNavigation, useSubmit } from 'react-router'
 export function useRecaptcha({ siteKey }: { siteKey: string }) {
   const keyRef = useRef(siteKey)
   const formRef = useRef<HTMLFormElement | null>(null)
+  const didSubmit = useRef(false)
+  const observer = useRef<IntersectionObserver | null>(null)
 
-  const isInitializing = useRef(false)
+  const isLoadingScript = useRef(false)
   const [isReady, setReady] = useState(false)
   const [isLoading, setLoading] = useState(false)
   const isBusy = isLoading || !isReady
@@ -21,8 +24,47 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
   const navigation = useNavigation()
   const submit = useSubmit()
 
-  // reset recaptcha after submit
-  const didSubmit = useRef(false)
+  const loadScript = useCallback(() => {
+    if (isLoadingScript.current) return
+    isLoadingScript.current = true
+    const script = document.createElement('script')
+    script.src = `https://www.google.com/recaptcha/api.js?render=${keyRef.current}`
+    script.async = true
+    script.defer = true
+    script.addEventListener(
+      'load',
+      () => {
+        window.grecaptcha.ready(() => {
+          setReady(true)
+        })
+      },
+      { once: true },
+    )
+    document.body.appendChild(script)
+  }, [])
+
+  // load script on intersection
+  useEffect(() => {
+    if (window.grecaptcha) return
+    if (!formRef.current) return
+
+    const handler = (entries: IntersectionObserverEntry[]) => {
+      const entry = entries[0]
+      if (entry.intersectionRatio === 1) {
+        loadScript()
+        observer.current?.disconnect()
+      }
+    }
+    observer.current = new IntersectionObserver(handler, {
+      root: null,
+      rootMargin: '500px',
+      threshold: 1,
+    })
+    observer.current.observe(formRef.current)
+    return () => {
+      observer.current?.disconnect()
+    }
+  }, [loadScript])
 
   /**
    * Append reCAPTCHA token and submit form
@@ -54,13 +96,17 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
     [submit],
   )
 
+  /**
+   * Reset form and state
+   */
   const reset = useCallback(async () => {
     formRef.current?.reset()
     setLoading(false)
     setReady(true)
   }, [])
 
-  // initialize reCAPTCHA
+  // load script on mount
+  /*
   useEffect(() => {
     // recaptcha is already initializing
     if (isInitializing.current) return
@@ -69,25 +115,11 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
     // recaptcha script is already loaded, trigger reset
     if (window.grecaptcha) {
       reset()
-      return
+    } else {
+      loadScript()
     }
-
-    // create script
-    const onScriptLoad = () => {
-      window.grecaptcha.ready(() => {
-        setReady(true)
-        /*
-        tokenRef.current = await window.grecaptcha.execute(keyRef.current, {
-          action: 'homepage',
-        })
-        */
-      })
-    }
-    const script = document.createElement('script')
-    script.src = `https://www.google.com/recaptcha/api.js?render=${keyRef.current}`
-    script.addEventListener('load', onScriptLoad, { once: true })
-    document.body.appendChild(script)
-  }, [reset])
+  }, [reset, loadScript])
+  */
 
   // reset recaptcha after submit
   useEffect(() => {
