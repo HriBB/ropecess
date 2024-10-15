@@ -1,3 +1,7 @@
+import { getLogger } from './logger.server'
+
+const logger = getLogger(['ropecess', 'email'])
+
 const RECAPTCHA_SITE_KEY = process.env.RECAPTCHA_SITE_KEY || ''
 const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET || ''
 
@@ -19,12 +23,15 @@ export type VerifyRecaptchaResponse = {
  * @see https://developers.google.com/recaptcha/docs/verify
  */
 export async function verifyRecaptcha(token: string) {
+  logger.debug('verifyRecaptcha request {val}', { val: token })
   const url = `https://www.google.com/recaptcha/api/siteverify?secret=${RECAPTCHA_SECRET}&response=${token}`
   const result = await fetch(url, { method: 'POST' })
   const data = await result.json()
   if (!data.success) {
+    logger.error('verifyRecaptcha error {val}', { val: JSON.stringify(data) })
     const err = data['error-codes'] ? data['error-codes'].join(', ') : ''
     throw new Error(`Recaptcha failed: ${err}`)
   }
+  logger.debug('verifyRecaptcha success {val}', { val: JSON.stringify(data) })
   return data as VerifyRecaptchaResponse
 }

@@ -2,6 +2,9 @@ import nodemailer from 'nodemailer'
 import Mail from 'nodemailer/lib/mailer'
 import { z } from 'zod'
 import { zfd } from 'zod-form-data'
+import { getLogger } from './logger.server'
+
+const logger = getLogger(['ropecess', 'email'])
 
 //
 // nodemailer
@@ -19,14 +22,26 @@ const transportOptions = {
   logger: process.env.EMAIL_LOGGER === 'true' || false,
 }
 
+logger.debug('transportOptions {val}', {
+  val: JSON.stringify({
+    service: transportOptions.service,
+    host: transportOptions.host,
+    port: transportOptions.port,
+    debug: transportOptions.debug,
+    logger: transportOptions.logger,
+  }),
+})
+
 const transporter = nodemailer.createTransport(transportOptions)
 
 export async function sendEmail(options: Mail.Options) {
   try {
+    logger.debug('sendEmail request {val}', { val: JSON.stringify(options) })
     const result = await transporter.sendMail(options)
+    logger.debug('sendEmail success {val}', { val: JSON.stringify(result) })
     return { success: true, result }
   } catch (error) {
-    console.error('[ERROR] sendEmail', error)
+    logger.error('sendEmail error', { error })
     throw new Error('Failed to send email')
   }
 }
