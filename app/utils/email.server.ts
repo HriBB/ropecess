@@ -24,17 +24,17 @@ const transportOptions = {
 
 logger.debug('transportOptions {val}', {
   val: JSON.stringify({
-    service: transportOptions.service,
-    host: transportOptions.host,
-    port: transportOptions.port,
-    debug: transportOptions.debug,
-    logger: transportOptions.logger,
+    ...transportOptions,
+    auth: {
+      user: transportOptions.auth.user,
+      pass: '***',
+    },
   }),
 })
 
 const transporter = nodemailer.createTransport(transportOptions)
 
-export async function sendEmail(options: Mail.Options) {
+async function sendEmail(options: Mail.Options) {
   try {
     logger.debug('sendEmail request {val}', { val: JSON.stringify(options) })
     const result = await transporter.sendMail(options)

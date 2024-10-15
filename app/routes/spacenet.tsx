@@ -36,6 +36,7 @@ import makingOfImage2 from '~/images/spacenet/spacenet-making-of-02.jpg?hero'
 import makingOfImage2Lqip from '~/images/spacenet/spacenet-making-of-02.jpg?lqip'
 import neonGlowImage5 from '~/images/spacenet/two-spacenets-at-night-glow.jpg?hero'
 import neonGlowImage5Lqip from '~/images/spacenet/two-spacenets-at-night-glow.jpg?lqip'
+import { useCallback } from 'react'
 
 const data = {
   meta: {
@@ -93,6 +94,23 @@ export default function SpaceNet({
 
   const recaptcha = useRecaptcha({ siteKey })
 
+  const scrollToForm = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    window.scrollTo({
+      top: document.getElementById('rent-or-buy')?.offsetTop,
+      behavior: 'smooth',
+    })
+    window.addEventListener(
+      'scrollend',
+      () => {
+        setTimeout(() => {
+          document.getElementById('name')?.focus()
+        }, 200)
+      },
+      { once: true },
+    )
+  }, [])
+
   return (
     <Main>
       <Hero>
@@ -108,6 +126,7 @@ export default function SpaceNet({
             href={data.hero.button.href}
             color="secondary"
             size="lg"
+            onClick={scrollToForm}
           >
             {data.hero.button.text}
           </Button>
@@ -115,7 +134,9 @@ export default function SpaceNet({
       </Hero>
 
       <Container as="section" size="md" className="py-40">
-        <Main.H2>What is a Space Net?</Main.H2>
+        <Main.H2>
+          <a href="#what-is-a-space-net">What is a Space Net?</a>
+        </Main.H2>
         <Main.P size="lg">
           The Space Net, a hand-woven creation made from thin ropes, is designed
           for levitation, meditation, and various whimsical activities in the
@@ -133,7 +154,9 @@ export default function SpaceNet({
       />
 
       <Container as="section" size="md" className="py-40">
-        <Main.H2>How we use a Space Net?</Main.H2>
+        <Main.H2>
+          <a href="#how-we-use-a-space-net">How we use a Space Net?</a>
+        </Main.H2>
         <Main.P size="lg">
           Our team crafts these nets and sets them up for different occasions.
           Sometimes they soar high in the air, other times they rest low to the
@@ -151,7 +174,11 @@ export default function SpaceNet({
       />
 
       <Container as="section" size="md" className="py-40">
-        <Main.H2>How you might use a Space Net?</Main.H2>
+        <Main.H2>
+          <a href="#how-you-might-use-a-space-net">
+            How you might use a Space Net?
+          </a>
+        </Main.H2>
         <Main.P size="lg">
           It is perfect to set up a chill area on festival, event, or any other
           special occasion. Or even just for fun! We can enhance the setup with
@@ -169,7 +196,9 @@ export default function SpaceNet({
       />
 
       <Container as="section" size="md" className="py-40">
-        <Main.H2>Floating above the ground</Main.H2>
+        <Main.H2>
+          <a href="#floating-above-the-ground">Floating above the ground</a>
+        </Main.H2>
         <Main.P size="lg">
           Experience the thrill of floating like never before with a space-net!
           This innovative setup transforms your outdoor adventures, offering a
@@ -192,7 +221,11 @@ export default function SpaceNet({
       />
 
       <Container as="section" size="md" className="py-40">
-        <Main.H2>Perfect for events and festivals</Main.H2>
+        <Main.H2>
+          <a href="#perfect-for-events-and-festivals">
+            Perfect for events and festivals
+          </a>
+        </Main.H2>
         <Main.P size="lg">
           Imagine setting up a stunning display at your next event or festival,
           where participants can float above the ground, challenge themselves,
@@ -220,7 +253,9 @@ export default function SpaceNet({
       <section id="rent-or-buy" className="bg-slate-50 py-40 dark:bg-slate-950">
         <Container size="sm">
           <div className="pb-10">
-            <Main.SpecialTitle>Rent or buy a Space Net?</Main.SpecialTitle>
+            <Main.SpecialTitle>
+              <a href="#rent-or-buy-a-space-net">Rent or buy a Space Net?</a>
+            </Main.SpecialTitle>
             <Main.P size="lg" className="text-black dark:text-white">
               If you are interested in having one of these nets, feel free to
               reach out! We can install them at your festival, event, or any

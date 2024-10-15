@@ -35,6 +35,7 @@ const data = {
     {
       id: 1,
       title: 'Photovoltaic Modules Installation',
+      anchor: '#photovoltaic-modules-installation',
       image: photovoltaicImage,
       lqip: photovoltaicLqip,
       description:
@@ -43,6 +44,7 @@ const data = {
     {
       id: 2,
       title: 'Industrial Rope Access and Climbing',
+      anchor: '#industrial-rope-access-and-climbing',
       image: industrialImage,
       lqip: industrialLqip,
       description:
@@ -51,6 +53,7 @@ const data = {
     {
       id: 3,
       title: 'Rigging',
+      anchor: '#rigging',
       image: riggingImage,
       lqip: riggingLqip,
       description:
@@ -59,6 +62,7 @@ const data = {
     {
       id: 4,
       title: 'Stage Building',
+      anchor: '#stage-building',
       image: stageImage,
       lqip: stageLqip,
       description: 'Working on big stages for StageCo Nederland and Belgium.',
@@ -141,7 +145,9 @@ export default function Services() {
                   loading="lazy"
                 />
                 <div className="flex flex-1 flex-col items-start justify-center gap-3">
-                  <h2 className="text-2xl font-medium">{service.title}</h2>
+                  <h2 className="text-2xl font-medium">
+                    <a href={service.anchor}>{service.title}</a>
+                  </h2>
                   <p>{service.description}</p>
                 </div>
               </div>

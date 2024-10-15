@@ -14,9 +14,9 @@ import type * as Route from './+types.root'
 import { Header } from '~/components/Header'
 import { Footer } from '~/components/Footer'
 
-import { ThemeScript } from '~/theme/ThemeScript'
-import { useTheme } from '~/theme/useTheme'
-import { getThemeFromRequest } from '~/theme/theme.server'
+import { getThemeFromRequest } from '~/utils/theme/theme.server'
+import { ThemeScript } from '~/utils/theme/ThemeScript'
+import { useTheme } from '~/utils/theme/useTheme'
 
 export { ErrorBoundary } from '~/components/ErrorBoundary'
 

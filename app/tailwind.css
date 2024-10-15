@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+.bounce {
+  animation-name: bounce;
 }
 
 @keyframes bounce {
@@ -20,8 +20,4 @@ html {
   60% {
     transform: translateY(-15px);
   }
-}
-
-.bounce {
-  animation-name: bounce;
 }

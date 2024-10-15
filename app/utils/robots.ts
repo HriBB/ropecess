@@ -1,5 +1,15 @@
 export const loader = () => {
-  const txt = `User-agent: 360Spider
+  return new Response(txt, {
+    status: 200,
+    headers: {
+      'content-type': 'text/plain',
+      // Cache for 24 hours
+      'cache-control': `max-age=${60 * 60 * 24}`,
+    },
+  })
+}
+
+const txt = `User-agent: 360Spider
 User-agent: 360Spider-Image
 User-agent: 360Spider-Video
 User-agent: AdsBot-Google
@@ -74,13 +84,3 @@ User-agent: YoudaoBot
 Disallow:
 User-agent: *
 Disallow: /`.trim()
-
-  return new Response(txt, {
-    status: 200,
-    headers: {
-      'content-type': 'text/plain',
-      // Cache for 24 hours
-      'cache-control': `max-age=${60 * 60 * 24}`,
-    },
-  })
-}

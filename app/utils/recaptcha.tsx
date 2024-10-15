@@ -41,10 +41,7 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
   const submit = useSubmit()
 
   const loadScript = useCallback(() => {
-    console.log('loadScript')
-
     if (isLoadingScript.current) {
-      console.log('already loading script')
       return
     }
     isLoadingScript.current = true
@@ -75,8 +72,6 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
 
     const handler = (entries: IntersectionObserverEntry[]) => {
       const entry = entries[0]
-      console.log('intersection', entry.intersectionRatio)
-
       if (entry.intersectionRatio === 1) {
         loadScript()
         observer.current?.disconnect()

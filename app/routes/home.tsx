@@ -37,6 +37,7 @@ const data = {
   },
   intro: {
     title: 'Welcome to Ropecess',
+    anchor: '#welcome',
     text: 'At Ropecess, we deliver top-quality construction and specialized access services, ensuring safety, precision, and reliability in every project.',
   },
   services: {
@@ -45,6 +46,7 @@ const data = {
       {
         id: 1,
         title: 'Work Plan',
+        anchor: '#work-plan',
         image: workPlanImage,
         lqip: workPlanLqip,
         text: 'Our Work Plan ensures every project is completed on time, within budget, and to the highest standards. We carefully plan, manage timelines, allocate resources, and mitigate risks, keeping you informed at every step.',
@@ -52,6 +54,7 @@ const data = {
       {
         id: 2,
         title: 'Access Plan',
+        anchor: '#access-plan',
         image: accessPlanImage,
         lqip: accessPlanLqip,
         text: 'Our Access Plan prioritizes safety and efficiency. We use advanced rope access and innovative methods to safely reach challenging areas, minimizing disruptions and reducing costs while maintaining top safety standards.',
@@ -59,6 +62,7 @@ const data = {
       {
         id: 3,
         title: 'Our Services',
+        anchor: '#our-services',
         image: ourServicesImage,
         lqip: ourServicesLqip,
         text: 'We offer a wide range of specialized construction and access services to cater to various industry needs.',
@@ -102,7 +106,9 @@ export default function Index() {
       <section className="bg-base-200 py-24">
         <Container className="flex flex-col gap-24">
           <div className="flex flex-col items-start md:items-center">
-            <Main.H2>{data.intro.title}</Main.H2>
+            <Main.H2>
+              <a href={data.intro.anchor}>{data.intro.title}</a>
+            </Main.H2>
             <p className="max-w-3xl text-left text-xl leading-normal md:text-center">
               {data.intro.text}
             </p>
@@ -121,7 +127,9 @@ export default function Index() {
                   loading="lazy"
                   sizes="(max-width:767px) 100vw, 400px"
                 />
-                <Main.H3 className="mb-0">{item.title}</Main.H3>
+                <Main.H3 className="mb-0">
+                  <a href={item.anchor}>{item.title}</a>
+                </Main.H3>
                 {item.text && <p>{item.text}</p>}
               </div>
             ))}
