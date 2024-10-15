@@ -1,6 +1,22 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigation, useSubmit } from 'react-router'
-import useIntersection from './useIntersection'
+import type { LinksFunction } from 'react-router'
+
+/**
+ * Preconnect to Google reCAPTCHA
+ *
+ * @see https://developers.google.com/recaptcha/docs/loading#using_resource_hints
+ */
+export const preconnectRecaptchaLinks: LinksFunction = () => {
+  return [
+    { rel: 'preconnect', href: 'https://www.google.com' },
+    {
+      rel: 'preconnect',
+      href: 'https://www.gstatic.com',
+      crossOrigin: 'anonymous',
+    },
+  ]
+}
 
 /**
  * useRecaptcha v3
@@ -25,7 +41,12 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
   const submit = useSubmit()
 
   const loadScript = useCallback(() => {
-    if (isLoadingScript.current) return
+    console.log('loadScript')
+
+    if (isLoadingScript.current) {
+      console.log('already loading script')
+      return
+    }
     isLoadingScript.current = true
     const script = document.createElement('script')
     script.src = `https://www.google.com/recaptcha/api.js?render=${keyRef.current}`
@@ -45,11 +66,17 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
 
   // load script on intersection
   useEffect(() => {
-    if (window.grecaptcha) return
+    if (window.grecaptcha) {
+      setReady(true)
+      return
+    }
+
     if (!formRef.current) return
 
     const handler = (entries: IntersectionObserverEntry[]) => {
       const entry = entries[0]
+      console.log('intersection', entry.intersectionRatio)
+
       if (entry.intersectionRatio === 1) {
         loadScript()
         observer.current?.disconnect()

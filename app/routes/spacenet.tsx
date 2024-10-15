@@ -3,11 +3,11 @@ import { Form, MetaFunction } from 'react-router'
 import type * as Route from './+types.spacenet'
 import { getMeta } from '~/utils/meta'
 import { handleFormError } from '~/utils/form.server'
-import { contactEmailSchema, sendContactEmail } from '~/utils/email.server'
+import { sendSpacenetEmail, spacenetEmailSchema } from '~/utils/email.server'
 
-import { useRecaptcha } from '~/recaptcha/useRecaptcha'
-import { siteKey, verifyRecaptcha } from '~/recaptcha/recaptcha.server'
-export { preconnectRecaptchaLinks as links } from '~/recaptcha/links'
+import { useRecaptcha } from '~/utils/recaptcha'
+import { siteKey, verifyRecaptcha } from '~/utils/recaptcha.server'
+export { preconnectRecaptchaLinks as links } from '~/utils/recaptcha'
 
 import { Main } from '~/components/Main'
 import { Hero } from '~/components/Hero'
@@ -72,9 +72,9 @@ export const loader = async () => ({ siteKey })
 export const action = async ({ request }: Route.ActionArgs) => {
   try {
     const formData = await request.formData()
-    const { token, ...contact } = await contactEmailSchema.parseAsync(formData)
+    const { token, ...form } = await spacenetEmailSchema.parseAsync(formData)
     await verifyRecaptcha(token)
-    await sendContactEmail(contact)
+    await sendSpacenetEmail(form)
     return {
       success: true,
       message: data.form.successMessage,

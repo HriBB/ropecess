@@ -1,7 +1,7 @@
 import { Link, MetaFunction } from 'react-router'
 
-import { getMeta } from '~/utils/meta'
 //import type * as Route from './+types.home'
+import { getMeta } from '~/utils/meta'
 
 import { Main } from '~/components/Main'
 import { Hero } from '~/components/Hero'

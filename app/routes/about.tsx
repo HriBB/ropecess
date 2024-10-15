@@ -1,6 +1,8 @@
 import { MetaFunction } from 'react-router'
 
 //import type * as Route from './+types.contact'
+import { getMeta } from '~/utils/meta'
+
 import { Hero } from '~/components/Hero'
 import { Container } from '~/components/Container'
 import { Picture } from '~/components/Picture'
@@ -15,7 +17,6 @@ import riggingImage from '~/images/services/rigging-01.jpg?thumb'
 import riggingLqip from '~/images/services/rigging-01.jpg?lqip'
 import stageImage from '~/images/services/stage-building-01.jpg?thumb'
 import stageLqip from '~/images/services/stage-building-01.jpg?lqip'
-import { getMeta } from '~/utils/meta'
 
 const data = {
   meta: {
