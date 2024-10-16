@@ -1,4 +1,4 @@
-import { Form, HeadersFunction, MetaFunction } from 'react-router'
+import { Form, MetaFunction } from 'react-router'
 
 import type * as Route from './+types.spacenet'
 import { getMeta } from '~/utils/meta'
