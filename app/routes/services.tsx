@@ -134,6 +134,7 @@ export default function Services() {
             {data.items.map((service) => (
               <div
                 key={service.id}
+                id={service.anchor}
                 className="flex flex-col gap-5 md:flex-row md:gap-10"
               >
                 <Picture

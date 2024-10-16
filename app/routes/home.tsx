@@ -117,6 +117,7 @@ export default function Index() {
             {data.services.items.map((item) => (
               <div
                 key={item.id}
+                id={item.anchor}
                 className="flex flex-1 flex-col gap-2 md:gap-6"
               >
                 <Picture

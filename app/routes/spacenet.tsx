@@ -1,4 +1,4 @@
-import { Form, MetaFunction } from 'react-router'
+import { Form, HeadersFunction, MetaFunction } from 'react-router'
 
 import type * as Route from './+types.spacenet'
 import { getMeta } from '~/utils/meta'
@@ -36,7 +36,6 @@ import makingOfImage2 from '~/images/spacenet/spacenet-making-of-02.jpg?hero'
 import makingOfImage2Lqip from '~/images/spacenet/spacenet-making-of-02.jpg?lqip'
 import neonGlowImage5 from '~/images/spacenet/two-spacenets-at-night-glow.jpg?hero'
 import neonGlowImage5Lqip from '~/images/spacenet/two-spacenets-at-night-glow.jpg?lqip'
-import { useCallback } from 'react'
 
 const data = {
   meta: {
@@ -94,23 +93,6 @@ export default function SpaceNet({
 
   const recaptcha = useRecaptcha({ siteKey })
 
-  const scrollToForm = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    window.scrollTo({
-      top: document.getElementById('rent-or-buy')?.offsetTop,
-      behavior: 'smooth',
-    })
-    window.addEventListener(
-      'scrollend',
-      () => {
-        setTimeout(() => {
-          document.getElementById('name')?.focus()
-        }, 200)
-      },
-      { once: true },
-    )
-  }, [])
-
   return (
     <Main>
       <Hero>
@@ -126,14 +108,18 @@ export default function SpaceNet({
             href={data.hero.button.href}
             color="secondary"
             size="lg"
-            onClick={scrollToForm}
           >
             {data.hero.button.text}
           </Button>
         </Hero.Content>
       </Hero>
 
-      <Container as="section" size="md" className="py-40">
+      <Container
+        id="what-is-a-space-net"
+        as="section"
+        size="md"
+        className="py-40"
+      >
         <Main.H2>
           <a href="#what-is-a-space-net">What is a Space Net?</a>
         </Main.H2>
@@ -153,7 +139,12 @@ export default function SpaceNet({
         loading="lazy"
       />
 
-      <Container as="section" size="md" className="py-40">
+      <Container
+        id="how-we-use-a-space-net"
+        as="section"
+        size="md"
+        className="py-40"
+      >
         <Main.H2>
           <a href="#how-we-use-a-space-net">How we use a Space Net?</a>
         </Main.H2>
@@ -173,7 +164,12 @@ export default function SpaceNet({
         loading="lazy"
       />
 
-      <Container as="section" size="md" className="py-40">
+      <Container
+        id="how-you-might-use-a-space-net"
+        as="section"
+        size="md"
+        className="py-40"
+      >
         <Main.H2>
           <a href="#how-you-might-use-a-space-net">
             How you might use a Space Net?
@@ -195,7 +191,12 @@ export default function SpaceNet({
         loading="lazy"
       />
 
-      <Container as="section" size="md" className="py-40">
+      <Container
+        id="floating-above-the-ground"
+        as="section"
+        size="md"
+        className="py-40"
+      >
         <Main.H2>
           <a href="#floating-above-the-ground">Floating above the ground</a>
         </Main.H2>
@@ -220,7 +221,12 @@ export default function SpaceNet({
         loading="lazy"
       />
 
-      <Container as="section" size="md" className="py-40">
+      <Container
+        id="perfect-for-events-and-festivals"
+        as="section"
+        size="md"
+        className="py-40"
+      >
         <Main.H2>
           <a href="#perfect-for-events-and-festivals">
             Perfect for events and festivals
@@ -254,7 +260,7 @@ export default function SpaceNet({
         <Container size="sm">
           <div className="pb-10">
             <Main.SpecialTitle>
-              <a href="#rent-or-buy-a-space-net">Rent or buy a Space Net?</a>
+              <a href="#rent-or-buy">Rent or buy a Space Net?</a>
             </Main.SpecialTitle>
             <Main.P size="lg" className="text-black dark:text-white">
               If you are interested in having one of these nets, feel free to
