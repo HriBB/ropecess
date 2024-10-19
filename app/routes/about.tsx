@@ -3,6 +3,7 @@ import { MetaFunction } from 'react-router'
 //import type * as Route from './+types.contact'
 import { getMeta } from '~/utils/meta'
 
+import { Main } from '~/components/Main'
 import { Hero } from '~/components/Hero'
 import { Container } from '~/components/Container'
 import { Picture } from '~/components/Picture'
@@ -71,7 +72,7 @@ export const meta: MetaFunction = () => getMeta(data.meta)
 
 export default function About() {
   return (
-    <main>
+    <Main>
       <Hero>
         <Hero.BackgroundPicture
           picture={data.hero.image}
@@ -107,6 +108,6 @@ export default function About() {
           </div>
         </Container>
       </section>
-    </main>
+    </Main>
   )
 }

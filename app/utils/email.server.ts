@@ -2,7 +2,8 @@ import nodemailer from 'nodemailer'
 import Mail from 'nodemailer/lib/mailer'
 import { z } from 'zod'
 import { zfd } from 'zod-form-data'
-import { getLogger } from './logger.server'
+
+import { getLogger } from '~/utils/logger.server'
 
 const logger = getLogger(['ropecess', 'email'])
 

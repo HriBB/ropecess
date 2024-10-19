@@ -15,7 +15,7 @@ export const ThemeButton = ({ className, ...props }: Props) => {
   return (
     <Dropdown className={className} {...props}>
       <Dropdown.Trigger className="btn btn-circle btn-ghost">
-        <LightIcon className="dark:hidden" />
+        <LightIcon className="block dark:hidden" />
         <DarkIcon className="hidden dark:block" />
       </Dropdown.Trigger>
       <Dropdown.Menu bottom left>
@@ -35,7 +35,7 @@ export const ThemeButton = ({ className, ...props }: Props) => {
                 name="theme"
                 value={t}
               >
-                {createElement(icons[t])}
+                {(icons as any)[t] && createElement((icons as any)[t])}
                 {t}
               </Button>
             </Dropdown.MenuItem>

@@ -1,4 +1,4 @@
-import { getLogger } from './logger.server'
+import { getLogger } from '~/utils/logger.server'
 
 const logger = getLogger(['ropecess', 'email'])
 

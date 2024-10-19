@@ -8,10 +8,10 @@ import { MenuIcon } from './MenuIcon'
 
 const items = [
   { href: '/', text: 'Home', className: 'btn-primary' },
-  { href: '/services/', text: 'Services', className: 'btn-primary' },
-  { href: '/spacenet/', text: 'Space Net', className: 'btn-secondary' },
-  { href: '/about/', text: 'About', className: 'btn-primary' },
-  { href: '/contact/', text: 'Contact', className: 'btn-primary' },
+  { href: '/services', text: 'Services', className: 'btn-primary' },
+  { href: '/spacenet', text: 'Space Net', className: 'btn-secondary' },
+  { href: '/about', text: 'About', className: 'btn-primary' },
+  { href: '/contact', text: 'Contact', className: 'btn-primary' },
 ]
 
 function contains(parent: any, child: any) {
@@ -76,7 +76,8 @@ export function Header() {
       )}
       <header
         className={cls(
-          'navbar fixed top-0 z-40 flex drop-shadow-lg backdrop-blur-sm',
+          'navbar fixed top-0 z-40 flex',
+          'drop-shadow-lg backdrop-blur-sm',
           'bg-base-100/70 dark:bg-base-100/90',
         )}
       >

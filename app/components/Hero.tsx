@@ -1,8 +1,4 @@
-import { useEffect, useState } from 'react'
-
 import { cls } from '~/utils/cls'
-import { DownIcon } from './DownIcon'
-import { Button } from './Button'
 import { Picture, PictureProps } from './Picture'
 
 type HeroProps<C extends React.ElementType> = {
@@ -19,14 +15,6 @@ function HeroBase<C extends React.ElementType = 'section'>({
   ...props
 }: Props<C>) {
   const Component = as || 'section'
-  const [isScrolled, setIsScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(true)
-    window.addEventListener('scroll', handleScroll, { once: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
   return (
     <Component
       className={cls(
@@ -35,21 +23,7 @@ function HeroBase<C extends React.ElementType = 'section'>({
       )}
       {...props}
     >
-      {/*
-      <div className="hero-overlay bg-base-100/20"></div>
-      */}
       {children}
-      {!isScrolled && (
-        <Button
-          color="ghost"
-          shape="circle"
-          aria-label="Scroll down"
-          className={cls('absolute bottom-4 left-1/2 z-50 -ml-5')}
-          onClick={() => window.scrollTo({ top: window.innerHeight })}
-        >
-          <DownIcon className="h-10 w-10 animate-pulse text-white/70" />
-        </Button>
-      )}
     </Component>
   )
 }
@@ -63,12 +37,9 @@ function Content({ children, className, ...props }: ContentProps) {
         'hero-content flex-col gap-10',
         'container rounded-sm p-10 py-14',
         'w-[calc(100%-4rem)] sm:w-full sm:max-w-md md:max-w-lg lg:max-w-4xl',
-        // background
+        'backdrop-blur-sm dark:backdrop-blur-sm',
         'bg-base-100/70 dark:bg-base-100/90',
-        // light
-        'text-base-content backdrop-blur-sm',
-        // dark
-        'dark:text-white dark:backdrop-blur-sm',
+        'text-base-content dark:text-white',
         className,
       )}
       {...props}

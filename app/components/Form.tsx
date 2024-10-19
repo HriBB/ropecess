@@ -15,7 +15,7 @@ export function FormField({
 }: FormFieldProps) {
   return (
     <label className={cls('form-control w-full', className)} {...props}>
-      <div className="label">
+      <span className="label">
         <span
           className={cls(
             'label-text dark:text-base-content',
@@ -29,7 +29,7 @@ export function FormField({
             {error}
           </span>
         )}
-      </div>
+      </span>
       {children}
     </label>
   )

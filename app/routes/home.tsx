@@ -31,38 +31,35 @@ const data = {
     lqip: bannerLqip,
     imageAlt: 'Construction frame',
     link: {
-      to: '/contact/',
+      to: '/contact',
       text: 'Contact Us',
     },
   },
   intro: {
+    id: 'welcome',
     title: 'Welcome to Ropecess',
-    anchor: '#welcome',
     text: 'At Ropecess, we deliver top-quality construction and specialized access services, ensuring safety, precision, and reliability in every project.',
   },
   services: {
     title: 'Our Services',
     items: [
       {
-        id: 1,
+        id: 'work-plan',
         title: 'Work Plan',
-        anchor: '#work-plan',
         image: workPlanImage,
         lqip: workPlanLqip,
         text: 'Our Work Plan ensures every project is completed on time, within budget, and to the highest standards. We carefully plan, manage timelines, allocate resources, and mitigate risks, keeping you informed at every step.',
       },
       {
-        id: 2,
+        id: 'access-plan',
         title: 'Access Plan',
-        anchor: '#access-plan',
         image: accessPlanImage,
         lqip: accessPlanLqip,
         text: 'Our Access Plan prioritizes safety and efficiency. We use advanced rope access and innovative methods to safely reach challenging areas, minimizing disruptions and reducing costs while maintaining top safety standards.',
       },
       {
-        id: 3,
+        id: 'our-services',
         title: 'Our Services',
-        anchor: '#our-services',
         image: ourServicesImage,
         lqip: ourServicesLqip,
         text: 'We offer a wide range of specialized construction and access services to cater to various industry needs.',
@@ -72,7 +69,7 @@ const data = {
   outro: {
     text: 'Contact us today to see how Ropecess can help bring your project to life.',
     link: {
-      to: '/contact/',
+      to: '/contact',
       text: 'Contact Us',
     },
   },
@@ -103,11 +100,11 @@ export default function Index() {
         </Hero.Content>
       </Hero>
 
-      <section className="bg-base-200 py-24">
+      <section className="bg-base-200 py-24" id={data.intro.id}>
         <Container className="flex flex-col gap-24">
           <div className="flex flex-col items-start md:items-center">
             <Main.H2>
-              <a href={data.intro.anchor}>{data.intro.title}</a>
+              <a href={`#${data.intro.id}`}>{data.intro.title}</a>
             </Main.H2>
             <p className="max-w-3xl text-left text-xl leading-normal md:text-center">
               {data.intro.text}
@@ -117,7 +114,7 @@ export default function Index() {
             {data.services.items.map((item) => (
               <div
                 key={item.id}
-                id={item.anchor}
+                id={item.id}
                 className="flex flex-1 flex-col gap-2 md:gap-6"
               >
                 <Picture
@@ -129,7 +126,7 @@ export default function Index() {
                   sizes="(max-width:767px) 100vw, 400px"
                 />
                 <Main.H3 className="mb-0">
-                  <a href={item.anchor}>{item.title}</a>
+                  <a href={`#${item.id}`}>{item.title}</a>
                 </Main.H3>
                 {item.text && <p>{item.text}</p>}
               </div>

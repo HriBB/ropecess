@@ -1,5 +1,5 @@
 import { typeToFlattenedError, ZodError } from 'zod'
-import { ContactEmail } from './email.server'
+import { ContactEmail } from '~/utils/email.server'
 
 export type FormResponseData = {
   success: boolean

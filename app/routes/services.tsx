@@ -33,36 +33,32 @@ const data = {
   },
   items: [
     {
-      id: 1,
+      id: 'photovoltaic-modules-installation',
       title: 'Photovoltaic Modules Installation',
-      anchor: '#photovoltaic-modules-installation',
       image: photovoltaicImage,
       lqip: photovoltaicLqip,
       description:
         'Our team allready worked on various PV constructon sites, ranging from flat roofs to vertical PV instalation. Every project is its own, and has to be tailored to construction site parameters.',
     },
     {
-      id: 2,
+      id: 'industrial-rope-access-and-climbing',
       title: 'Industrial Rope Access and Climbing',
-      anchor: '#industrial-rope-access-and-climbing',
       image: industrialImage,
       lqip: industrialLqip,
       description:
         'Working for various companies, from High Bay Warehouses to rock cleaning, our range of knowlege expands with each project. Work on ropes is our specialty.',
     },
     {
-      id: 3,
+      id: 'rigging',
       title: 'Rigging',
-      anchor: '#rigging',
       image: riggingImage,
       lqip: riggingLqip,
       description:
         'Venue rigging are projects, which demand more knowlege than you can think of. It is not just pulling chains up in the air and fixing them, but also weight redundancy calculating and setting points exactly on spot, so they are in perfect position for the gig.',
     },
     {
-      id: 4,
+      id: 'stage-building',
       title: 'Stage Building',
-      anchor: '#stage-building',
       image: stageImage,
       lqip: stageLqip,
       description: 'Working on big stages for StageCo Nederland and Belgium.',
@@ -134,7 +130,7 @@ export default function Services() {
             {data.items.map((service) => (
               <div
                 key={service.id}
-                id={service.anchor}
+                id={service.id}
                 className="flex flex-col gap-5 md:flex-row md:gap-10"
               >
                 <Picture
@@ -147,7 +143,7 @@ export default function Services() {
                 />
                 <div className="flex flex-1 flex-col items-start justify-center gap-3">
                   <h2 className="text-2xl font-medium">
-                    <a href={service.anchor}>{service.title}</a>
+                    <a href={`#${service.id}`}>{service.title}</a>
                   </h2>
                   <p>{service.description}</p>
                 </div>

@@ -1,13 +1,11 @@
 import { Form, MetaFunction } from 'react-router'
 
 import type * as Route from './+types.spacenet'
-import { getMeta } from '~/utils/meta'
 import { handleFormError } from '~/utils/form.server'
 import { sendSpacenetEmail, spacenetEmailSchema } from '~/utils/email.server'
-
-import { useRecaptcha } from '~/utils/recaptcha'
-import { siteKey, verifyRecaptcha } from '~/utils/recaptcha.server'
-export { preconnectRecaptchaLinks as links } from '~/utils/recaptcha'
+import { siteKey, verifyRecaptcha } from '~/utils/recaptcha/recaptcha.server'
+import { useRecaptcha } from '~/utils/recaptcha/recaptcha'
+import { getMeta } from '~/utils/meta'
 
 import { Main } from '~/components/Main'
 import { Hero } from '~/components/Hero'
@@ -88,11 +86,8 @@ export default function SpaceNet({
   loaderData,
   actionData,
 }: Route.ComponentProps) {
-  const { siteKey } = loaderData
+  const recaptcha = useRecaptcha({ siteKey: loaderData.siteKey })
   const errors = actionData?.errors?.fieldErrors
-
-  const recaptcha = useRecaptcha({ siteKey })
-
   return (
     <Main>
       <Hero>
