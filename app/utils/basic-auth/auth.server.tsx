@@ -1,7 +1,13 @@
 export const BASIC_AUTH_USER = process.env.BASIC_AUTH_USER
 export const BASIC_AUTH_PASS = process.env.BASIC_AUTH_PASS
 
+const isAuthEnabled = BASIC_AUTH_USER && BASIC_AUTH_PASS
+
 export function isAuthorized(request: Request) {
+  if (!isAuthEnabled) {
+    return true
+  }
+
   const header = request.headers.get('Authorization')
 
   if (!header) return false
@@ -14,5 +20,6 @@ export function isAuthorized(request: Request) {
   return username === BASIC_AUTH_USER && password === BASIC_AUTH_PASS
 }
 
-export const authHeaders =
-  BASIC_AUTH_USER && BASIC_AUTH_PASS ? { 'WWW-Authenticate': 'Basic' } : null
+export const authHeaders = isAuthEnabled
+  ? { 'WWW-Authenticate': 'Basic' }
+  : null
