@@ -1,22 +1,28 @@
 import {
   configure,
   getConsoleSink,
-  getLogger,
+  getLogger as getBaseLogger,
   LogLevel,
 } from '@logtape/logtape'
 
-const level = (process.env.LOG_LEVEL || 'info') as LogLevel
+import { requireEnv } from 'lighthouse/env.server'
+
+export const LOG_NAME = requireEnv('LOG_NAME') || 'app'
+export const LOG_LEVEL = requireEnv('LOG_LEVEL') || 'info'
 
 await configure({
   sinks: { console: getConsoleSink() },
   filters: {},
   loggers: [
-    { category: 'ropecess', level, sinks: ['console'] },
+    { category: LOG_NAME, level: LOG_LEVEL as LogLevel, sinks: ['console'] },
     { category: 'logtape', level: 'warning', sinks: ['console'] },
   ],
   reset: true,
 })
 
-export const logger = getLogger(['ropecess'])
-
-export { getLogger }
+export function getLogger(category: string | string[]) {
+  return getBaseLogger([
+    LOG_NAME,
+    ...(typeof category === 'string' ? [category] : category),
+  ])
+}

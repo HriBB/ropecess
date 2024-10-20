@@ -5,7 +5,7 @@ import { zfd } from 'zod-form-data'
 
 import { getLogger } from '~/utils/logger.server'
 
-const logger = getLogger(['ropecess', 'email'])
+const logger = getLogger('email')
 
 //
 // nodemailer

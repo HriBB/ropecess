@@ -8,10 +8,13 @@ import {
   ShouldRevalidateFunction,
 } from 'react-router'
 
-import '~/tailwind.css'
+import '~/app.css'
 
 import type * as Route from './+types.root'
+import { getPlausible } from '~/utils/plausible/plausible.server'
 import { getTheme } from '~/utils/theme/theme.server'
+
+import { AnalyticsScript } from '~/utils/plausible/AnalyticsScript'
 import { ThemeScript } from '~/utils/theme/ThemeScript'
 import { Header } from '~/components/Header'
 import { Footer } from '~/components/Footer'
@@ -30,8 +33,9 @@ export const shouldRevalidate: ShouldRevalidateFunction = (args) => {
 }
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
+  const plausible = getPlausible()
   const theme = await getTheme(request)
-  return { theme }
+  return { plausible, theme }
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -43,6 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
         <ThemeScript />
+        <AnalyticsScript />
       </head>
       <body>
         <Header />
@@ -58,26 +63,3 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return <Outlet />
 }
-
-/*
-export function ErrorBoundary() {
-  const error = useRouteError()
-  return (
-    <main className="min-h-[calc(100vh-4rem)] pt-28 md:pt-32">
-      <div>
-        {isRouteErrorResponse(error) ? (
-          <>
-            <h2>{`Error ${error.status}`}</h2>
-            <div>{error.data}</div>
-          </>
-        ) : (
-          <>
-            <h2>Error</h2>
-            <div>{error instanceof Error ? error.message : 'Bad request'}</div>
-          </>
-        )}
-      </div>
-    </main>
-  )
-}
-*/

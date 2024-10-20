@@ -1,6 +1,6 @@
 import { getLogger } from '~/utils/logger.server'
 
-const logger = getLogger(['ropecess', 'email'])
+const logger = getLogger('recaptcha')
 
 const RECAPTCHA_SITE_KEY = process.env.RECAPTCHA_SITE_KEY || ''
 const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET || ''
