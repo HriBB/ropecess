@@ -94,7 +94,7 @@ export function Header() {
         </div>
 
         {/* buttons right */}
-        <div className="navbar-end order-3">
+        <div className="navbar-end order-3 pr-2">
           <ThemeButton />
           <Button
             className="btn btn-circle btn-ghost no-animation flex md:hidden"
