@@ -282,6 +282,7 @@ export default function SpaceNet({
               label={data.form.name}
               error={errors?.name}
               disabled={recaptcha.isBusy}
+              autoComplete="name"
             />
             <InputField
               id="email"
@@ -289,6 +290,7 @@ export default function SpaceNet({
               label={data.form.email}
               error={errors?.email}
               disabled={recaptcha.isBusy}
+              autoComplete="email"
             />
             <TextareaField
               id="message"

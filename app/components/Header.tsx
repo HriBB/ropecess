@@ -135,7 +135,7 @@ export function Header() {
                       //isActive && link.className,
                     )
                   }
-                  prefetch="viewport"
+                  prefetch="intent"
                 >
                   {link.text}
                 </NavLink>

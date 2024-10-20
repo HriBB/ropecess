@@ -93,7 +93,7 @@ export default function Index() {
             to={data.hero.link.to}
             color="primary"
             size="lg"
-            prefetch="viewport"
+            prefetch="intent"
           >
             {data.hero.link.text}
           </Button>
@@ -144,7 +144,7 @@ export default function Index() {
             className="w-full md:w-auto"
             size="lg"
             color="primary"
-            prefetch="viewport"
+            prefetch="intent"
           >
             {data.outro.link.text}
           </Button>
