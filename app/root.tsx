@@ -1,5 +1,5 @@
 import {
-  HeadersArgs,
+  data,
   Links,
   Meta,
   Outlet,
@@ -11,20 +11,24 @@ import {
 import '~/app.css'
 
 import type * as Route from './+types.root'
+import { cacheHeaders } from '~/utils/cache.server'
+import { authHeaders, isAuthorized } from '~/utils/basic-auth/auth.server'
 import { getPlausible } from '~/utils/plausible/plausible.server'
 import { getTheme } from '~/utils/theme/theme.server'
 
+import { Unauthorized } from '~/utils/basic-auth/Unauthorized'
 import { AnalyticsScript } from '~/utils/plausible/AnalyticsScript'
 import { ThemeScript } from '~/utils/theme/ThemeScript'
 import { Header } from '~/components/Header'
 import { Footer } from '~/components/Footer'
+import { useRootData } from './utils/data'
 
 export { ErrorBoundary } from '~/components/ErrorBoundary'
 
-export function headers(_: HeadersArgs) {
+export function headers() {
   return {
-    'Cache-Control': 'public, max-age=31536000',
-    Vary: 'Cookie',
+    ...authHeaders,
+    ...cacheHeaders,
   }
 }
 
@@ -33,12 +37,19 @@ export const shouldRevalidate: ShouldRevalidateFunction = (args) => {
 }
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
+  const authorized = isAuthorized(request)
   const plausible = getPlausible()
   const theme = await getTheme(request)
-  return { plausible, theme }
+  return data(
+    { authorized, plausible, theme },
+    { status: authorized ? 200 : 401 },
+  )
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  if (!useRootData().authorized) {
+    return <Unauthorized />
+  }
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
