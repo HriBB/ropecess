@@ -5,7 +5,7 @@ import {
   LogLevel,
 } from '@logtape/logtape'
 
-import { requireEnv } from 'lighthouse/env.server'
+import { requireEnv } from '~/utils/env.server'
 
 export const LOG_NAME = requireEnv('LOG_NAME') || 'app'
 export const LOG_LEVEL = requireEnv('LOG_LEVEL') || 'info'
