@@ -47,9 +47,7 @@ export function Picture({
         height={picture.img.h}
         decoding={decoding}
         loading={loading}
-        // @ts-expect-error fetchpriority is not available in react 18
-        // eslint-disable-next-line react/no-unknown-property
-        fetchpriority={fetchPriority}
+        fetchPriority={fetchPriority}
         style={{
           ...style,
           ...(lqip

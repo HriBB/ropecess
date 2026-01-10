@@ -12,4 +12,5 @@ _gen
 .env.prod
 .env.local
 .env.production
+.env.traefik
 .react-router

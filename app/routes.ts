@@ -12,3 +12,5 @@ export const routes: RouteConfig = [
   route('/theme', 'utils/theme/route.ts'),
   route('/robots.txt', 'utils/robots.ts'),
 ]
+
+export default routes
