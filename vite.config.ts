@@ -2,11 +2,13 @@ import { defineConfig } from 'vite'
 import { reactRouter } from '@react-router/dev/vite'
 import lqip from 'vite-plugin-lqip'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import devtoolsJson from 'vite-plugin-devtools-json'
 
 import { imagetools } from './imagetools'
 
 export default defineConfig({
   plugins: [
+    devtoolsJson(),
     /**
      * Vite plugin for generating LQIP (Low Quality Image Placeholder) images
      *
