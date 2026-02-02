@@ -1,6 +1,6 @@
 import { MetaFunction } from 'react-router'
 
-//import type * as Route from './+types.contact'
+//import type { Route } from './+types/contact'
 import { getMeta } from '~/utils/meta'
 
 import { Main } from '~/components/Main'

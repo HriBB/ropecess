@@ -8,6 +8,10 @@ export const routes: RouteConfig = [
   route('/contact', 'routes/contact.tsx'),
   route('/services', 'routes/services.tsx'),
   route('/spacenet', 'routes/spacenet.tsx'),
+  route(
+    '/professional-height-cleaning',
+    'routes/professional-height-cleaning.tsx',
+  ),
   // other
   route('/theme', 'utils/theme/route.ts'),
   route('/robots.txt', 'utils/robots.ts'),

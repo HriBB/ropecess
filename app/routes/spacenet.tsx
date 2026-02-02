@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/refs */
 import { Form, MetaFunction } from 'react-router'
 
-import type * as Route from './+types.spacenet'
+import type { Route } from './+types/spacenet'
 import { handleFormError } from '~/utils/form.server'
 import { sendSpacenetEmail, spacenetEmailSchema } from '~/utils/email.server'
 import { siteKey, verifyRecaptcha } from '~/utils/recaptcha/recaptcha.server'

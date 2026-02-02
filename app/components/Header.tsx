@@ -10,6 +10,11 @@ const items = [
   { href: '/', text: 'Home', className: 'btn-primary' },
   { href: '/services', text: 'Services', className: 'btn-primary' },
   { href: '/spacenet', text: 'Space Net', className: 'btn-secondary' },
+  {
+    href: '/professional-height-cleaning',
+    text: 'Height Cleaning',
+    className: 'btn-primary',
+  },
   { href: '/about', text: 'About', className: 'btn-primary' },
   { href: '/contact', text: 'Contact', className: 'btn-primary' },
 ]
@@ -44,11 +49,13 @@ export function Header() {
 
   useEffect(() => {
     if (navigation.formData) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setOpen(false)
     }
   }, [navigation])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpen(false)
   }, [location.key])
 

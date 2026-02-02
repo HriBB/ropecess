@@ -9,7 +9,7 @@ import {
 
 import '~/app.css'
 
-import type * as Route from './+types.root'
+import type { Route } from './+types/root'
 import { cacheHeaders } from '~/utils/cache.server'
 import { getPlausible } from '~/utils/plausible/plausible.server'
 import { getTheme } from '~/utils/theme/theme.server'

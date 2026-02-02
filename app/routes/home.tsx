@@ -1,6 +1,6 @@
 import { Link, MetaFunction } from 'react-router'
 
-//import type * as Route from './+types.home'
+//import type { Route } from './+types/home'
 import { getMeta } from '~/utils/meta'
 
 import { Main } from '~/components/Main'
@@ -8,6 +8,7 @@ import { Hero } from '~/components/Hero'
 import { Button } from '~/components/Button'
 import { Picture } from '~/components/Picture'
 import { Container } from '~/components/Container'
+import { CallToAction } from '~/components/CallToAction'
 
 import bannerImage from '~/images/home/banner.jpg?hero'
 import bannerLqip from '~/images/home/banner.jpg?lqip'
@@ -66,7 +67,7 @@ const data = {
       },
     ],
   },
-  outro: {
+  cta: {
     text: 'Contact us today to see how Ropecess can help bring your project to life.',
     link: {
       to: '/contact',
@@ -135,21 +136,7 @@ export default function Index() {
         </Container>
       </section>
 
-      <section className="py-24">
-        <Container className="flex flex-col items-center gap-10">
-          <p className="text-xl">{data.outro.text}</p>
-          <Button
-            as={Link}
-            to={data.outro.link.to}
-            className="w-full md:w-auto"
-            size="lg"
-            color="primary"
-            prefetch="intent"
-          >
-            {data.outro.link.text}
-          </Button>
-        </Container>
-      </section>
+      <CallToAction text={data.cta.text} link={data.cta.link} />
     </Main>
   )
 }

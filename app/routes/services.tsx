@@ -1,6 +1,6 @@
 import { MetaFunction } from 'react-router'
 
-//import type * as Route from './+types.services'
+//import type { Route } from './+types/services'
 import { getMeta } from '~/utils/meta'
 
 import { Hero } from '~/components/Hero'

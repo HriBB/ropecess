@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/refs */
 import { Form, MetaFunction } from 'react-router'
 
-import type * as Route from './+types.contact'
+import type { Route } from './+types/contact'
 import { handleFormError } from '~/utils/form.server'
 import { contactEmailSchema, sendContactEmail } from '~/utils/email.server'
 import { siteKey, verifyRecaptcha } from '~/utils/recaptcha/recaptcha.server'
