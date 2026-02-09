@@ -20,6 +20,7 @@ import { ThemeScript } from '~/utils/theme/ThemeScript'
 import { Header } from '~/components/Header'
 import { Footer } from '~/components/Footer'
 import { cn } from './utils/cn'
+import { useTheme } from './utils/theme/useTheme'
 
 export { ErrorBoundary } from '~/components/ErrorBoundary'
 
@@ -38,7 +39,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { theme } = useLoaderData<typeof loader>()
+  const theme = useTheme()
   return (
     <html
       lang="en"
