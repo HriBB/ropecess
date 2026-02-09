@@ -1,4 +1,4 @@
-import { cls } from '~/utils/cls'
+import { cn } from '~/utils/cn'
 import { Container } from './Container'
 
 const paragraphSizes = {
@@ -16,7 +16,7 @@ type ParagraphProps = React.ComponentPropsWithoutRef<'p'> & {
 function P({ children, className, size = 'md', ...props }: ParagraphProps) {
   return (
     <p
-      className={cls('mb-6 last:mb-0', paragraphSizes[size], className)}
+      className={cn('mb-6 last:mb-0', paragraphSizes[size], className)}
       {...props}
     >
       {children}
@@ -31,7 +31,7 @@ function H2({
 }: React.ComponentPropsWithoutRef<'h1'>) {
   return (
     <h2
-      className={cls(
+      className={cn(
         'text-4xl font-bold',
         'mb-8 last:mb-0',
         'uppercase',
@@ -51,7 +51,7 @@ function H3({
 }: React.ComponentPropsWithoutRef<'h3'>) {
   return (
     <h2
-      className={cls(
+      className={cn(
         'text-2xl font-bold',
         'mb-8 last:mb-0',
         'uppercase',
@@ -71,7 +71,7 @@ function SpecialTitle({
 }: React.ComponentPropsWithoutRef<'h3'>) {
   return (
     <h2
-      className={cls(
+      className={cn(
         'text-5xl uppercase leading-tight text-secondary',
         'font-bold',
         'mb-8',
@@ -90,7 +90,7 @@ function Hero({
   ...props
 }: React.ComponentPropsWithoutRef<'section'>) {
   return (
-    <section className={cls('h-svh w-full', className)} {...props}>
+    <section className={cn('h-svh w-full', className)} {...props}>
       {children}
     </section>
   )
@@ -102,7 +102,7 @@ function Section({
   ...props
 }: React.ComponentPropsWithoutRef<'section'>) {
   return (
-    <section className={cls('py-24', className)} {...props}>
+    <section className={cn('py-24', className)} {...props}>
       {children}
     </section>
   )

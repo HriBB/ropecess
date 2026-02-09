@@ -2,19 +2,19 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { NavLink, useLocation, useNavigation } from 'react-router'
 
 import { ThemeButton } from '~/utils/theme/ThemeButton'
-import { cls } from '~/utils/cls'
+import { cn } from '~/utils/cn'
 import { Button } from './Button'
 import { MenuIcon } from './MenuIcon'
 
 const items = [
   { href: '/', text: 'Home', className: 'btn-primary' },
   { href: '/services', text: 'Services', className: 'btn-primary' },
-  { href: '/spacenet', text: 'Space Net', className: 'btn-secondary' },
   {
     href: '/professional-height-cleaning',
     text: 'Height Cleaning',
     className: 'btn-primary',
   },
+  { href: '/spacenet', text: 'Space Net', className: 'btn-secondary' },
   { href: '/about', text: 'About', className: 'btn-primary' },
   { href: '/contact', text: 'Contact', className: 'btn-primary' },
 ]
@@ -82,7 +82,7 @@ export function Header() {
         <progress className="progress progress-primary fixed left-0 top-0 z-50 h-1 w-full" />
       )}
       <header
-        className={cls(
+        className={cn(
           'navbar fixed top-0 z-40 flex',
           'drop-shadow-lg backdrop-blur-sm',
           'bg-base-100/70 dark:bg-base-100/90',
@@ -91,7 +91,7 @@ export function Header() {
         {/* logo left */}
         <div className="navbar-start order-1" style={{ order: 1 }}>
           <a
-            className={cls(
+            className={cn(
               'btn btn-ghost no-animation btn-lg px-4 text-4xl font-bold uppercase',
             )}
             href="/"
@@ -115,7 +115,7 @@ export function Header() {
         {/* navigation */}
         <nav
           ref={navRef}
-          className={cls(
+          className={cn(
             'navbar-center order-2 w-44 flex-1 md:flex md:w-auto',
             'max-md:bg-base-200 max-md:dark:bg-base-300',
             'max-md:rounded-lg max-md:shadow-xl',
@@ -125,7 +125,7 @@ export function Header() {
           )}
         >
           <ul
-            className={cls(
+            className={cn(
               'flex w-full flex-col items-stretch gap-1 p-2',
               'md:p-0x md:flex-row md:items-center md:gap-2',
             )}
@@ -135,7 +135,7 @@ export function Header() {
                 <NavLink
                   to={link.href}
                   className={({ isActive }) =>
-                    cls(
+                    cn(
                       'btn no-animation flex-shrink-0 text-nowrap',
                       'w-full justify-start md:w-auto',
                       isActive ? 'btn-primary' : 'btn-ghost',

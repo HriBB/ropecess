@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigation } from 'react-router'
-import { cls } from '~/utils/cls'
+import { cn } from '~/utils/cn'
 
 import './details.css'
 
@@ -60,7 +60,7 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
     return (
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <details
-        className={cls('group relative', className)}
+        className={cn('group relative', className)}
         ref={forwardedRef}
         open={open ?? isOpen}
         onToggle={(event) => {

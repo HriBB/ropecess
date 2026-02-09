@@ -1,11 +1,11 @@
-import { cls } from '~/utils/cls'
+import { cn } from '~/utils/cn'
 
 export type Props = Omit<React.ComponentPropsWithoutRef<'svg'>, 'children'>
 
 export function DownIcon({ className, ...props }: Props) {
   return (
     <svg
-      className={cls('current-color', className)}
+      className={cn('current-color', className)}
       viewBox="0 0 28 28"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"

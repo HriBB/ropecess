@@ -1,4 +1,4 @@
-import { cls } from '~/utils/cls'
+import { cn } from '~/utils/cn'
 
 export type MenuProps = React.ComponentProps<'ul'> & {
   top?: boolean
@@ -18,7 +18,7 @@ export const Menu = ({
 }: MenuProps) => {
   return (
     <ul
-      className={cls(
+      className={cn(
         'absolute z-50 max-h-[360px] min-w-[150px] overflow-y-auto p-2',
         'rounded bg-base-200 shadow-xl dark:bg-base-300',
         bottom && 'top-12',

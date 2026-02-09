@@ -1,4 +1,4 @@
-import { cls } from '~/utils/cls'
+import { cn } from '~/utils/cn'
 
 const sizes = {
   sm: 'max-w-2xl', // 672px
@@ -27,7 +27,7 @@ export function Container<C extends React.ElementType = 'div'>({
 
   return (
     <Component
-      className={cls('container mx-auto px-8', sizes[size], className)}
+      className={cn('container mx-auto px-8', sizes[size], className)}
       {...props}
     >
       {children}

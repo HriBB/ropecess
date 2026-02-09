@@ -1,4 +1,4 @@
-import { cls } from '~/utils/cls'
+import { cn } from '~/utils/cn'
 import { Button, ButtonProps } from './Button'
 
 export type FormFieldProps = React.ComponentPropsWithoutRef<'label'> & {
@@ -14,10 +14,10 @@ export function FormField({
   ...props
 }: FormFieldProps) {
   return (
-    <label className={cls('form-control w-full', className)} {...props}>
+    <label className={cn('form-control w-full', className)} {...props}>
       <span className="label">
         <span
-          className={cls(
+          className={cn(
             'label-text dark:text-base-content',
             error && 'text-red-600 dark:text-red-400',
           )}
@@ -58,7 +58,7 @@ export function InputField({
         id={id}
         name={name}
         type={type}
-        className={cls(
+        className={cn(
           'input input-bordered w-full',
           disabled && 'input-disabled',
           error && 'input-error',
@@ -90,7 +90,7 @@ export function TextareaField({
   return (
     <FormField label={label} htmlFor={id} error={error} {...labelProps}>
       <textarea
-        className={cls(
+        className={cn(
           'textarea textarea-bordered w-full',
           disabled && 'textarea-disabled',
           error && 'textarea-error',
@@ -162,7 +162,7 @@ export function SubmitButton({
     <div className="flex justify-end">
       <Button
         color={color}
-        className={cls('w-full sm:w-auto', className)}
+        className={cn('w-full sm:w-auto', className)}
         disabled={disabled}
         {...props}
       >

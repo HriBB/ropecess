@@ -1,4 +1,4 @@
-import { cls } from '~/utils/cls'
+import { cn } from '~/utils/cn'
 import { Picture, PictureProps } from './Picture'
 
 type HeroProps<C extends React.ElementType> = {
@@ -17,7 +17,7 @@ function HeroBase<C extends React.ElementType = 'section'>({
   const Component = as || 'section'
   return (
     <Component
-      className={cls(
+      className={cn(
         'hero relative h-svh w-full overflow-hidden bg-base-200 text-white',
         className,
       )}
@@ -33,7 +33,7 @@ type ContentProps = React.ComponentPropsWithoutRef<'div'>
 function Content({ children, className, ...props }: ContentProps) {
   return (
     <div
-      className={cls(
+      className={cn(
         'hero-content flex-col gap-10',
         'container rounded-sm p-10 py-14',
         'w-[calc(100%-4rem)] sm:w-full sm:max-w-md md:max-w-lg lg:max-w-4xl',
@@ -54,7 +54,7 @@ type TitleProps = React.ComponentPropsWithoutRef<'h1'>
 function Title({ children, className, ...props }: TitleProps) {
   return (
     <h1
-      className={cls(
+      className={cn(
         'text-center font-medium leading-snug tracking-wide',
         'text-3xl sm:text-4xl md:text-5xl lg:text-6xl',
         'uppercase',
@@ -70,7 +70,7 @@ function Title({ children, className, ...props }: TitleProps) {
 function BackgroundPicture({ className, ...props }: PictureProps) {
   return (
     <Picture
-      className={cls('absolute inset-0 h-full w-full object-cover', className)}
+      className={cn('absolute inset-0 h-full w-full object-cover', className)}
       loading="eager"
       decoding="async"
       fetchPriority="high"

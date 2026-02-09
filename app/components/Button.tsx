@@ -1,4 +1,4 @@
-import { cls } from '~/utils/cls'
+import { cn } from '~/utils/cn'
 
 const baseClassName = 'btn no-animation'
 
@@ -60,7 +60,7 @@ export const Button = <C extends React.ElementType = 'button'>({
   return (
     <Component
       {...props}
-      className={cls(
+      className={cn(
         baseClassName,
         color && colors[color],
         size && sizes[size],

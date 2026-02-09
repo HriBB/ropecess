@@ -5,6 +5,7 @@ import {
   Scripts,
   ScrollRestoration,
   ShouldRevalidateFunction,
+  useLoaderData,
 } from 'react-router'
 
 import '~/app.css'
@@ -18,6 +19,7 @@ import { AnalyticsScript } from '~/utils/plausible/AnalyticsScript'
 import { ThemeScript } from '~/utils/theme/ThemeScript'
 import { Header } from '~/components/Header'
 import { Footer } from '~/components/Footer'
+import { cn } from './utils/cn'
 
 export { ErrorBoundary } from '~/components/ErrorBoundary'
 
@@ -36,8 +38,13 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { theme } = useLoaderData<typeof loader>()
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={cn(theme, 'bg-base-200')}
+      suppressHydrationWarning
+    >
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,7 +53,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <ThemeScript />
         <AnalyticsScript />
       </head>
-      <body>
+      <body className="bg-base-200">
         <Header />
         {children}
         <Footer />
