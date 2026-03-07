@@ -2,22 +2,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { NavLink, useLocation, useNavigation } from 'react-router'
 
 import { ThemeButton } from '~/utils/theme/ThemeButton'
+import { LanguageSwitcher } from '~/components/LanguageSwitcher'
 import { cn } from '~/utils/cn'
+import { useLocalizeHref } from '~/utils/i18n'
+import { useTranslations } from '~/utils/translations'
 import { Button } from './Button'
 import { MenuIcon } from './MenuIcon'
-
-const items = [
-  { href: '/', text: 'Home', className: 'btn-primary' },
-  { href: '/services', text: 'Services', className: 'btn-primary' },
-  {
-    href: '/professional-height-cleaning',
-    text: 'Height Cleaning',
-    className: 'btn-primary',
-  },
-  { href: '/spacenet', text: 'Space Net', className: 'btn-secondary' },
-  { href: '/about', text: 'About', className: 'btn-primary' },
-  { href: '/contact', text: 'Contact', className: 'btn-primary' },
-]
 
 function contains(parent: any, child: any) {
   return (
@@ -30,6 +20,20 @@ function contains(parent: any, child: any) {
 export function Header() {
   const location = useLocation()
   const navigation = useNavigation()
+  const t = useTranslations()
+  const lh = useLocalizeHref()
+
+  const items = [
+    { href: lh('/'), text: t('nav.home') },
+    { href: lh('/services'), text: t('nav.services') },
+    {
+      href: lh('/professional-height-cleaning'),
+      text: t('nav.heightCleaning'),
+    },
+    { href: lh('/spacenet'), text: t('nav.spaceNet') },
+    { href: lh('/about'), text: t('nav.about') },
+    { href: lh('/contact'), text: t('nav.contact') },
+  ]
 
   const navRef = useRef<HTMLDivElement | null>(null)
   const [isOpen, setOpen] = useState<HTMLButtonElement | false>(false)
@@ -79,12 +83,12 @@ export function Header() {
   return (
     <>
       {isLoading && (
-        <progress className="progress progress-primary fixed left-0 top-0 z-50 h-1 w-full" />
+        <progress className="progress progress-primary fixed top-0 left-0 z-50 h-1 w-full" />
       )}
       <header
         className={cn(
           'navbar fixed top-0 z-40 flex',
-          'drop-shadow-lg backdrop-blur-sm',
+          'drop-shadow-lg backdrop-blur-xs',
           'bg-base-100/70 dark:bg-base-100/90',
         )}
       >
@@ -92,19 +96,20 @@ export function Header() {
         <div className="navbar-start order-1" style={{ order: 1 }}>
           <a
             className={cn(
-              'btn btn-ghost no-animation btn-lg px-4 text-4xl font-bold uppercase',
+              'btn btn-ghost btn-lg px-4 text-4xl font-bold uppercase',
             )}
-            href="/"
+            href={lh('/')}
           >
             Ropecess
           </a>
         </div>
 
         {/* buttons right */}
-        <div className="navbar-end order-3 pr-2">
+        <div className="navbar-end order-3 pr-2 lg:gap-2">
+          <LanguageSwitcher />
           <ThemeButton />
           <Button
-            className="btn btn-circle btn-ghost no-animation flex md:hidden"
+            className="btn btn-circle btn-ghost flex lg:hidden"
             onClick={handleMenuToggle}
             aria-label="Toggle Menu"
           >
@@ -116,28 +121,29 @@ export function Header() {
         <nav
           ref={navRef}
           className={cn(
-            'navbar-center order-2 w-44 flex-1 md:flex md:w-auto',
-            'max-md:bg-base-200 max-md:dark:bg-base-300',
-            'max-md:rounded-lg max-md:shadow-xl',
+            'navbar-center order-2 w-44 flex-1 lg:flex lg:w-auto',
+            'max-lg:bg-base-200 max-lg:dark:bg-base-300',
+            'max-lg:rounded-lg max-lg:shadow-xl',
             isOpen
-              ? 'absolute right-4 top-full z-50 flex -translate-y-4'
+              ? 'absolute top-full right-4 z-50 flex -translate-y-4'
               : 'hidden',
           )}
         >
           <ul
             className={cn(
               'flex w-full flex-col items-stretch gap-1 p-2',
-              'md:p-0x md:flex-row md:items-center md:gap-2',
+              'lg:p-0x lg:flex-row lg:items-center lg:gap-2',
             )}
           >
             {items.map((link) => (
               <li key={link.href}>
                 <NavLink
                   to={link.href}
+                  end
                   className={({ isActive }) =>
                     cn(
-                      'btn no-animation flex-shrink-0 text-nowrap',
-                      'w-full justify-start md:w-auto',
+                      'btn shrink-0 text-nowrap',
+                      'w-full justify-start lg:w-auto',
                       isActive ? 'btn-primary' : 'btn-ghost',
                       //isActive && link.className,
                     )

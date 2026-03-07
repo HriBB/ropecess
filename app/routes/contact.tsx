@@ -7,6 +7,8 @@ import { contactEmailSchema, sendContactEmail } from '~/utils/email.server'
 import { siteKey, verifyRecaptcha } from '~/utils/recaptcha/recaptcha.server'
 import { useRecaptcha } from '~/utils/recaptcha/recaptcha'
 import { getMeta } from '~/utils/meta'
+import { type Locale, useLocale } from '~/utils/i18n'
+import { getLocaleFromRequest } from '~/utils/i18n.server'
 
 import { Main } from '~/components/Main'
 import { Hero } from '~/components/Hero'
@@ -23,34 +25,70 @@ import bannerImage from '~/images/contact/banner.jpg?hero'
 import bannerLqip from '~/images/contact/banner.jpg?lqip'
 
 const data = {
-  meta: {
-    title: 'Contact US',
-    description:
-      'Get in touch with Ropecess to discuss your project requirements. Our team is here to help you with your construction and access needs.',
-    image: bannerImage,
+  en: {
+    meta: {
+      title: 'Contact Us',
+      description:
+        'Get in touch with Ropecess to discuss your project requirements. Our team is here to help you with your construction and access needs.',
+      image: bannerImage,
+    },
+    hero: {
+      title: 'Contact Us',
+      image: bannerImage,
+      lqip: bannerLqip,
+      imageAlt: 'Construction worker on a building site',
+    },
+    form: {
+      name: 'Name',
+      email: 'Email',
+      message: 'Message',
+      button: 'Send Message',
+      errorMessage: 'Form contains errors',
+      successMessage:
+        'Thank you for your inquiry. We will get back to you as soon as possible.',
+    },
   },
-  hero: {
-    title: 'Contact US',
-    image: bannerImage,
-    lqip: bannerLqip,
-    imageAlt: 'Construction worker on a building site',
-  },
-  form: {
-    name: 'Name',
-    email: 'Email',
-    message: 'Message',
-    button: 'Send Message',
-    errorMessage: 'Form contains errors',
-    successMessage:
-      'Thank you for your inquiry. We will get back to you as soon as possible.',
+  sl: {
+    meta: {
+      title: 'Kontakt',
+      description:
+        'Stopite v stik z Ropecess in se pogovorite o zahtevah vašega projekta. Naša ekipa vam je na voljo za vaše gradbene in dostopne potrebe.',
+      image: bannerImage,
+    },
+    hero: {
+      title: 'Kontakt',
+      image: bannerImage,
+      lqip: bannerLqip,
+      imageAlt: 'Gradbeni delavec na gradbišču',
+    },
+    form: {
+      name: 'Ime',
+      email: 'E-pošta',
+      message: 'Sporočilo',
+      button: 'Pošlji sporočilo',
+      errorMessage: 'Obrazec vsebuje napake',
+      successMessage:
+        'Hvala za vaše povpraševanje. Odgovorili vam bomo v najkrajšem možnem času.',
+    },
   },
 }
 
-export const meta: MetaFunction = () => getMeta(data.meta)
+export const meta: MetaFunction = ({ matches, location }) => {
+  const rootData = matches[0]?.data as { locale: Locale; env: { APP_URL: string } }
+  const locale = rootData?.locale ?? 'en'
+  return getMeta({
+    ...data[locale].meta,
+    locale,
+    pathname: location.pathname,
+    appUrl: rootData?.env?.APP_URL,
+  })
+}
 
 export const loader = async () => ({ siteKey })
 
 export const action = async ({ request }: Route.ActionArgs) => {
+  const locale = getLocaleFromRequest(request)
+  const d = data[locale]
   try {
     const formData = await request.formData()
     const { token, ...form } = await contactEmailSchema.parseAsync(formData)
@@ -58,10 +96,10 @@ export const action = async ({ request }: Route.ActionArgs) => {
     await sendContactEmail(form)
     return {
       success: true,
-      message: data.form.successMessage,
+      message: d.form.successMessage,
     }
   } catch (error) {
-    return handleFormError(error, data.form.errorMessage)
+    return handleFormError(error, d.form.errorMessage)
   }
 }
 
@@ -69,18 +107,20 @@ export default function Contact({
   loaderData,
   actionData,
 }: Route.ComponentProps) {
+  const locale = useLocale()
+  const d = data[locale]
   const recaptcha = useRecaptcha({ siteKey: loaderData.siteKey })
   const errors = actionData?.errors?.fieldErrors
   return (
     <Main>
       <Hero>
         <Hero.BackgroundPicture
-          picture={data.hero.image}
-          lqip={data.hero.lqip}
-          alt={data.hero.imageAlt}
+          picture={d.hero.image}
+          lqip={d.hero.lqip}
+          alt={d.hero.imageAlt}
         />
         <Hero.Content>
-          <Hero.Title>{data.hero.title}</Hero.Title>
+          <Hero.Title>{d.hero.title}</Hero.Title>
         </Hero.Content>
       </Hero>
       <Container as="section" className="flex items-center justify-center">
@@ -93,26 +133,26 @@ export default function Contact({
           <InputField
             id="name"
             name="name"
-            label={data.form.name}
+            label={d.form.name}
             error={errors?.name}
             disabled={recaptcha.isBusy}
           />
           <InputField
             id="email"
             name="email"
-            label={data.form.email}
+            label={d.form.email}
             error={errors?.email}
             disabled={recaptcha.isBusy}
           />
           <TextareaField
             id="message"
             name="message"
-            label={data.form.message}
+            label={d.form.message}
             error={errors?.message}
             disabled={recaptcha.isBusy}
           />
           <SubmitButton disabled={recaptcha.isBusy}>
-            {data.form.button}
+            {d.form.button}
           </SubmitButton>
           {actionData?.message && <Success>{actionData.message}</Success>}
           {actionData?.error && <Error>{actionData.error}</Error>}

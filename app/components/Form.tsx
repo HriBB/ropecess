@@ -1,8 +1,9 @@
 import { cn } from '~/utils/cn'
 import { Button, ButtonProps } from './Button'
 
-export type FormFieldProps = React.ComponentPropsWithoutRef<'label'> & {
+export type FormFieldProps = React.ComponentPropsWithoutRef<'fieldset'> & {
   label: string
+  htmlFor?: string
   error?: string[] | string | null
 }
 
@@ -10,34 +11,32 @@ export function FormField({
   children,
   className,
   label,
+  htmlFor,
   error,
   ...props
 }: FormFieldProps) {
   return (
-    <label className={cn('form-control w-full', className)} {...props}>
-      <span className="label">
+    <fieldset className={cn('fieldset w-full', className)} {...props}>
+      <label className="label flex justify-between" htmlFor={htmlFor}>
         <span
-          className={cn(
-            'label-text dark:text-base-content',
-            error && 'text-red-600 dark:text-red-400',
-          )}
+          className={cn(error && 'text-red-600 dark:text-red-400')}
         >
           {label}
         </span>
         {error && (
-          <span className="label-text-alt text-red-600 dark:text-red-400">
+          <span className="text-xs text-red-600 dark:text-red-400">
             {error}
           </span>
         )}
-      </span>
+      </label>
       {children}
-    </label>
+    </fieldset>
   )
 }
 
 export type InputFieldProps = React.ComponentPropsWithoutRef<'input'> & {
   label: string
-  labelProps?: React.ComponentPropsWithoutRef<'label'>
+  labelProps?: React.ComponentPropsWithoutRef<'fieldset'>
   error?: string[] | string | null
 }
 
@@ -59,8 +58,7 @@ export function InputField({
         name={name}
         type={type}
         className={cn(
-          'input input-bordered w-full',
-          disabled && 'input-disabled',
+          'input w-full',
           error && 'input-error',
           className,
         )}
@@ -73,7 +71,7 @@ export function InputField({
 
 export type TextareaFieldProps = React.ComponentPropsWithoutRef<'textarea'> & {
   label: string
-  labelProps?: React.ComponentPropsWithoutRef<'label'>
+  labelProps?: React.ComponentPropsWithoutRef<'fieldset'>
   error?: string[] | string | null
 }
 
@@ -91,8 +89,7 @@ export function TextareaField({
     <FormField label={label} htmlFor={id} error={error} {...labelProps}>
       <textarea
         className={cn(
-          'textarea textarea-bordered w-full',
-          disabled && 'textarea-disabled',
+          'textarea w-full',
           error && 'textarea-error',
           className,
         )}

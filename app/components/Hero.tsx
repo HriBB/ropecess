@@ -35,9 +35,9 @@ function Content({ children, className, ...props }: ContentProps) {
     <div
       className={cn(
         'hero-content flex-col gap-10',
-        'container rounded-sm p-10 py-14',
+        'container rounded-xs p-10 py-14',
         'w-[calc(100%-4rem)] sm:w-full sm:max-w-md md:max-w-lg lg:max-w-4xl',
-        'backdrop-blur-sm dark:backdrop-blur-sm',
+        'backdrop-blur-xs dark:backdrop-blur-xs',
         'bg-base-100/70 dark:bg-base-100/90',
         'text-base-content dark:text-white',
         className,

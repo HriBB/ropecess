@@ -1,7 +1,7 @@
 import { MetaFunction } from 'react-router'
 
-//import type { Route } from './+types/services'
 import { getMeta } from '~/utils/meta'
+import { type Locale, useLocale } from '~/utils/i18n'
 
 import { Hero } from '~/components/Hero'
 import { Container } from '~/components/Container'
@@ -19,115 +19,220 @@ import stageImage from '~/images/services/stage-building-01.jpg?thumb'
 import stageLqip from '~/images/services/stage-building-01.jpg?lqip'
 
 const data = {
-  meta: {
-    title: 'Services',
-    description:
-      'Ropecess offers a wide range of specialized construction services, including photovoltaic installation, industrial rope access, rigging, and stage building.',
-    image: bannerImage,
+  en: {
+    meta: {
+      title: 'Services',
+      description:
+        'Ropecess offers a wide range of specialized construction services, including photovoltaic installation, industrial rope access, rigging, and stage building.',
+      image: bannerImage,
+    },
+    hero: {
+      title: 'Services',
+      image: bannerImage,
+      lqip: bannerLqip,
+      imageAlt: 'Construction frame with workers',
+    },
+    items: [
+      {
+        id: 'photovoltaic-modules-installation',
+        title: 'Photovoltaic Modules Installation',
+        image: photovoltaicImage,
+        lqip: photovoltaicLqip,
+        description:
+          'Our team allready worked on various PV constructon sites, ranging from flat roofs to vertical PV instalation. Every project is its own, and has to be tailored to construction site parameters.',
+      },
+      {
+        id: 'industrial-rope-access-and-climbing',
+        title: 'Industrial Rope Access and Climbing',
+        image: industrialImage,
+        lqip: industrialLqip,
+        description:
+          'Working for various companies, from High Bay Warehouses to rock cleaning, our range of knowlege expands with each project. Work on ropes is our specialty.',
+      },
+      {
+        id: 'rigging',
+        title: 'Rigging',
+        image: riggingImage,
+        lqip: riggingLqip,
+        description:
+          'Venue rigging are projects, which demand more knowlege than you can think of. It is not just pulling chains up in the air and fixing them, but also weight redundancy calculating and setting points exactly on spot, so they are in perfect position for the gig.',
+      },
+      {
+        id: 'stage-building',
+        title: 'Stage Building',
+        image: stageImage,
+        lqip: stageLqip,
+        description:
+          'Working on big stages for StageCo Nederland and Belgium.',
+      },
+    ],
+    services: [
+      {
+        id: 1,
+        title: 'Rock Cleaning and Anchoring',
+        text: 'Ensuring the stability and safety of rock faces and slopes through expert cleaning and secure anchoring techniques.',
+      },
+      {
+        id: 2,
+        title: 'Photovoltaic Installation',
+        text: 'Providing complete photovoltaic system installations, from planning and design to installation and maintenance.',
+      },
+      {
+        id: 3,
+        title: 'Steel Construction Assembly',
+        text: 'Precision assembly of steel structures for industrial, commercial, and residential projects.',
+      },
+      {
+        id: 4,
+        title: 'Crane Rigging',
+        text: 'Expert rigging services for safe and efficient lifting and movement of heavy materials and equipment.',
+      },
+      {
+        id: 5,
+        title: 'Venue Rigging',
+        text: 'Professional rigging for events, ensuring the safe and secure setup of stages, lighting, and other structures.',
+      },
+      {
+        id: 6,
+        title: 'Window Cleaning',
+        text: 'High-quality window cleaning services for buildings of all heights, using safe and efficient rope access techniques.',
+      },
+      {
+        id: 7,
+        title: 'Confined Space Rope Access',
+        text: 'Specialized services for working in confined spaces, where traditional access methods are impractical.',
+      },
+      {
+        id: 8,
+        title: 'Concrete and Facade Examination',
+        text: 'Thorough inspections and assessments of concrete structures and facades to identify and address potential issues.',
+      },
+    ],
   },
-  hero: {
-    title: 'Services',
-    image: bannerImage,
-    lqip: bannerLqip,
-    imageAlt: 'Construction frame with workers',
+  sl: {
+    meta: {
+      title: 'Storitve',
+      description:
+        'Ropecess ponuja širok nabor specializiranih gradbenih storitev, vključno z montažo fotovoltaike, industrijskim vrvnim dostopom, odrsko tehniko in gradnjo odrov.',
+      image: bannerImage,
+    },
+    hero: {
+      title: 'Storitve',
+      image: bannerImage,
+      lqip: bannerLqip,
+      imageAlt: 'Gradbeni oder z delavci',
+    },
+    items: [
+      {
+        id: 'photovoltaic-modules-installation',
+        title: 'Montaža fotovoltaičnih modulov',
+        image: photovoltaicImage,
+        lqip: photovoltaicLqip,
+        description:
+          'Naša ekipa je že delala na različnih gradbiščih za sončne elektrarne, od ravnih streh do vertikalnih PV montaž. Vsak projekt je edinstven in ga je treba prilagoditi parametrom gradbišča.',
+      },
+      {
+        id: 'industrial-rope-access-and-climbing',
+        title: 'Industrijski vrvni dostop in plezanje',
+        image: industrialImage,
+        lqip: industrialLqip,
+        description:
+          'Delo za različna podjetja, od visokoregalnih skladišč do čiščenja skal, širi naše znanje z vsakim projektom. Delo na vrveh je naša specialnost.',
+      },
+      {
+        id: 'rigging',
+        title: 'Odrska tehnika',
+        image: riggingImage,
+        lqip: riggingLqip,
+        description:
+          'Odrska tehnika so projekti, ki zahtevajo več znanja, kot si lahko zamislite. Ne gre le za dviganje verig v zrak in njihovo pritrditev, temveč tudi za izračun nosilnosti in natančno postavitev točk, da so v popolnem položaju za dogodek.',
+      },
+      {
+        id: 'stage-building',
+        title: 'Gradnja odrov',
+        image: stageImage,
+        lqip: stageLqip,
+        description:
+          'Delo na velikih odrih za StageCo Nederland in Belgium.',
+      },
+    ],
+    services: [
+      {
+        id: 1,
+        title: 'Čiščenje in sidranje skal',
+        text: 'Zagotavljanje stabilnosti in varnosti skalnih sten in pobočij s strokovnim čiščenjem in varnimi sidralnimi tehnikami.',
+      },
+      {
+        id: 2,
+        title: 'Montaža fotovoltaike',
+        text: 'Celovite montaže fotovoltaičnih sistemov, od načrtovanja in oblikovanja do montaže in vzdrževanja.',
+      },
+      {
+        id: 3,
+        title: 'Montaža jeklenih konstrukcij',
+        text: 'Natančna montaža jeklenih konstrukcij za industrijske, komercialne in stanovanjske projekte.',
+      },
+      {
+        id: 4,
+        title: 'Žerjavanje',
+        text: 'Strokovna žerjavska dela za varno in učinkovito dviganje in premikanje težkih materialov in opreme.',
+      },
+      {
+        id: 5,
+        title: 'Odrska tehnika za dogodke',
+        text: 'Profesionalna odrska tehnika za dogodke, ki zagotavlja varno in zanesljivo postavitev odrov, razsvetljave in drugih struktur.',
+      },
+      {
+        id: 6,
+        title: 'Čiščenje oken',
+        text: 'Visokokakovostne storitve čiščenja oken za stavbe vseh višin z uporabo varnih in učinkovitih tehnik vrvnega dostopa.',
+      },
+      {
+        id: 7,
+        title: 'Vrvni dostop v utesnjenih prostorih',
+        text: 'Specializirane storitve za delo v utesnjenih prostorih, kjer so tradicionalne metode dostopa nepraktične.',
+      },
+      {
+        id: 8,
+        title: 'Pregled betona in fasad',
+        text: 'Temeljiti pregledi in ocene betonskih konstrukcij in fasad za odkrivanje in odpravljanje morebitnih težav.',
+      },
+    ],
   },
-  items: [
-    {
-      id: 'photovoltaic-modules-installation',
-      title: 'Photovoltaic Modules Installation',
-      image: photovoltaicImage,
-      lqip: photovoltaicLqip,
-      description:
-        'Our team allready worked on various PV constructon sites, ranging from flat roofs to vertical PV instalation. Every project is its own, and has to be tailored to construction site parameters.',
-    },
-    {
-      id: 'industrial-rope-access-and-climbing',
-      title: 'Industrial Rope Access and Climbing',
-      image: industrialImage,
-      lqip: industrialLqip,
-      description:
-        'Working for various companies, from High Bay Warehouses to rock cleaning, our range of knowlege expands with each project. Work on ropes is our specialty.',
-    },
-    {
-      id: 'rigging',
-      title: 'Rigging',
-      image: riggingImage,
-      lqip: riggingLqip,
-      description:
-        'Venue rigging are projects, which demand more knowlege than you can think of. It is not just pulling chains up in the air and fixing them, but also weight redundancy calculating and setting points exactly on spot, so they are in perfect position for the gig.',
-    },
-    {
-      id: 'stage-building',
-      title: 'Stage Building',
-      image: stageImage,
-      lqip: stageLqip,
-      description: 'Working on big stages for StageCo Nederland and Belgium.',
-    },
-  ],
-  services: [
-    {
-      id: 1,
-      title: 'Rock Cleaning and Anchoring',
-      text: 'Ensuring the stability and safety of rock faces and slopes through expert cleaning and secure anchoring techniques.',
-    },
-    {
-      id: 2,
-      title: 'Photovoltaic Installation',
-      text: 'Providing complete photovoltaic system installations, from planning and design to installation and maintenance.',
-    },
-    {
-      id: 3,
-      title: 'Steel Construction Assembly',
-      text: 'Precision assembly of steel structures for industrial, commercial, and residential projects.',
-    },
-    {
-      id: 4,
-      title: 'Crane Rigging',
-      text: 'Expert rigging services for safe and efficient lifting and movement of heavy materials and equipment.',
-    },
-    {
-      id: 5,
-      title: 'Venue Rigging',
-      text: 'Professional rigging for events, ensuring the safe and secure setup of stages, lighting, and other structures.',
-    },
-    {
-      id: 6,
-      title: 'Window Cleaning',
-      text: 'High-quality window cleaning services for buildings of all heights, using safe and efficient rope access techniques.',
-    },
-    {
-      id: 7,
-      title: 'Confined Space Rope Access',
-      text: 'Specialized services for working in confined spaces, where traditional access methods are impractical.',
-    },
-    {
-      id: 8,
-      title: 'Concrete and Facade Examination',
-      text: 'Thorough inspections and assessments of concrete structures and facades to identify and address potential issues.',
-    },
-  ],
 }
 
-export const meta: MetaFunction = () => getMeta(data.meta)
+export const meta: MetaFunction = ({ matches, location }) => {
+  const rootData = matches[0]?.data as { locale: Locale; env: { APP_URL: string } }
+  const locale = rootData?.locale ?? 'en'
+  return getMeta({
+    ...data[locale].meta,
+    locale,
+    pathname: location.pathname,
+    appUrl: rootData?.env?.APP_URL,
+  })
+}
 
 export default function Services() {
+  const locale = useLocale()
+  const d = data[locale]
+
   return (
     <main>
       <Hero>
         <Hero.BackgroundPicture
-          picture={data.hero.image}
-          lqip={data.hero.lqip}
-          alt={data.hero.imageAlt}
+          picture={d.hero.image}
+          lqip={d.hero.lqip}
+          alt={d.hero.imageAlt}
         />
         <Hero.Content className="lg:mr-10">
-          <Hero.Title>{data.hero.title}</Hero.Title>
+          <Hero.Title>{d.hero.title}</Hero.Title>
         </Hero.Content>
       </Hero>
 
       <section className="py-24">
         <Container size="md">
           <div className="flex flex-col gap-24">
-            {data.items.map((service) => (
+            {d.items.map((service) => (
               <div
                 key={service.id}
                 id={service.id}

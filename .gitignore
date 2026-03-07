@@ -15,3 +15,5 @@ _gen
 .env.production
 .env.traefik
 .react-router
+# Local Netlify folder
+.netlify

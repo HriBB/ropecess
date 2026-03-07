@@ -12,6 +12,8 @@ import '~/app.css'
 import type { Route } from './+types/root'
 import { cacheHeaders } from '~/utils/cache.server'
 import { getTheme } from '~/utils/theme/theme.server'
+import { getLocaleFromRequest } from '~/utils/i18n.server'
+import { useLocale } from '~/utils/i18n'
 
 import { ThemeScript } from '~/utils/theme/ThemeScript'
 import { Header } from '~/components/Header'
@@ -31,14 +33,18 @@ export const shouldRevalidate: ShouldRevalidateFunction = (args) => {
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
   const theme = await getTheme(request)
-  return { theme }
+  const locale = getLocaleFromRequest(request)
+  const { APP_URL = '', APP_NAME = 'Ropecess', APP_ENV = 'production' } =
+    process.env
+  return { theme, locale, env: { APP_URL, APP_NAME, APP_ENV } }
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const theme = useTheme()
+  const locale = useLocale()
   return (
     <html
-      lang="en"
+      lang={locale}
       className={cn(theme, 'bg-base-200')}
       suppressHydrationWarning
     >

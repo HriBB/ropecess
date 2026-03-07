@@ -1,6 +1,6 @@
 import { cn } from '~/utils/cn'
 
-const baseClassName = 'btn no-animation'
+const baseClassName = 'btn'
 
 const colors = {
   primary: 'btn-primary',
