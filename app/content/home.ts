@@ -111,7 +111,7 @@ export const data = {
       ],
       link: {
         to: '/professional-height-cleaning',
-        text: 'Learn More',
+        text: 'Learn More About Height Cleaning',
       },
     },
     cta: {
@@ -199,7 +199,7 @@ export const data = {
       ],
       link: {
         to: '/professional-height-cleaning',
-        text: 'Preberite več',
+        text: 'Preberite več o višinskem čiščenju',
       },
     },
     cta: {

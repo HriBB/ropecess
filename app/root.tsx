@@ -35,8 +35,10 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
   const plausible = getPlausible()
   const theme = await getTheme(request)
   const locale = getLocaleFromRequest(request)
-  const { APP_URL = '', APP_NAME = 'Ropecess', APP_ENV = 'production' } =
-    process.env
+  const { APP_NAME = 'Ropecess', APP_ENV = 'production' } = process.env
+  // Fall back to the request origin so canonical/hreflang stay absolute
+  // even when APP_URL is not configured in the environment.
+  const APP_URL = process.env.APP_URL || new URL(request.url).origin
   return { plausible, theme, locale, env: { APP_URL, APP_NAME, APP_ENV } }
 }
 
