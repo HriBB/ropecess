@@ -43,9 +43,9 @@ export const action = async ({ request }: Route.ActionArgs) => {
   const d = data[locale]
   try {
     const formData = await request.formData()
-    const { token, ...form } = await spacenetEmailSchema.parseAsync(formData)
+    const { token, preview, ...form } = await spacenetEmailSchema.parseAsync(formData)
     await verifyRecaptcha(token)
-    await sendSpacenetEmail(form)
+    await sendSpacenetEmail({ ...form, preview: preview === 'true' })
     return {
       success: true,
       message: d.form.successMessage,

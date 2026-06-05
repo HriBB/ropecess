@@ -4,6 +4,7 @@ import { z } from 'zod'
 import { zfd } from 'zod-form-data'
 
 import { getLogger } from '~/utils/logger.server'
+import { buildContactSubject, buildSpacenetSubject } from '~/utils/email.subject'
 
 const logger = getLogger('email')
 
@@ -56,6 +57,7 @@ export const contactEmailSchema = zfd.formData({
   email: zfd.text(z.string().email()),
   message: zfd.text(z.string().min(3)),
   token: zfd.text(z.string().min(1)),
+  preview: zfd.text(z.literal('true').optional()),
 })
 
 export type ContactEmail = z.infer<typeof contactEmailSchema>
@@ -64,12 +66,13 @@ export async function sendContactEmail(data: {
   name: string
   email: string
   message: string
+  preview?: boolean
 }) {
   return sendEmail({
     from: process.env.EMAIL_USERNAME,
     replyTo: data.email,
     to: process.env.CONTACT_EMAIL_TO,
-    subject: `New contact inquiry from ${data.name}`,
+    subject: buildContactSubject(data.name, data.preview ?? false),
     text: `Name: ${data.name}\nEmail: ${data.email}\n\n${data.message}`,
   })
 }
@@ -83,6 +86,7 @@ export const spacenetEmailSchema = zfd.formData({
   email: zfd.text(z.string().email()),
   message: zfd.text(z.string().min(3)),
   token: zfd.text(z.string().min(1)),
+  preview: zfd.text(z.literal('true').optional()),
 })
 
 export type SpacenetEmail = z.infer<typeof spacenetEmailSchema>
@@ -91,12 +95,13 @@ export async function sendSpacenetEmail(data: {
   name: string
   email: string
   message: string
+  preview?: boolean
 }) {
   return sendEmail({
     from: process.env.EMAIL_USERNAME,
     replyTo: data.email,
     to: process.env.SPACENET_EMAIL_TO,
-    subject: `New Spacenet inquiry from ${data.name}`,
+    subject: buildSpacenetSubject(data.name, data.preview ?? false),
     text: `Name: ${data.name}\nEmail: ${data.email}\n\n${data.message}`,
   })
 }

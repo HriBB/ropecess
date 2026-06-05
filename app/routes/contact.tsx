@@ -41,9 +41,9 @@ export const action = async ({ request }: Route.ActionArgs) => {
   const d = data[locale]
   try {
     const formData = await request.formData()
-    const { token, ...form } = await contactEmailSchema.parseAsync(formData)
+    const { token, preview, ...form } = await contactEmailSchema.parseAsync(formData)
     await verifyRecaptcha(token)
-    await sendContactEmail(form)
+    await sendContactEmail({ ...form, preview: preview === 'true' })
     return {
       success: true,
       message: d.form.successMessage,
