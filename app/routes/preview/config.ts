@@ -46,6 +46,14 @@ const VARIANT_C_ROUTE_FILES: Record<InnerPage, string> = {
   contact: 'routes/preview/variant-c/contact.tsx',
 }
 
+const VARIANT_D_ROUTE_FILES: Record<InnerPage, string> = {
+  about: 'routes/preview/variant-d/about.tsx',
+  services: 'routes/preview/variant-d/services.tsx',
+  spacenet: 'routes/preview/variant-d/spacenet.tsx',
+  'height-cleaning': 'routes/preview/variant-d/height-cleaning.tsx',
+  contact: 'routes/preview/variant-d/contact.tsx',
+}
+
 export function buildPreviewRoutes(token: string | undefined): RouteConfigEntry[] {
   if (!token) return []
 
@@ -97,11 +105,23 @@ export function buildPreviewRoutes(token: string | undefined): RouteConfigEntry[
         ]),
       ]),
 
-      // Variants D–E — home pages only (dedicated layouts come in S8–S9)
-      ...(['d', 'e'] as const).flatMap((v) => [
-        route(`/p/${token}/${v}/`, 'routes/preview/variant-home.tsx', { id: `preview-${v}-en` }),
-        route(`/p/${token}/${v}/sl/`, 'routes/preview/variant-home.tsx', { id: `preview-${v}-sl` }),
+      // Variant D — Neo-Brutalist — home + all inner pages under its own layout
+      layout('routes/preview/variant-d/layout.tsx', [
+        route(`/p/${token}/d/`, 'routes/preview/variant-d/home.tsx', { id: 'preview-d-en' }),
+        route(`/p/${token}/d/sl/`, 'routes/preview/variant-d/home.tsx', { id: 'preview-d-sl' }),
+        ...INNER_PAGES.flatMap((page) => [
+          route(`/p/${token}/d/${page}/`, VARIANT_D_ROUTE_FILES[page], {
+            id: `preview-d-${page}-en`,
+          }),
+          route(`/p/${token}/d/sl/${page}/`, VARIANT_D_ROUTE_FILES[page], {
+            id: `preview-d-${page}-sl`,
+          }),
+        ]),
       ]),
+
+      // Variant E — Aurora Glass — home page only (dedicated layout comes in S9)
+      route(`/p/${token}/e/`, 'routes/preview/variant-home.tsx', { id: 'preview-e-en' }),
+      route(`/p/${token}/e/sl/`, 'routes/preview/variant-home.tsx', { id: 'preview-e-sl' }),
     ]),
   ]
 }
