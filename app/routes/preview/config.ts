@@ -41,8 +41,8 @@ export function buildPreviewRoutes(token: string | undefined): RouteConfigEntry[
 
       // Variant A — Airy Organic — home + all inner pages under its own layout
       layout('routes/preview/variant-a/layout.tsx', [
-        route(`/p/${token}/a/`, 'routes/preview/variant-home.tsx', { id: 'preview-a-en' }),
-        route(`/p/${token}/a/sl/`, 'routes/preview/variant-home.tsx', { id: 'preview-a-sl' }),
+        route(`/p/${token}/a/`, 'routes/preview/variant-a/home.tsx', { id: 'preview-a-en' }),
+        route(`/p/${token}/a/sl/`, 'routes/preview/variant-a/home.tsx', { id: 'preview-a-sl' }),
         ...VARIANT_A_INNER_PAGES.flatMap((page) => [
           route(`/p/${token}/a/${page}/`, VARIANT_A_ROUTE_FILES[page], {
             id: `preview-a-${page}-en`,
