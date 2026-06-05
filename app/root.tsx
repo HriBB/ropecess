@@ -18,8 +18,6 @@ import { useLocale } from '~/utils/i18n'
 
 import { AnalyticsScript } from '~/utils/plausible/AnalyticsScript'
 import { ThemeScript } from '~/utils/theme/ThemeScript'
-import { Header } from '~/components/Header'
-import { Footer } from '~/components/Footer'
 import { cn } from './utils/cn'
 import { useTheme } from './utils/theme/useTheme'
 
@@ -60,9 +58,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <AnalyticsScript />
       </head>
       <body className="bg-base-200">
-        <Header />
         {children}
-        <Footer />
         <ScrollRestoration />
         <Scripts />
       </body>
