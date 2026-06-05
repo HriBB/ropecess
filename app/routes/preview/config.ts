@@ -38,6 +38,14 @@ const VARIANT_B_ROUTE_FILES: Record<InnerPage, string> = {
   contact: 'routes/preview/variant-b/contact.tsx',
 }
 
+const VARIANT_C_ROUTE_FILES: Record<InnerPage, string> = {
+  about: 'routes/preview/variant-c/about.tsx',
+  services: 'routes/preview/variant-c/services.tsx',
+  spacenet: 'routes/preview/variant-c/spacenet.tsx',
+  'height-cleaning': 'routes/preview/variant-c/height-cleaning.tsx',
+  contact: 'routes/preview/variant-c/contact.tsx',
+}
+
 export function buildPreviewRoutes(token: string | undefined): RouteConfigEntry[] {
   if (!token) return []
 
@@ -75,8 +83,22 @@ export function buildPreviewRoutes(token: string | undefined): RouteConfigEntry[
         ]),
       ]),
 
-      // Variants C–E — home pages only (dedicated layouts come in S7–S9)
-      ...(['c', 'd', 'e'] as const).flatMap((v) => [
+      // Variant C — Editorial Calm — home + all inner pages under its own layout
+      layout('routes/preview/variant-c/layout.tsx', [
+        route(`/p/${token}/c/`, 'routes/preview/variant-c/home.tsx', { id: 'preview-c-en' }),
+        route(`/p/${token}/c/sl/`, 'routes/preview/variant-c/home.tsx', { id: 'preview-c-sl' }),
+        ...INNER_PAGES.flatMap((page) => [
+          route(`/p/${token}/c/${page}/`, VARIANT_C_ROUTE_FILES[page], {
+            id: `preview-c-${page}-en`,
+          }),
+          route(`/p/${token}/c/sl/${page}/`, VARIANT_C_ROUTE_FILES[page], {
+            id: `preview-c-${page}-sl`,
+          }),
+        ]),
+      ]),
+
+      // Variants D–E — home pages only (dedicated layouts come in S8–S9)
+      ...(['d', 'e'] as const).flatMap((v) => [
         route(`/p/${token}/${v}/`, 'routes/preview/variant-home.tsx', { id: `preview-${v}-en` }),
         route(`/p/${token}/${v}/sl/`, 'routes/preview/variant-home.tsx', { id: `preview-${v}-sl` }),
       ]),
