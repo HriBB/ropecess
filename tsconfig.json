@@ -24,9 +24,9 @@
     "allowJs": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": ["./app/*"],
+      "types/*": ["./types/*"]
     },
     "noEmit": true,
     "rootDirs": [".", "./.react-router/types"],

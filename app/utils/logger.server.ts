@@ -14,8 +14,12 @@ await configure({
   sinks: { console: getConsoleSink() },
   filters: {},
   loggers: [
-    { category: LOG_NAME, level: LOG_LEVEL as LogLevel, sinks: ['console'] },
-    { category: 'logtape', level: 'warning', sinks: ['console'] },
+    {
+      category: LOG_NAME,
+      lowestLevel: LOG_LEVEL as LogLevel,
+      sinks: ['console'],
+    },
+    { category: ['logtape', 'meta'], lowestLevel: 'warning', sinks: ['console'] },
   ],
   reset: true,
 })

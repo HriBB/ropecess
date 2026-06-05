@@ -64,22 +64,22 @@ export const Details = forwardRef<HTMLDetailsElement, DetailsProps>(
         ref={forwardedRef}
         open={open ?? isOpen}
         onToggle={(event) => {
-          onToggle && onToggle(event)
+          onToggle?.(event)
           if (event.defaultPrevented) return
           setOpen(event.currentTarget.open)
         }}
         onMouseDown={(event) => {
-          onMouseDown && onMouseDown(event)
+          onMouseDown?.(event)
           if (event.defaultPrevented) return
           if (isOpen) clickRef.current = true
         }}
         onTouchStart={(event) => {
-          onTouchStart && onTouchStart(event)
+          onTouchStart?.(event)
           if (event.defaultPrevented) return
           if (isOpen) clickRef.current = true
         }}
         onFocus={(event) => {
-          onFocus && onFocus(event)
+          onFocus?.(event)
           if (event.defaultPrevented) return
           if (isOpen) focusRef.current = true
         }}
