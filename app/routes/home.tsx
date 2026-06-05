@@ -10,9 +10,6 @@ import { Picture } from '~/components/Picture'
 import { Container } from '~/components/Container'
 import { CallToAction } from '~/components/CallToAction'
 
-// PROTOTYPE — homepage design exploration, dev-only (see home-prototype/index.tsx)
-import { HomePrototype, type HomeVariantProps } from './home-prototype'
-
 import { data } from '~/content/home'
 
 export const meta: MetaFunction = ({ matches, location }) => {
@@ -29,23 +26,11 @@ export const meta: MetaFunction = ({ matches, location }) => {
   })
 }
 
-export default function Index() {
+export default function Home() {
   const locale = useLocale()
   const lh = useLocalizeHref()
   const d = data[locale]
 
-  // PROTOTYPE — `?variant=a|b|c|d|e` swaps the rendering; original by default.
-  return (
-    <HomePrototype
-      d={d}
-      lh={lh}
-      locale={locale}
-      original={<OriginalHome d={d} lh={lh} locale={locale} />}
-    />
-  )
-}
-
-function OriginalHome({ d, lh }: HomeVariantProps) {
   return (
     <Main>
       <Hero>

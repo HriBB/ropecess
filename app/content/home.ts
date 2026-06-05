@@ -1,5 +1,3 @@
-// PROTOTYPE — hero swapped from images/home/banner.jpg (dark steel corridor)
-// to the brighter rope-access shot; revert or keep when prototype resolves.
 import bannerImage from '~/images/height-cleaning/banner.jpg?hero'
 import bannerLqip from '~/images/height-cleaning/banner.jpg?lqip'
 import workPlanImage from '~/images/home/work-plan.jpg?square'
@@ -214,12 +212,7 @@ export const data = {
   },
 }
 
-/**
- * PROTOTYPE — extra homepage section data (services, spacenet, contact).
- * Copy + images reused from routes/services.tsx, routes/spacenet.tsx,
- * routes/contact.tsx. Localized en/sl. Deleted with the prototype — the
- * winning structure gets folded into home.tsx properly.
- */
+// Extra homepage section data used by Design Preview variant components (services, spacenet, contact).
 export const extra = {
   en: {
     services: {
