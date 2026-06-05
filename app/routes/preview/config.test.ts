@@ -59,26 +59,38 @@ describe('buildPreviewRoutes', () => {
     }
   })
 
-  it('does NOT register inner pages for variants b-e', () => {
+  it('registers variant-b inner pages in both locales', () => {
     const routes = buildPreviewRoutes('tok')
     const allPaths = collectAllPaths(routes)
     const innerPages = ['about', 'services', 'spacenet', 'height-cleaning', 'contact']
-    for (const v of ['b', 'c', 'd', 'e'] as const) {
+    for (const page of innerPages) {
+      expect(allPaths).toContain(`/p/tok/b/${page}/`)
+      expect(allPaths).toContain(`/p/tok/b/sl/${page}/`)
+    }
+  })
+
+  it('does NOT register inner pages for variants c-e', () => {
+    const routes = buildPreviewRoutes('tok')
+    const allPaths = collectAllPaths(routes)
+    const innerPages = ['about', 'services', 'spacenet', 'height-cleaning', 'contact']
+    for (const v of ['c', 'd', 'e'] as const) {
       for (const page of innerPages) {
         expect(allPaths).not.toContain(`/p/tok/${v}/${page}/`)
       }
     }
   })
 
-  it('registers exactly 21 routed paths total', () => {
+  it('registers exactly 31 routed paths total', () => {
     // 1 launcher
     // 2 variant-a homes (en + sl)
     // 10 variant-a inner pages (5 pages × 2 locales)
-    // 8 variant b-e homes (4 variants × 2 locales)
-    // = 21
+    // 2 variant-b homes (en + sl)
+    // 10 variant-b inner pages (5 pages × 2 locales)
+    // 6 variant c-e homes (3 variants × 2 locales)
+    // = 31
     const routes = buildPreviewRoutes('tok')
     const allPaths = collectAllPaths(routes)
-    expect(allPaths).toHaveLength(21)
+    expect(allPaths).toHaveLength(31)
   })
 
   it('assigns unique route ids across the entire tree', () => {

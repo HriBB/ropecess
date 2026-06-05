@@ -12,7 +12,7 @@ export const VARIANT_NAMES: Record<VariantKey, string> = {
   e: 'Aurora Glass',
 }
 
-const VARIANT_A_INNER_PAGES = [
+const INNER_PAGES = [
   'about',
   'services',
   'spacenet',
@@ -20,14 +20,22 @@ const VARIANT_A_INNER_PAGES = [
   'contact',
 ] as const
 
-type VariantAPage = (typeof VARIANT_A_INNER_PAGES)[number]
+type InnerPage = (typeof INNER_PAGES)[number]
 
-const VARIANT_A_ROUTE_FILES: Record<VariantAPage, string> = {
+const VARIANT_A_ROUTE_FILES: Record<InnerPage, string> = {
   about: 'routes/preview/variant-a/about.tsx',
   services: 'routes/preview/variant-a/services.tsx',
   spacenet: 'routes/preview/variant-a/spacenet.tsx',
   'height-cleaning': 'routes/preview/variant-a/height-cleaning.tsx',
   contact: 'routes/preview/variant-a/contact.tsx',
+}
+
+const VARIANT_B_ROUTE_FILES: Record<InnerPage, string> = {
+  about: 'routes/preview/variant-b/about.tsx',
+  services: 'routes/preview/variant-b/services.tsx',
+  spacenet: 'routes/preview/variant-b/spacenet.tsx',
+  'height-cleaning': 'routes/preview/variant-b/height-cleaning.tsx',
+  contact: 'routes/preview/variant-b/contact.tsx',
 }
 
 export function buildPreviewRoutes(token: string | undefined): RouteConfigEntry[] {
@@ -43,7 +51,7 @@ export function buildPreviewRoutes(token: string | undefined): RouteConfigEntry[
       layout('routes/preview/variant-a/layout.tsx', [
         route(`/p/${token}/a/`, 'routes/preview/variant-a/home.tsx', { id: 'preview-a-en' }),
         route(`/p/${token}/a/sl/`, 'routes/preview/variant-a/home.tsx', { id: 'preview-a-sl' }),
-        ...VARIANT_A_INNER_PAGES.flatMap((page) => [
+        ...INNER_PAGES.flatMap((page) => [
           route(`/p/${token}/a/${page}/`, VARIANT_A_ROUTE_FILES[page], {
             id: `preview-a-${page}-en`,
           }),
@@ -53,8 +61,22 @@ export function buildPreviewRoutes(token: string | undefined): RouteConfigEntry[
         ]),
       ]),
 
-      // Variants B–E — home pages only (dedicated layouts come in S6–S9)
-      ...(['b', 'c', 'd', 'e'] as const).flatMap((v) => [
+      // Variant B — Exaggerated Minimal — home + all inner pages under its own layout
+      layout('routes/preview/variant-b/layout.tsx', [
+        route(`/p/${token}/b/`, 'routes/preview/variant-b/home.tsx', { id: 'preview-b-en' }),
+        route(`/p/${token}/b/sl/`, 'routes/preview/variant-b/home.tsx', { id: 'preview-b-sl' }),
+        ...INNER_PAGES.flatMap((page) => [
+          route(`/p/${token}/b/${page}/`, VARIANT_B_ROUTE_FILES[page], {
+            id: `preview-b-${page}-en`,
+          }),
+          route(`/p/${token}/b/sl/${page}/`, VARIANT_B_ROUTE_FILES[page], {
+            id: `preview-b-${page}-sl`,
+          }),
+        ]),
+      ]),
+
+      // Variants C–E — home pages only (dedicated layouts come in S7–S9)
+      ...(['c', 'd', 'e'] as const).flatMap((v) => [
         route(`/p/${token}/${v}/`, 'routes/preview/variant-home.tsx', { id: `preview-${v}-en` }),
         route(`/p/${token}/${v}/sl/`, 'routes/preview/variant-home.tsx', { id: `preview-${v}-sl` }),
       ]),
