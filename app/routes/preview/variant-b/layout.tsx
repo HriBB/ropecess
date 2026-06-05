@@ -173,6 +173,8 @@ export default function VariantBLayout() {
 
   return (
     <div className="bg-base-100 text-base-content min-h-screen" style={lato}>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link rel="stylesheet" href={GOOGLE_FONTS} />
       <VariantBHeader token={token} variant={variant} locale={locale} />
       <div className="pt-[73px]">

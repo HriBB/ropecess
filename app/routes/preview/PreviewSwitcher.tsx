@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import { VARIANT_KEYS, VARIANT_NAMES } from './config'
 import type { VariantKey } from './config'
 
@@ -9,18 +9,23 @@ type Props = {
   locale: 'en' | 'sl'
 }
 
-export function PreviewSwitcher({ token, variant, locale }: Props) {
+export function PreviewSwitcher({ token, variant }: Props) {
   const navigate = useNavigate()
-  const localeSegment = locale === 'sl' ? '/sl/' : '/'
+  const { pathname } = useLocation()
 
   const go = useCallback(
     (dir: 1 | -1) => {
       const keys = [...VARIANT_KEYS]
       const i = keys.indexOf(variant)
       const next = keys[(i + dir + keys.length) % keys.length]
-      navigate(`/p/${token}/${next}${localeSegment}`, { replace: true })
+      // Keep the current page + locale, swap only the variant segment.
+      const prefix = `/p/${token}/${variant}`
+      const rest = pathname.startsWith(prefix)
+        ? pathname.slice(prefix.length)
+        : '/'
+      navigate(`/p/${token}/${next}${rest || '/'}`, { replace: true })
     },
-    [variant, token, localeSegment, navigate],
+    [variant, token, pathname, navigate],
   )
 
   useEffect(() => {

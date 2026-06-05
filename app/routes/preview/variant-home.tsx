@@ -63,6 +63,8 @@ export default function VariantHome() {
 
   return (
     <>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link rel="stylesheet" href={GOOGLE_FONTS} />
       <Component d={d} lh={lh} locale={locale} />
       <PreviewSwitcher token={token} variant={variant} locale={locale} />
