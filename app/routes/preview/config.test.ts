@@ -89,16 +89,17 @@ describe('buildPreviewRoutes', () => {
     }
   })
 
-  it('does NOT register inner pages for variant e', () => {
+  it('registers variant-e inner pages in both locales', () => {
     const routes = buildPreviewRoutes('tok')
     const allPaths = collectAllPaths(routes)
     const innerPages = ['about', 'services', 'spacenet', 'height-cleaning', 'contact']
     for (const page of innerPages) {
-      expect(allPaths).not.toContain(`/p/tok/e/${page}/`)
+      expect(allPaths).toContain(`/p/tok/e/${page}/`)
+      expect(allPaths).toContain(`/p/tok/e/sl/${page}/`)
     }
   })
 
-  it('registers exactly 51 routed paths total', () => {
+  it('registers exactly 61 routed paths total', () => {
     // 1 launcher
     // 2 variant-a homes (en + sl)
     // 10 variant-a inner pages (5 pages × 2 locales)
@@ -109,10 +110,11 @@ describe('buildPreviewRoutes', () => {
     // 2 variant-d homes (en + sl)
     // 10 variant-d inner pages (5 pages × 2 locales)
     // 2 variant-e homes (en + sl)
-    // = 51
+    // 10 variant-e inner pages (5 pages × 2 locales)
+    // = 61
     const routes = buildPreviewRoutes('tok')
     const allPaths = collectAllPaths(routes)
-    expect(allPaths).toHaveLength(51)
+    expect(allPaths).toHaveLength(61)
   })
 
   it('assigns unique route ids across the entire tree', () => {

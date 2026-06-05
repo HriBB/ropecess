@@ -54,6 +54,14 @@ const VARIANT_D_ROUTE_FILES: Record<InnerPage, string> = {
   contact: 'routes/preview/variant-d/contact.tsx',
 }
 
+const VARIANT_E_ROUTE_FILES: Record<InnerPage, string> = {
+  about: 'routes/preview/variant-e/about.tsx',
+  services: 'routes/preview/variant-e/services.tsx',
+  spacenet: 'routes/preview/variant-e/spacenet.tsx',
+  'height-cleaning': 'routes/preview/variant-e/height-cleaning.tsx',
+  contact: 'routes/preview/variant-e/contact.tsx',
+}
+
 export function buildPreviewRoutes(token: string | undefined): RouteConfigEntry[] {
   if (!token) return []
 
@@ -119,9 +127,19 @@ export function buildPreviewRoutes(token: string | undefined): RouteConfigEntry[
         ]),
       ]),
 
-      // Variant E — Aurora Glass — home page only (dedicated layout comes in S9)
-      route(`/p/${token}/e/`, 'routes/preview/variant-home.tsx', { id: 'preview-e-en' }),
-      route(`/p/${token}/e/sl/`, 'routes/preview/variant-home.tsx', { id: 'preview-e-sl' }),
+      // Variant E — Aurora Glass — home + all inner pages under its own layout
+      layout('routes/preview/variant-e/layout.tsx', [
+        route(`/p/${token}/e/`, 'routes/preview/variant-e/home.tsx', { id: 'preview-e-en' }),
+        route(`/p/${token}/e/sl/`, 'routes/preview/variant-e/home.tsx', { id: 'preview-e-sl' }),
+        ...INNER_PAGES.flatMap((page) => [
+          route(`/p/${token}/e/${page}/`, VARIANT_E_ROUTE_FILES[page], {
+            id: `preview-e-${page}-en`,
+          }),
+          route(`/p/${token}/e/sl/${page}/`, VARIANT_E_ROUTE_FILES[page], {
+            id: `preview-e-${page}-sl`,
+          }),
+        ]),
+      ]),
     ]),
   ]
 }
