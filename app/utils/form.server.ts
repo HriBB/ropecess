@@ -1,11 +1,11 @@
-import { typeToFlattenedError, ZodError } from 'zod'
+import { ZodFlattenedError, ZodError } from 'zod'
 import { ContactEmail } from '~/utils/email.server'
 
 export type FormResponseData = {
   success: boolean
   message?: string | null
   error?: string | null
-  errors?: typeToFlattenedError<ContactEmail> | null
+  errors?: ZodFlattenedError<ContactEmail> | null
 }
 
 export function handleFormError(

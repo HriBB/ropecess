@@ -1,4 +1,8 @@
+overrides:
+  sharp: 0.34.5
+
 onlyBuiltDependencies:
+  - '@parcel/watcher'
   - esbuild
   - sharp
   - unrs-resolver

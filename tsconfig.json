@@ -9,6 +9,7 @@
     ".react-router/types/**/*",
     "types/env.d.ts"
   ],
+  "exclude": ["node_modules", "build", "backup"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "types": ["@react-router/node", "vite/client", "grecaptcha"],

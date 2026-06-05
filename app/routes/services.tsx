@@ -1,7 +1,7 @@
-import { MetaFunction } from 'react-router'
+import { Link, MetaFunction } from 'react-router'
 
 import { getMeta } from '~/utils/meta'
-import { type Locale, useLocale } from '~/utils/i18n'
+import { type Locale, useLocale, useLocalizeHref } from '~/utils/i18n'
 
 import { Hero } from '~/components/Hero'
 import { Container } from '~/components/Container'
@@ -17,13 +17,15 @@ import riggingImage from '~/images/services/rigging-01.jpg?thumb'
 import riggingLqip from '~/images/services/rigging-01.jpg?lqip'
 import stageImage from '~/images/services/stage-building-01.jpg?thumb'
 import stageLqip from '~/images/services/stage-building-01.jpg?lqip'
+import heightCleaningImage from '~/images/height-cleaning/height-cleaning-00.jpg?thumb'
+import heightCleaningLqip from '~/images/height-cleaning/height-cleaning-00.jpg?lqip'
 
 const data = {
   en: {
     meta: {
       title: 'Services',
       description:
-        'Ropecess offers a wide range of specialized construction services, including photovoltaic installation, industrial rope access, rigging, and stage building.',
+        'Ropecess offers a wide range of specialized construction services, including photovoltaic installation, industrial rope access, rigging, stage building, and professional height cleaning.',
       image: bannerImage,
     },
     hero: {
@@ -64,6 +66,15 @@ const data = {
         lqip: stageLqip,
         description:
           'Working on big stages for StageCo Nederland and Belgium.',
+      },
+      {
+        id: 'professional-height-cleaning',
+        title: 'Professional Height Cleaning',
+        to: '/professional-height-cleaning',
+        image: heightCleaningImage,
+        lqip: heightCleaningLqip,
+        description:
+          'Whether your facility requires surgical precision on delicate glass or heavy-duty maintenance on steel structures, we deliver high-quality cleaning using the most efficient access methods available.',
       },
     ],
     services: [
@@ -113,7 +124,7 @@ const data = {
     meta: {
       title: 'Storitve',
       description:
-        'Ropecess ponuja širok nabor specializiranih gradbenih storitev, vključno z montažo fotovoltaike, industrijskim vrvnim dostopom, odrsko tehniko in gradnjo odrov.',
+        'Ropecess ponuja širok nabor specializiranih gradbenih storitev, vključno z montažo fotovoltaike, industrijskim vrvnim dostopom, odrsko tehniko, gradnjo odrov in profesionalnim čiščenjem na višini.',
       image: bannerImage,
     },
     hero: {
@@ -154,6 +165,15 @@ const data = {
         lqip: stageLqip,
         description:
           'Delo na velikih odrih za StageCo Nederland in Belgium.',
+      },
+      {
+        id: 'professional-height-cleaning',
+        title: 'Profesionalno čiščenje na višini',
+        to: '/professional-height-cleaning',
+        image: heightCleaningImage,
+        lqip: heightCleaningLqip,
+        description:
+          'Najsi vaš objekt zahteva kirurško natančnost na nežnem steklu ali intenzivno vzdrževanje jeklenih konstrukcij, zagotavljamo visokokakovostno čiščenje z najučinkovitejšimi metodami dostopa.',
       },
     ],
     services: [
@@ -214,6 +234,7 @@ export const meta: MetaFunction = ({ matches, location }) => {
 
 export default function Services() {
   const locale = useLocale()
+  const localizeHref = useLocalizeHref()
   const d = data[locale]
 
   return (
@@ -248,7 +269,11 @@ export default function Services() {
                 />
                 <div className="flex flex-1 flex-col items-start justify-center gap-3">
                   <h2 className="text-2xl font-medium">
-                    <a href={`#${service.id}`}>{service.title}</a>
+                    {'to' in service && service.to ? (
+                      <Link to={localizeHref(service.to)}>{service.title}</Link>
+                    ) : (
+                      <a href={`#${service.id}`}>{service.title}</a>
+                    )}
                   </h2>
                   <p>{service.description}</p>
                 </div>

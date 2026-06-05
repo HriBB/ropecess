@@ -1,0 +1,3 @@
+# Build-time image pipeline via vite-imagetools
+
+All site images are optimized at build time by `vite-imagetools` using preset query params (`?hero`, `?square`, `?thumb`, `?lqip`) defined in `imagetools.ts`, including a custom `square` output format for density-based srcsets. We chose this over a runtime image CDN (e.g. Netlify Image CDN): the image set is small and static, variants are versioned with the code, and the site stays host-independent with no runtime transformation dependency. The cost is slower builds and bigger build output — fine at this scale. Don't "migrate" this to a runtime CDN without revisiting this ADR.

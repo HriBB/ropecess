@@ -42,8 +42,8 @@ const data = {
       title: 'Welcome to Ropecess',
       text: 'At Ropecess, we deliver top-quality construction and specialized access services, ensuring safety, precision, and reliability in every project.',
     },
-    services: {
-      title: 'Our Services',
+    howWeWork: {
+      title: 'How We Work',
       items: [
         {
           id: 'work-plan',
@@ -98,8 +98,8 @@ const data = {
       title: 'Dobrodošli v Ropecess',
       text: 'V podjetju Ropecess zagotavljamo visokokakovostne gradbene in specializirane dostopne storitve z varnostjo, natančnostjo in zanesljivostjo pri vsakem projektu.',
     },
-    services: {
-      title: 'Naše storitve',
+    howWeWork: {
+      title: 'Kako delamo',
       items: [
         {
           id: 'work-plan',
@@ -186,7 +186,7 @@ export default function Index() {
             </p>
           </div>
           <div className="grid grid-cols-1 gap-20 md:grid-cols-3 md:gap-20">
-            {d.services.items.map((item) => (
+            {d.howWeWork.items.map((item) => (
               <div
                 key={item.id}
                 id={item.id}

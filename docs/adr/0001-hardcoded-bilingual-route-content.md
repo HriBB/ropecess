@@ -1,0 +1,3 @@
+# Hardcoded bilingual route content, no CMS or i18n library
+
+Each page's content lives as a typed `data = { en: {...}, sl: {...} }` object inside its route file, and every route is registered twice in `app/routes.ts` (English at the root path, Slovenian under `/sl`). We deliberately chose this over an i18n library (i18next), a `:lang` route param, or a CMS: the site is ~6 pages, content rarely changes, the developer is the content editor, and colocated objects give full type safety with zero i18n runtime cost. The trade-off is duplication (adding a language touches every route file and `routes.ts`) and no non-developer editing — acceptable at this size.

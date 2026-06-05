@@ -64,6 +64,7 @@ export function useRecaptcha({ siteKey }: { siteKey: string }) {
   // load script on intersection
   useEffect(() => {
     if (window.grecaptcha) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setReady(true)
       return
     }

@@ -1,36 +1,22 @@
 # Ropecess
 
 - [production](https://ropecess.eu/)
-- [staging](https://ropecessclimb.si/)
 - [example](https://ropeaccess.se/)
+- [linkedin](https://www.linkedin.com/in/tilen-pogacnik-ropecess/)
 
 ## Installation
 
 ```bash
 # install dependencies
-npm install
+pnpm install
 
 # copy .env file
 cp .env.example .env
 
 # run development server
-npm run dev
+pnpm dev
 ```
 
-## Traefik Basic Auth
+## Deployment
 
-https://coolify.io/docs/knowledge-base/traefik/basic-auth
-
-1. Generate password
-
-```bash
-htpasswd -nbB ropecess <password>
-ropecess:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-```
-
-2. Add to Traefik config
-
-```
-traefik.http.middlewares.auth.basicauth.users=ropecess:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-traefik.http.routers.<unique_router_name>.middlewares=auth
-```
+Deployed to [Netlify](https://www.netlify.com/) (see `netlify.toml` and [ADR-0002](docs/adr/0002-deploy-to-netlify.md)).

@@ -66,10 +66,11 @@ export async function sendContactEmail(data: {
   message: string
 }) {
   return sendEmail({
-    from: data.email,
+    from: process.env.EMAIL_USERNAME,
+    replyTo: data.email,
     to: process.env.CONTACT_EMAIL_TO,
-    subject: `New Contact message received from ${data.name}`,
-    text: data.message,
+    subject: `New contact inquiry from ${data.name}`,
+    text: `Name: ${data.name}\nEmail: ${data.email}\n\n${data.message}`,
   })
 }
 
@@ -92,9 +93,10 @@ export async function sendSpacenetEmail(data: {
   message: string
 }) {
   return sendEmail({
-    from: data.email,
+    from: process.env.EMAIL_USERNAME,
+    replyTo: data.email,
     to: process.env.SPACENET_EMAIL_TO,
-    subject: `New Space Net message received from ${data.name}`,
-    text: data.message,
+    subject: `New Spacenet inquiry from ${data.name}`,
+    text: `Name: ${data.name}\nEmail: ${data.email}\n\n${data.message}`,
   })
 }
