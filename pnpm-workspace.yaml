@@ -1,6 +1,17 @@
 overrides:
   sharp: 0.34.5
 
+# Host is macOS arm64; the Ralph sbx sandbox is Linux arm64 sharing the same
+# node_modules via direct mount. Install native bindings for both platforms
+# (rolldown, lightningcss, esbuild, sharp, ...) so Vite works in the sandbox.
+supportedArchitectures:
+  os:
+    - current
+    - linux
+  cpu:
+    - current
+    - arm64
+
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - esbuild
