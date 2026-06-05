@@ -10,23 +10,8 @@ import { imagetools } from './imagetools'
 export default defineConfig({
   plugins: [
     tailwindcss(),
-    /**
-     * Vite plugin for generating LQIP (Low Quality Image Placeholder) images
-     *
-     * @see https://github.com/drwpow/vite-plugin-lqip
-     */
     lqip(),
-    /**
-     * Vite plugin for image processing
-     *
-     * @see https://github.com/JonasKruckenberg/imagetools
-     */
     imagetools(),
-    /**
-     * React Router
-     *
-     * @see https://reactrouter.com/dev/guides/start/installation
-     */
     reactRouter(),
     netlifyReactRouter(),
     netlify(),

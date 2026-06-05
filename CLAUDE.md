@@ -1,4 +1,4 @@
-# ropecess
+# ropecess.eu
 
 ## Agent skills
 

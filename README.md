@@ -1,7 +1,6 @@
 # Ropecess
 
 - [production](https://ropecess.eu/)
-- [example](https://ropeaccess.se/)
 - [linkedin](https://www.linkedin.com/in/tilen-pogacnik-ropecess/)
 
 ## Installation
