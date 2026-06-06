@@ -29,6 +29,7 @@ export function Picture({
   decoding = 'async',
   loading = 'lazy',
   fetchPriority,
+  sizes,
   ...props
 }: PictureProps) {
   return (
@@ -36,7 +37,7 @@ export function Picture({
       {Object.entries(picture.sources)
         .sort(sortSources)
         .map(([key, value]) => (
-          <source key={key} srcSet={value} type={`image/${key}`} />
+          <source key={key} srcSet={value} type={`image/${key}`} sizes={sizes} />
         ))}
 
       <img
@@ -48,6 +49,7 @@ export function Picture({
         decoding={decoding}
         loading={loading}
         fetchPriority={fetchPriority}
+        sizes={sizes}
         style={{
           ...style,
           ...(lqip
