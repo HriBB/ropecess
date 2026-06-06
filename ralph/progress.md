@@ -3,7 +3,26 @@
 One dated entry per completed iteration: issue number, what was built, test/build
 results, anything deferred or surprising for the next iteration. Newest at the top.
 
-PRD: #2. Slices: #3–#11 (`ready-for-agent`), #12 is HITL (`ready-for-human` — not ours).
+PRD: #2. Slices: #3–#11 (`ready-for-agent`), #12 is HITL (`ready-for-human` — not ours). Bugfixes: #13.
+
+---
+
+## 2026-06-06 — Issue #13: WCAG AA contrast — small accent text, all variants
+
+**Branch:** `fix/13-aa-contrast-accent-text` — **PR:** https://github.com/HriBB/ropecess/pull/15
+
+**Built:** Fixed Lighthouse colour-contrast failures across all five Design Variants and the launcher, both light and dark themes. No palette swaps; aesthetic anchors preserved by tonal darkening and opacity adjustment:
+
+- **A (Airy Organic):** sage light `#5f7c61` → `#4d6950` (4.62→6.08:1 on white); footer `/40` → `/70`; stacked `opacity-50` removed; locale toggle `/60` → `/70`.
+- **B (Exaggerated Minimal):** active-nav orange moved to CSS classes `text-[#B84009] dark:text-[#F56B14]` (3.56→5.56 light, 4.45→5.28 dark); inactive nav `/50` → `/70`; footer `opacity-40` → `/70`; section numbers and labels updated; descriptions `opacity-60` → `/80`.
+- **C (Editorial Calm):** active nav `text-amber-500` → `text-amber-700 dark:text-amber-500` (1.91→5.02 light); inactive nav `/50` → `/70`; chapter labels `opacity-50` → `/75`; body text-sm on `bg-base-200` sections `opacity-70` → `/80`; footer `opacity-40/30` → `/70`.
+- **D (Neo-Brutalist):** inactive nav `/60` → `/70`; footer `opacity-40` → `/70`.
+- **E (Aurora Glass):** active nav/chips `text-fuchsia-400` → `text-fuchsia-700 dark:text-fuchsia-300` (2.46→6.32 light, 9.00 dark); inactive nav `/60` → `/70`; footer pill + copyright fixed.
+- **Launcher:** `opacity-50/40` labels → `/75` (applies to `bg-base-200` context too: 4.65:1).
+
+**Test/build results:** 26 unit tests pass (4 files). `pnpm typecheck`, `pnpm lint`, `pnpm build` all clean (4.78s). Token absent from canonical/og:url; noindex present.
+
+**Deferred/surprising:** Issue #14 (card image waste) is still `ready-for-agent`. The systemic opacity-as-muted-text pattern is now resolved across the whole preview tree — future variants should use `text-base-content/75+` rather than `opacity-50` for secondary labels on any background.
 
 ---
 
