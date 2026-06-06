@@ -40,7 +40,7 @@ export const action = async ({ request }: { request: Request }) => {
 }
 
 const font = { fontFamily: "'Albert Sans', sans-serif" } as const
-const sageText = 'text-[#5f7c61] dark:text-[#a7c4a9]'
+const sageText = 'text-[#4d6950] dark:text-[#a7c4a9]'
 const sageBg =
   'bg-[#5f7c61] text-white hover:bg-[#4d664f] dark:bg-[#a7c4a9] dark:text-[#1c241d] dark:hover:bg-[#c0d6c1]'
 

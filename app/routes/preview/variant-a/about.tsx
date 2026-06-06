@@ -12,7 +12,7 @@ export const meta: MetaFunction = ({ location }) => {
 }
 
 const font = { fontFamily: "'Albert Sans', sans-serif" } as const
-const sageText = 'text-[#5f7c61] dark:text-[#a7c4a9]'
+const sageText = 'text-[#4d6950] dark:text-[#a7c4a9]'
 
 export default function VariantAAbout() {
   const { pathname } = useLocation()

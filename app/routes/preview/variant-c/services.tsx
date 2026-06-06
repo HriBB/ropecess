@@ -29,7 +29,7 @@ function Chapter({
     >
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[220px_1fr]">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.35em] opacity-50 lg:sticky lg:top-28">
+          <p className="text-xs font-bold uppercase tracking-[0.35em] text-base-content/75 lg:sticky lg:top-28">
             <span className="mr-3 inline-block h-2 w-2 rounded-full bg-amber-500" />
             {label}
           </p>
@@ -62,7 +62,7 @@ export default function VariantCServices() {
       {/* Hero */}
       <section className="px-6 pb-20 pt-36 md:px-12">
         <div className="mx-auto max-w-6xl">
-          <p className="mb-8 text-xs font-bold uppercase tracking-[0.35em] opacity-50">
+          <p className="mb-8 text-xs font-bold uppercase tracking-[0.35em] text-base-content/75">
             <span className="mr-3 inline-block h-2 w-2 rounded-full bg-amber-500" />
             {d.hero.title}
           </p>
@@ -89,7 +89,7 @@ export default function VariantCServices() {
               <span className="flex-1 text-xl font-light tracking-tight md:text-2xl">
                 {item.title}
               </span>
-              <span className="hidden max-w-xs text-xs leading-relaxed opacity-50 md:block">
+              <span className="hidden max-w-xs text-xs leading-relaxed text-base-content/75 md:block">
                 {item.description}
               </span>
             </Link>
@@ -111,7 +111,7 @@ export default function VariantCServices() {
                 </span>
                 <h3 className="text-lg font-extralight tracking-tight">{s.title}</h3>
               </div>
-              <p className="ml-14 text-sm leading-relaxed opacity-60">{s.text}</p>
+              <p className="ml-14 text-sm leading-relaxed text-base-content/80">{s.text}</p>
             </div>
           ))}
         </div>

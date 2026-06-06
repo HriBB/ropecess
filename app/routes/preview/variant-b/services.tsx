@@ -19,10 +19,10 @@ const ORANGE = '#EA580C'
 function SectionNumber({ n, label }: { n: string; label: string }) {
   return (
     <div className="mb-16 flex items-baseline gap-4" style={lato}>
-      <span className="text-sm font-bold" style={{ color: ORANGE }}>
+      <span className="text-sm font-bold text-[#B84009] dark:text-[#F56B14]">
         {n}
       </span>
-      <span className="text-xs font-bold uppercase tracking-[0.4em] opacity-40">{label}</span>
+      <span className="text-xs font-bold uppercase tracking-[0.4em] text-base-content/75">{label}</span>
       <span className="h-px flex-1 bg-base-content/10" />
     </div>
   )
@@ -103,7 +103,7 @@ export default function VariantBServices() {
               <h3 style={garamond} className="mb-3 text-xl font-medium">
                 {s.title}
               </h3>
-              <p className="text-sm leading-relaxed opacity-60" style={lato}>
+              <p className="text-sm leading-relaxed text-base-content/80" style={lato}>
                 {s.text}
               </p>
             </div>

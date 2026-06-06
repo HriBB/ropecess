@@ -65,7 +65,7 @@ export default function VariantESpacenet() {
       {/* Hero */}
       <section className="relative px-4 pb-10 pt-20 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <span className="mb-6 inline-block rounded-full border border-fuchsia-400/40 bg-fuchsia-500/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-fuchsia-400 dark:text-fuchsia-300">
+          <span className="mb-6 inline-block rounded-full border border-fuchsia-400/40 bg-fuchsia-500/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-fuchsia-700 dark:text-fuchsia-300">
             {d.hero.title}
           </span>
           <h1 className="text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl">

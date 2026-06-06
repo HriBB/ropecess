@@ -14,7 +14,7 @@ const GOOGLE_FONTS =
   'https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200..700&display=swap'
 
 const font = { fontFamily: "'Albert Sans', sans-serif" } as const
-const sageText = 'text-[#5f7c61] dark:text-[#a7c4a9]'
+const sageText = 'text-[#4d6950] dark:text-[#a7c4a9]'
 const sageBg =
   'bg-[#5f7c61] text-white hover:bg-[#4d664f] dark:bg-[#a7c4a9] dark:text-[#1c241d] dark:hover:bg-[#c0d6c1]'
 
@@ -103,7 +103,7 @@ function VariantAHeader({
         <Link
           to={altUrl}
           prefetch="intent"
-          className="text-sm font-medium text-base-content/60 hover:text-base-content transition-colors px-2 py-1"
+          className="text-sm font-medium text-base-content/70 hover:text-base-content transition-colors px-2 py-1"
           aria-label={`Switch to ${altLocale === 'sl' ? 'Slovenščina' : 'English'}`}
         >
           {altLocale === 'sl' ? '🇸🇮' : '🇬🇧'}
@@ -157,10 +157,10 @@ function VariantAHeader({
 function VariantAFooter({ locale }: { locale: Locale }) {
   return (
     <footer
-      className="py-16 text-center text-sm text-base-content/40"
+      className="py-16 text-center text-sm text-base-content/70"
       style={font}
     >
-      <p className="mb-2 font-semibold tracking-[0.3em] text-xs uppercase opacity-50">
+      <p className="mb-2 font-semibold tracking-[0.3em] text-xs uppercase">
         {locale === 'sl' ? 'Dizajnska predogled' : 'Design Preview'}
       </p>
       <p>&copy; Tilen Pogačnik {new Date().getFullYear()}</p>

@@ -89,7 +89,7 @@ function VariantDHeader({
               `border-4 border-transparent px-4 py-2 text-xs uppercase font-bold transition-all ${
                 isActive
                   ? 'border-base-content bg-yellow-300 text-black shadow-[4px_4px_0_0] shadow-base-content'
-                  : 'text-base-content/60 hover:text-base-content'
+                  : 'text-base-content/70 hover:text-base-content'
               }`
             }
           >
@@ -141,7 +141,7 @@ function VariantDHeader({
                 `border-4 border-transparent px-4 py-3 text-xs uppercase font-bold transition-all ${
                   isActive
                     ? 'border-base-content bg-yellow-300 text-black'
-                    : 'text-base-content/60 hover:text-base-content'
+                    : 'text-base-content/70 hover:text-base-content'
                 }`
               }
             >
@@ -166,7 +166,7 @@ function VariantDFooter({ locale }: { locale: Locale }) {
             ★ {locale === 'sl' ? 'PREDOGLED' : 'PREVIEW'} ★
           </span>
         </p>
-        <p className="text-xs opacity-40">&copy; Tilen Pogačnik {new Date().getFullYear()}</p>
+        <p className="text-xs text-base-content/70">&copy; Tilen Pogačnik {new Date().getFullYear()}</p>
       </div>
     </footer>
   )
