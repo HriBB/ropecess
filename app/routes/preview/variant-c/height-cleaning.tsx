@@ -33,7 +33,7 @@ function Chapter({
     >
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[220px_1fr]">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.35em] opacity-50 lg:sticky lg:top-28">
+          <p className="text-xs font-bold uppercase tracking-[0.35em] text-base-content/75 lg:sticky lg:top-28">
             <span className="mr-3 inline-block h-2 w-2 rounded-full bg-amber-500" />
             {label}
           </p>
@@ -72,7 +72,7 @@ export default function VariantCHeightCleaning() {
       {/* Hero */}
       <section className="px-6 pb-20 pt-36 md:px-12">
         <div className="mx-auto max-w-6xl">
-          <p className="mb-8 text-xs font-bold uppercase tracking-[0.35em] opacity-50">
+          <p className="mb-8 text-xs font-bold uppercase tracking-[0.35em] text-base-content/75">
             <span className="mr-3 inline-block h-2 w-2 rounded-full bg-amber-500" />
             {d.hero.title[0]}
           </p>
@@ -100,9 +100,9 @@ export default function VariantCHeightCleaning() {
                 </span>
                 <h3 className="text-2xl font-extralight tracking-tight">{service.title}</h3>
               </div>
-              <p className="mb-6 ml-14 text-sm leading-loose opacity-70">{service.text}</p>
+              <p className="mb-6 ml-14 text-sm leading-loose text-base-content/80">{service.text}</p>
               {'items' in service && service.items && (
-                <ul className="mb-8 ml-14 flex flex-col gap-2 text-sm opacity-70">
+                <ul className="mb-8 ml-14 flex flex-col gap-2 text-sm text-base-content/80">
                   {service.items.map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
@@ -112,7 +112,7 @@ export default function VariantCHeightCleaning() {
                 </ul>
               )}
               {'richItems' in service && service.richItems && (
-                <ul className="mb-8 ml-14 flex flex-col gap-2 text-sm opacity-70">
+                <ul className="mb-8 ml-14 flex flex-col gap-2 text-sm text-base-content/80">
                   {service.richItems.map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
@@ -131,8 +131,8 @@ export default function VariantCHeightCleaning() {
 
       {/* How we work */}
       <Chapter label={d.howWeWork.title}>
-        <p className="mb-8 text-sm leading-loose opacity-70">{d.howWeWork.text}</p>
-        <ul className="mb-10 flex flex-col gap-3 text-sm opacity-70">
+        <p className="mb-8 text-sm leading-loose text-base-content/80">{d.howWeWork.text}</p>
+        <ul className="mb-10 flex flex-col gap-3 text-sm text-base-content/80">
           {d.howWeWork.items.map((item, i) => (
             <li key={i} className="flex items-start gap-4 border-t border-base-content/10 pt-4">
               <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-amber-500" />
@@ -147,7 +147,7 @@ export default function VariantCHeightCleaning() {
 
       {/* Why choose */}
       <Chapter label={d.whyChoose.title} muted>
-        <ul className="mb-10 flex flex-col gap-3 text-sm opacity-70">
+        <ul className="mb-10 flex flex-col gap-3 text-sm text-base-content/80">
           {d.whyChoose.items.map((item, i) => (
             <li key={i} className="flex items-start gap-4 border-t border-base-content/10 pt-4">
               <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-amber-500" />

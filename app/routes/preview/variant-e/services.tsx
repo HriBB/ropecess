@@ -88,7 +88,7 @@ export default function VariantEServices() {
                 sizes="(max-width:639px) 80vw, 25vw"
               />
               <div className="px-3 pb-4">
-                <span className="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-fuchsia-400 dark:text-fuchsia-300">
+                <span className="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-fuchsia-700 dark:text-fuchsia-300">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <h3 className="mb-2 text-lg font-bold leading-tight">{item.title}</h3>
@@ -108,7 +108,7 @@ export default function VariantEServices() {
           <div className={`${glass} divide-y divide-base-content/10`}>
             {d.services.map((s, i) => (
               <div key={s.id} className="flex items-start gap-6 p-6">
-                <span className="mt-0.5 shrink-0 text-xs font-bold text-fuchsia-400 dark:text-fuchsia-300">
+                <span className="mt-0.5 shrink-0 text-xs font-bold text-fuchsia-700 dark:text-fuchsia-300">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div>

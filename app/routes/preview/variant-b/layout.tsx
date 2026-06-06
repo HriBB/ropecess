@@ -88,11 +88,10 @@ function VariantBHeader({
             className={({ isActive }) =>
               `text-xs font-bold uppercase tracking-[0.2em] transition-colors ${
                 isActive
-                  ? 'text-base-content'
-                  : 'text-base-content/50 hover:text-base-content'
+                  ? 'text-[#B84009] dark:text-[#F56B14]'
+                  : 'text-base-content/70 hover:text-base-content'
               }`
             }
-            style={({ isActive }) => (isActive ? { color: ORANGE } : undefined)}
           >
             {item.label}
           </NavLink>
@@ -104,7 +103,7 @@ function VariantBHeader({
         <Link
           to={altUrl}
           prefetch="intent"
-          className="text-xs font-bold uppercase tracking-[0.15em] text-base-content/50 hover:text-base-content transition-colors"
+          className="text-xs font-bold uppercase tracking-[0.15em] text-base-content/70 hover:text-base-content transition-colors"
           aria-label={`Switch to ${altLocale === 'sl' ? 'Slovenščina' : 'English'}`}
         >
           {altLocale === 'sl' ? 'SL' : 'EN'}
@@ -140,10 +139,11 @@ function VariantBHeader({
               onClick={() => setOpen(false)}
               className={({ isActive }) =>
                 `text-xs font-bold uppercase tracking-[0.2em] transition-colors ${
-                  isActive ? '' : 'text-base-content/50 hover:text-base-content'
+                  isActive
+                    ? 'text-[#B84009] dark:text-[#F56B14]'
+                    : 'text-base-content/70 hover:text-base-content'
                 }`
               }
-              style={({ isActive }) => (isActive ? { color: ORANGE } : undefined)}
             >
               {item.label}
             </NavLink>
@@ -158,10 +158,10 @@ function VariantBFooter({ locale }: { locale: Locale }) {
   return (
     <footer className="py-16 px-6 border-t border-base-content/10" style={lato}>
       <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-        <p className="text-xs font-bold uppercase tracking-[0.3em] opacity-40">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-base-content/70">
           {locale === 'sl' ? 'Dizajnska predogled' : 'Design Preview'}
         </p>
-        <p className="text-xs opacity-40">&copy; Tilen Pogačnik {new Date().getFullYear()}</p>
+        <p className="text-xs text-base-content/70">&copy; Tilen Pogačnik {new Date().getFullYear()}</p>
       </div>
     </footer>
   )

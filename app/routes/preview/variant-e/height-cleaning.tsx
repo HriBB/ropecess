@@ -79,7 +79,7 @@ export default function VariantEHeightCleaning() {
               <div key={idx} className={`${glass} overflow-hidden`}>
                 <div className="p-6 md:p-8">
                   <div className="mb-5 flex items-center gap-4">
-                    <span className="rounded-full bg-gradient-to-r from-fuchsia-500/20 to-cyan-400/20 px-3 py-1 text-xs font-bold text-fuchsia-400 dark:text-fuchsia-300">
+                    <span className="rounded-full bg-gradient-to-r from-fuchsia-500/20 to-cyan-400/20 px-3 py-1 text-xs font-bold text-fuchsia-700 dark:text-fuchsia-300">
                       {String(idx + 1).padStart(2, '0')}
                     </span>
                     <h3 className="text-lg font-bold">{service.title}</h3>
@@ -89,7 +89,7 @@ export default function VariantEHeightCleaning() {
                     <ul className="flex flex-col gap-2">
                       {service.items.map((item, i) => (
                         <li key={i} className="flex items-start gap-3 text-sm">
-                          <span className="mt-0.5 shrink-0 text-fuchsia-400 dark:text-fuchsia-300">
+                          <span className="mt-0.5 shrink-0 text-fuchsia-700 dark:text-fuchsia-300">
                             ✦
                           </span>
                           {item}
@@ -101,7 +101,7 @@ export default function VariantEHeightCleaning() {
                     <ul className="flex flex-col gap-2">
                       {service.richItems.map((item, i) => (
                         <li key={i} className="flex items-start gap-3 text-sm">
-                          <span className="mt-0.5 shrink-0 text-fuchsia-400 dark:text-fuchsia-300">
+                          <span className="mt-0.5 shrink-0 text-fuchsia-700 dark:text-fuchsia-300">
                             ✦
                           </span>
                           <span>
@@ -142,7 +142,7 @@ export default function VariantEHeightCleaning() {
           <div className={`${glass} divide-y divide-base-content/10`}>
             {d.howWeWork.items.map((item, i) => (
               <div key={i} className="flex items-start gap-5 p-6">
-                <span className="mt-0.5 shrink-0 rounded-full bg-gradient-to-r from-fuchsia-500/20 to-cyan-400/20 px-3 py-1 text-xs font-bold text-fuchsia-400 dark:text-fuchsia-300">
+                <span className="mt-0.5 shrink-0 rounded-full bg-gradient-to-r from-fuchsia-500/20 to-cyan-400/20 px-3 py-1 text-xs font-bold text-fuchsia-700 dark:text-fuchsia-300">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <p className="text-sm leading-relaxed">
@@ -180,7 +180,7 @@ export default function VariantEHeightCleaning() {
                 key={i}
                 className={`${glass} flex flex-col gap-2 p-6 transition-transform hover:-translate-y-1`}
               >
-                <span className="text-fuchsia-400 dark:text-fuchsia-300">✦</span>
+                <span className="text-fuchsia-700 dark:text-fuchsia-300">✦</span>
                 <p className="text-sm leading-relaxed">
                   <span className="font-semibold">{item.bold}</span> {item.text}
                 </p>

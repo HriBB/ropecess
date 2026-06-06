@@ -84,7 +84,7 @@ function VariantCHeader({
             prefetch="intent"
             className={({ isActive }) =>
               `text-xs font-medium uppercase tracking-[0.25em] transition-colors ${
-                isActive ? 'text-amber-500' : 'text-base-content/50 hover:text-base-content'
+                isActive ? 'text-amber-700 dark:text-amber-500' : 'text-base-content/70 hover:text-base-content'
               }`
             }
           >
@@ -98,7 +98,7 @@ function VariantCHeader({
         <Link
           to={altUrl}
           prefetch="intent"
-          className="text-xs font-medium uppercase tracking-[0.2em] text-base-content/50 hover:text-base-content transition-colors"
+          className="text-xs font-medium uppercase tracking-[0.2em] text-base-content/70 hover:text-base-content transition-colors"
           aria-label={`Switch to ${altLocale === 'sl' ? 'Slovenščina' : 'English'}`}
         >
           {altLocale === 'sl' ? 'SL' : 'EN'}
@@ -134,7 +134,7 @@ function VariantCHeader({
               onClick={() => setOpen(false)}
               className={({ isActive }) =>
                 `text-xs font-medium uppercase tracking-[0.25em] transition-colors ${
-                  isActive ? 'text-amber-500' : 'text-base-content/50 hover:text-base-content'
+                  isActive ? 'text-amber-700 dark:text-amber-500' : 'text-base-content/70 hover:text-base-content'
                 }`
               }
             >
@@ -151,11 +151,11 @@ function VariantCFooter({ locale }: { locale: Locale }) {
   return (
     <footer className="py-20 px-6 border-t border-base-content/10" style={font}>
       <div className="mx-auto max-w-6xl flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-        <p className="text-xs font-medium uppercase tracking-[0.35em] opacity-40">
+        <p className="text-xs font-medium uppercase tracking-[0.35em] text-base-content/70">
           <span className="mr-3 inline-block h-2 w-2 rounded-full bg-amber-500" />
           {locale === 'sl' ? 'Dizajnska predogled' : 'Design Preview'}
         </p>
-        <p className="text-xs opacity-30">&copy; Tilen Pogačnik {new Date().getFullYear()}</p>
+        <p className="text-xs text-base-content/70">&copy; Tilen Pogačnik {new Date().getFullYear()}</p>
       </div>
     </footer>
   )

@@ -40,7 +40,7 @@ export default function VariantEAbout() {
       {/* Hero */}
       <section className="relative px-4 pb-10 pt-20 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <span className="mb-6 inline-block rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-fuchsia-400 dark:text-fuchsia-300">
+          <span className="mb-6 inline-block rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-fuchsia-700 dark:text-fuchsia-300">
             {locale === 'sl' ? 'O nas' : 'About us'}
           </span>
           <h1 className="text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl">
@@ -88,7 +88,7 @@ export default function VariantEAbout() {
               <div
                 className={`flex flex-col justify-center gap-5 p-8 md:p-12 ${i % 2 === 0 ? '' : 'md:order-1'}`}
               >
-                <span className="w-fit rounded-full bg-gradient-to-r from-fuchsia-500/20 to-cyan-400/20 px-4 py-1 text-xs font-bold text-fuchsia-400 dark:text-fuchsia-300">
+                <span className="w-fit rounded-full bg-gradient-to-r from-fuchsia-500/20 to-cyan-400/20 px-4 py-1 text-xs font-bold text-fuchsia-700 dark:text-fuchsia-300">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <p className="text-sm leading-relaxed opacity-80">{item.text}</p>

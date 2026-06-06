@@ -66,7 +66,7 @@ export default function VariantEContact() {
       {/* Hero */}
       <section className="relative px-4 pb-10 pt-20 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <span className="mb-6 inline-block rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-fuchsia-400 dark:text-fuchsia-300">
+          <span className="mb-6 inline-block rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-fuchsia-700 dark:text-fuchsia-300">
             {d.hero.title}
           </span>
           <h1 className="text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl">
@@ -91,7 +91,7 @@ export default function VariantEContact() {
               </p>
               <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-3 text-sm opacity-60">
-                  <span className="text-fuchsia-400 dark:text-fuchsia-300">✦</span>
+                  <span className="text-fuchsia-700 dark:text-fuchsia-300">✦</span>
                   <span>
                     {locale === 'sl' ? 'Hitri odgovor v 24 urah' : 'Fast reply within 24 hours'}
                   </span>

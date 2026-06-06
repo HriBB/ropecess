@@ -86,8 +86,8 @@ function VariantEHeader({
             className={({ isActive }) =>
               `rounded-full px-4 py-2 text-sm font-medium transition-all ${
                 isActive
-                  ? 'bg-gradient-to-r from-fuchsia-500/20 to-cyan-400/20 text-fuchsia-400 shadow-[0_0_12px_rgba(217,70,239,0.3)] dark:text-fuchsia-300'
-                  : 'text-base-content/60 hover:text-base-content hover:bg-base-content/5'
+                  ? 'bg-gradient-to-r from-fuchsia-500/20 to-cyan-400/20 text-fuchsia-700 shadow-[0_0_12px_rgba(217,70,239,0.3)] dark:text-fuchsia-300'
+                  : 'text-base-content/70 hover:text-base-content hover:bg-base-content/5'
               }`
             }
           >
@@ -138,8 +138,8 @@ function VariantEHeader({
               className={({ isActive }) =>
                 `rounded-2xl px-4 py-3 text-sm font-medium transition-all ${
                   isActive
-                    ? 'bg-gradient-to-r from-fuchsia-500/20 to-cyan-400/20 text-fuchsia-400 dark:text-fuchsia-300'
-                    : 'text-base-content/60 hover:text-base-content hover:bg-base-content/5'
+                    ? 'bg-gradient-to-r from-fuchsia-500/20 to-cyan-400/20 text-fuchsia-700 dark:text-fuchsia-300'
+                    : 'text-base-content/70 hover:text-base-content hover:bg-base-content/5'
                 }`
               }
             >
@@ -157,11 +157,11 @@ function VariantEFooter({ locale }: { locale: Locale }) {
     <footer className="border-t border-base-content/10 bg-base-100/60 py-10 px-5 backdrop-blur-xl">
       <div className="mx-auto max-w-6xl flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <p className="text-sm font-medium">
-          <span className="rounded-full bg-gradient-to-r from-fuchsia-500/20 to-cyan-400/20 px-4 py-1.5 text-xs font-semibold text-fuchsia-400 shadow-[0_0_10px_rgba(217,70,239,0.2)] dark:text-fuchsia-300">
+          <span className="rounded-full bg-gradient-to-r from-fuchsia-500/20 to-cyan-400/20 px-4 py-1.5 text-xs font-semibold text-fuchsia-700 shadow-[0_0_10px_rgba(217,70,239,0.2)] dark:text-fuchsia-300">
             ✦ {locale === 'sl' ? 'Predogled dizajna' : 'Design Preview'} ✦
           </span>
         </p>
-        <p className="text-xs opacity-40">&copy; Tilen Pogačnik {new Date().getFullYear()}</p>
+        <p className="text-xs text-base-content/70">&copy; Tilen Pogačnik {new Date().getFullYear()}</p>
       </div>
     </footer>
   )

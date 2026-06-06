@@ -49,7 +49,7 @@ function Chapter({
     >
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[220px_1fr]">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.35em] opacity-50 lg:sticky lg:top-28">
+          <p className="text-xs font-bold uppercase tracking-[0.35em] text-base-content/75 lg:sticky lg:top-28">
             <span className="mr-3 inline-block h-2 w-2 rounded-full bg-amber-500" />
             {label}
           </p>
@@ -74,7 +74,7 @@ export default function VariantCSpacenet() {
       {/* Hero */}
       <section className="px-6 pb-20 pt-36 md:px-12">
         <div className="mx-auto max-w-6xl">
-          <p className="mb-8 text-xs font-bold uppercase tracking-[0.35em] opacity-50">
+          <p className="mb-8 text-xs font-bold uppercase tracking-[0.35em] text-base-content/75">
             <span className="mr-3 inline-block h-2 w-2 rounded-full bg-amber-500" />
             {d.hero.title}
           </p>
@@ -91,7 +91,7 @@ export default function VariantCSpacenet() {
             <h2 className="mb-8 text-3xl font-extralight leading-snug tracking-tight md:text-4xl">
               {d.sections.whatIs.title}
             </h2>
-            <p className="text-sm leading-loose opacity-70">{d.sections.whatIs.text}</p>
+            <p className="text-sm leading-loose text-base-content/80">{d.sections.whatIs.text}</p>
           </div>
           <Picture
             picture={pageImages.chilloutPeople.image}
@@ -119,7 +119,7 @@ export default function VariantCSpacenet() {
             <h2 className="mb-8 text-3xl font-extralight leading-snug tracking-tight md:text-4xl">
               {d.sections.howWeUse.title}
             </h2>
-            <p className="text-sm leading-loose opacity-70">{d.sections.howWeUse.text}</p>
+            <p className="text-sm leading-loose text-base-content/80">{d.sections.howWeUse.text}</p>
           </div>
         </div>
       </Chapter>
@@ -139,8 +139,8 @@ export default function VariantCSpacenet() {
             <h2 className="mb-8 text-3xl font-extralight leading-snug tracking-tight md:text-4xl">
               {d.sections.events.title}
             </h2>
-            <p className="mb-6 text-sm leading-loose opacity-70">{d.sections.events.text1}</p>
-            <p className="text-sm leading-loose opacity-70">{d.sections.events.text2}</p>
+            <p className="mb-6 text-sm leading-loose text-base-content/80">{d.sections.events.text1}</p>
+            <p className="text-sm leading-loose text-base-content/80">{d.sections.events.text2}</p>
           </div>
         </div>
       </Chapter>
@@ -152,7 +152,7 @@ export default function VariantCSpacenet() {
             <h2 className="mb-8 text-4xl font-extralight leading-tight tracking-tight md:text-5xl">
               {d.sections.rentOrBuy.title}
             </h2>
-            <p className="text-sm leading-loose opacity-70">{d.sections.rentOrBuy.text1}</p>
+            <p className="text-sm leading-loose text-base-content/80">{d.sections.rentOrBuy.text1}</p>
           </div>
           <Form
             method="POST"

@@ -39,10 +39,10 @@ const ORANGE = '#EA580C'
 function SectionNumber({ n, label }: { n: string; label: string }) {
   return (
     <div className="mb-16 flex items-baseline gap-4" style={lato}>
-      <span className="text-sm font-bold" style={{ color: ORANGE }}>
+      <span className="text-sm font-bold text-[#B84009] dark:text-[#F56B14]">
         {n}
       </span>
-      <span className="text-xs font-bold uppercase tracking-[0.4em] opacity-40">{label}</span>
+      <span className="text-xs font-bold uppercase tracking-[0.4em] text-base-content/75">{label}</span>
       <span className="h-px flex-1 bg-base-content/10" />
     </div>
   )
@@ -84,7 +84,7 @@ export default function VariantBSpacenet() {
             <h2 style={garamond} className="mb-8 text-4xl font-medium leading-tight md:text-5xl">
               {d.sections.whatIs.title}
             </h2>
-            <p className="text-base leading-relaxed opacity-70" style={lato}>
+            <p className="text-base leading-relaxed text-base-content/80" style={lato}>
               {d.sections.whatIs.text}
             </p>
           </div>
@@ -115,7 +115,7 @@ export default function VariantBSpacenet() {
             <h2 style={garamond} className="mb-8 text-4xl font-medium leading-tight md:text-5xl">
               {d.sections.howWeUse.title}
             </h2>
-            <p className="text-base leading-relaxed opacity-70" style={lato}>
+            <p className="text-base leading-relaxed text-base-content/80" style={lato}>
               {d.sections.howWeUse.text}
             </p>
           </div>
@@ -130,10 +130,10 @@ export default function VariantBSpacenet() {
             <h2 style={garamond} className="mb-8 text-4xl font-medium leading-tight md:text-5xl">
               {d.sections.events.title}
             </h2>
-            <p className="mb-6 text-base leading-relaxed opacity-70" style={lato}>
+            <p className="mb-6 text-base leading-relaxed text-base-content/80" style={lato}>
               {d.sections.events.text1}
             </p>
-            <p className="text-base leading-relaxed opacity-70" style={lato}>
+            <p className="text-base leading-relaxed text-base-content/80" style={lato}>
               {d.sections.events.text2}
             </p>
           </div>
